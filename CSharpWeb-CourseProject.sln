@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Web", "MyGarage.Web\MyGarage.Web.csproj", "{6AFD2348-3AF3-4571-84B4-E9BE40B1F453}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{37261004-39B5-467B-84C0-2537CE5AB0F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D832D19A-A6BB-4297-8565-9D49726F0FA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Data", "MyGarage.Data\MyGarage.Data.csproj", "{7BB9D429-D235-423F-8523-DC51C6B99D43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Data.Models", "MyGarage.Data.Models\MyGarage.Data.Models.csproj", "{92288DFC-01D2-4915-90C8-B0747BC34037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Common", "MyGarage.Common\MyGarage.Common.csproj", "{5F6D376F-9343-4162-8DD8-7183B5E47361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Web.ViewModels", "MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj", "{6173C107-6409-4C1A-ABE6-66B88444490D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AFD2348-3AF3-4571-84B4-E9BE40B1F453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AFD2348-3AF3-4571-84B4-E9BE40B1F453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AFD2348-3AF3-4571-84B4-E9BE40B1F453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AFD2348-3AF3-4571-84B4-E9BE40B1F453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB9D429-D235-423F-8523-DC51C6B99D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB9D429-D235-423F-8523-DC51C6B99D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB9D429-D235-423F-8523-DC51C6B99D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB9D429-D235-423F-8523-DC51C6B99D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92288DFC-01D2-4915-90C8-B0747BC34037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92288DFC-01D2-4915-90C8-B0747BC34037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92288DFC-01D2-4915-90C8-B0747BC34037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92288DFC-01D2-4915-90C8-B0747BC34037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F6D376F-9343-4162-8DD8-7183B5E47361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6D376F-9343-4162-8DD8-7183B5E47361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6D376F-9343-4162-8DD8-7183B5E47361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6D376F-9343-4162-8DD8-7183B5E47361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6173C107-6409-4C1A-ABE6-66B88444490D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6173C107-6409-4C1A-ABE6-66B88444490D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6173C107-6409-4C1A-ABE6-66B88444490D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6173C107-6409-4C1A-ABE6-66B88444490D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6AFD2348-3AF3-4571-84B4-E9BE40B1F453} = {37261004-39B5-467B-84C0-2537CE5AB0F3}
+		{7BB9D429-D235-423F-8523-DC51C6B99D43} = {D832D19A-A6BB-4297-8565-9D49726F0FA8}
+		{92288DFC-01D2-4915-90C8-B0747BC34037} = {D832D19A-A6BB-4297-8565-9D49726F0FA8}
+		{6173C107-6409-4C1A-ABE6-66B88444490D} = {37261004-39B5-467B-84C0-2537CE5AB0F3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E20820C-976B-4D9F-B5FB-AA522692CB94}
+	EndGlobalSection
+EndGlobal
