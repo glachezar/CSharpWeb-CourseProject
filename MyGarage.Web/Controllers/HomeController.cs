@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyGarage.Web.Models;
 using System.Diagnostics;
+using MyGarage.Web.ViewModels.Home;
 
 namespace MyGarage.Web.Controllers
 {
