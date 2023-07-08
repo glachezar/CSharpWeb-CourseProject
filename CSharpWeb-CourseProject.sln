@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Common", "MyGarage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Web.ViewModels", "MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj", "{6173C107-6409-4C1A-ABE6-66B88444490D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A9A9A241-AF0F-414A-9324-1A8445B0DD54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Services.Data", "MyGarage.Services.Data\MyGarage.Services.Data.csproj", "{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,10 @@ Global
 		{6173C107-6409-4C1A-ABE6-66B88444490D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6173C107-6409-4C1A-ABE6-66B88444490D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6173C107-6409-4C1A-ABE6-66B88444490D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +60,7 @@ Global
 		{7BB9D429-D235-423F-8523-DC51C6B99D43} = {D832D19A-A6BB-4297-8565-9D49726F0FA8}
 		{92288DFC-01D2-4915-90C8-B0747BC34037} = {D832D19A-A6BB-4297-8565-9D49726F0FA8}
 		{6173C107-6409-4C1A-ABE6-66B88444490D} = {37261004-39B5-467B-84C0-2537CE5AB0F3}
+		{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309} = {A9A9A241-AF0F-414A-9324-1A8445B0DD54}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E20820C-976B-4D9F-B5FB-AA522692CB94}

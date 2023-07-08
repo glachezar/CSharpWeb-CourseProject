@@ -1,11 +1,14 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using MyGarage.Data;
-using MyGarage.Web.Data;
-
+using System.Net.Mime;
+using MyGarage.Data.Models;
 
 namespace MyGarage.Web
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+
+    using Data;
+
+
     public class Program
     {
         public static void Main(string[] args)
@@ -15,16 +18,29 @@ namespace MyGarage.Web
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<MyGarageDbContext>(options =>
                 options.UseSqlServer(connectionString));
              
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    options.SignIn.RequireConfirmedAccount = false;
+                    options.SignIn.RequireConfirmedAccount = 
+                        builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+
+                    options.Password.RequireLowercase = 
+                        builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+
+                    options.Password.RequireUppercase = 
+                        builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
+
+                    options.Password.RequireNonAlphanumeric = 
+                        builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+
+                    options.Password.RequiredLength = 
+                        builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<MyGarageDbContext>();
 
             builder.Services.AddControllersWithViews();
 

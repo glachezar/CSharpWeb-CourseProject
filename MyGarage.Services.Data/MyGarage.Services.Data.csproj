@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyGarage.Common\MyGarage.Common.csproj" />
+    <ProjectReference Include="..\MyGarage.Data.Models\MyGarage.Data.Models.csproj" />
+    <ProjectReference Include="..\MyGarage.Data\MyGarage.Data.csproj" />
+    <ProjectReference Include="..\MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
