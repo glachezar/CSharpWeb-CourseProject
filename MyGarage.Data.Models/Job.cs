@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyGarage.Data.Models
 {
+    using static MyGarage.Common.EntityValidationConstants.Job;
     public class Job
     {
         public Job()

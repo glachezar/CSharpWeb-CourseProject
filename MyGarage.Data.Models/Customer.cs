@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using static MyGarage.Common.EntityValidationConstants.Customer;
 
 namespace MyGarage.Data.Models
 {
@@ -33,7 +33,10 @@ namespace MyGarage.Data.Models
         [Required] 
         public string PhoneNumber { get; set; } = null!;
 
-        
+        public Guid? ApplicationUserId { get; set; }
+
+        public ApplicationUser? ApplicationUser { get; set; }
+
         public Guid? VehicleId { get; set; }
 
         public virtual ICollection<Vehicle>? Vehicles { get; set; }

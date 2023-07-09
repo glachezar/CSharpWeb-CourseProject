@@ -18,7 +18,12 @@
             
         }
 
-        public static class ServiceJob
+        public static class Job
+        {
+            
+        }
+
+        public static class JobCard
         {
             
         }

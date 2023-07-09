@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MyGarage.Data.Models
+﻿namespace MyGarage.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using static MyGarage.Common.EntityValidationConstants.Vehicle;
 
     public class Vehicle
     {

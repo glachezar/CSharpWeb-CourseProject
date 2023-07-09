@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using static MyGarage.Common.EntityValidationConstants.Part;
+
     public class Part
     {
         public Part()

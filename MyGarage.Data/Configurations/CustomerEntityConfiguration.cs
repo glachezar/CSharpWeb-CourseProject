@@ -14,8 +14,10 @@
 
             builder.HasKey(c => c.Id);
 
-            //builder.HasMany(v => v.Vehicles)
-            //    .WithOne(c => c.Customer);
+
+            builder.HasOne(c => c.ApplicationUser)
+            .WithOne(u => u.Customer)
+            .HasForeignKey<Customer>(c => c.ApplicationUserId);
 
         }
 

@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MyGarage.Data.Models
+﻿namespace MyGarage.Data.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+
+    using static MyGarage.Common.EntityValidationConstants.JobCard;
 
     public class JobCard
     {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGarage.Data;
 
@@ -11,9 +12,10 @@ using MyGarage.Data;
 namespace MyGarage.Data.Migrations
 {
     [DbContext(typeof(MyGarageDbContext))]
-    partial class MyGarageDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230708162516_ApplicationUser-CustomerRelationAdded")]
+    partial class ApplicationUserCustomerRelationAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,16 +261,14 @@ namespace MyGarage.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique()
-                        .HasFilter("[ApplicationUserId] IS NOT NULL");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Customers");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ab62bb11-3d07-4ee1-9581-f1911b02b9d1"),
+                            Id = new Guid("f84e9ea6-edcb-40f8-8b6e-94c15316a8ba"),
                             Email = "Martinov@mcg.bg",
                             Name = "Martin",
                             PhoneNumber = "0888100100",
@@ -276,7 +276,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6a50272d-0e96-46bb-ade2-2388e3893a38"),
+                            Id = new Guid("9b8fd2ed-3e0c-4b72-84e3-bb9aa9007b23"),
                             Email = "Peshov@mcg.bg",
                             Name = "Pesho",
                             PhoneNumber = "0888100200",
@@ -284,7 +284,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("54324ca0-a853-49ba-968d-1e7805dfd5d8"),
+                            Id = new Guid("e9882318-1d61-4663-9d8c-d81e168f5b6e"),
                             Email = "Ivanov@mcg.bg",
                             Name = "Ivan",
                             PhoneNumber = "0888100200",
@@ -317,13 +317,13 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("15805aba-6eef-46ba-8f6e-31ff895cb193"),
+                            Id = new Guid("430bbbad-259b-409b-849f-f40360d4275d"),
                             JobName = "Oil change",
                             Price = 50.00m
                         },
                         new
                         {
-                            Id = new Guid("d7c921b7-1eec-4b41-b434-e807e2416215"),
+                            Id = new Guid("5dcb549b-e468-44c4-bb26-7569b30b02f2"),
                             JobName = "Tyre replacement",
                             Price = 20.00m
                         });
@@ -338,7 +338,7 @@ namespace MyGarage.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 8, 16, 54, 18, 439, DateTimeKind.Utc).AddTicks(8899));
+                        .HasDefaultValue(new DateTime(2023, 7, 8, 16, 25, 15, 901, DateTimeKind.Utc).AddTicks(6748));
 
                     b.Property<Guid>("MechanicId")
                         .HasColumnType("uniqueidentifier");
@@ -384,14 +384,14 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7ade9fb8-2421-4bd4-a5c4-65583ed70f4b"),
+                            Id = new Guid("da188915-e1db-4655-be6e-4f0a41bf0fd7"),
                             Name = "Ivan",
                             PhoneNumber = "0888123456",
                             Surname = "Ivanov"
                         },
                         new
                         {
-                            Id = new Guid("60859e26-4040-4247-ac01-86485c91819c"),
+                            Id = new Guid("42a4ad20-146e-4c16-ab37-eb2fe44efd88"),
                             Name = "Petar",
                             PhoneNumber = "0888123457",
                             Surname = "Petrov"
@@ -424,13 +424,13 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2bbd2119-c6a1-43b7-853f-6eb3028f3059"),
+                            Id = new Guid("6a585155-41ef-46ee-bec8-4a62eede3901"),
                             PartName = "Wishbone",
                             PartNumber = "G40.3613/C"
                         },
                         new
                         {
-                            Id = new Guid("ff7d7e28-09a7-4233-8eff-70d668a8ffae"),
+                            Id = new Guid("b4304aa7-800f-4be4-959d-9f4d457582b9"),
                             PartName = "Handbrake cable",
                             PartNumber = "G40.36415/C"
                         });
@@ -486,7 +486,7 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a62d5073-052d-4b96-88a5-df3ab3a0a98b"),
+                            Id = new Guid("2ad5af7e-edb8-41b0-b2cf-770dfbef4714"),
                             EngineNumber = "5GZCZ33D03S835560",
                             FuelType = "Gasoline",
                             Make = "Acura",
@@ -498,7 +498,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("deb12c65-790a-4491-aa2c-2e846704e034"),
+                            Id = new Guid("3c1a5adf-4ab6-4333-8665-367840bf7876"),
                             EngineNumber = "JN6MD06S2BW031939",
                             FuelType = "Gasoline",
                             Make = "Hyundai",
@@ -564,8 +564,8 @@ namespace MyGarage.Data.Migrations
             modelBuilder.Entity("MyGarage.Data.Models.Customer", b =>
                 {
                     b.HasOne("MyGarage.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("Customer")
-                        .HasForeignKey("MyGarage.Data.Models.Customer", "ApplicationUserId");
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });
@@ -614,12 +614,6 @@ namespace MyGarage.Data.Migrations
                         .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("MyGarage.Data.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Customer")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MyGarage.Data.Models.Customer", b =>
