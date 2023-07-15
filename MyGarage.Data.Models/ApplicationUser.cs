@@ -8,8 +8,11 @@
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid();
+            this.Vehicles = new HashSet<Vehicle>();
         }
 
         public Customer Customer { get; set; }
+
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }
