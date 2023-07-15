@@ -15,6 +15,7 @@ namespace MyGarage.Data.Models
         public Guid Id { get; set; }
 
         [Required]
+        [MaxLength(NameMaxLength)]
         public string JobName { get; set; } = null!;
 
         [Required]

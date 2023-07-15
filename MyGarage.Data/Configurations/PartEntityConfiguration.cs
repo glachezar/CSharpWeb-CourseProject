@@ -23,14 +23,16 @@ namespace MyGarage.Data.Configurations
             part = new Part()
             {
                 PartName = "Wishbone",
-                PartNumber = "G40.3613/C"
+                PartNumber = "G40.3613/C",
+                Price = 70.00M
             };
             Parts.Add(part);
 
             part = new Part()
             {
                 PartName = "Handbrake cable",
-                PartNumber = "G40.36415/C"
+                PartNumber = "G40.36415/C",
+                Price = 65.00M
             };
             Parts.Add(part);
 

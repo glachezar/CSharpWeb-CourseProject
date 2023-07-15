@@ -16,24 +16,30 @@
         public Guid Id { get; set; }
 
         [Required]
+        [MaxLength(MakeMaxLength)]
         public string Make { get; set; } = null!;
 
         [Required]
+        [MaxLength(ModelNameMaxLength)]
         public string Model { get; set; } = null!;
 
         [Required]
+        [MaxLength(VinMaxLength)]
         public string Vin { get; set; } = null!;
 
-
+        [MaxLength(EngineNumberMaxLength)]
         public string EngineNumber { get; set; }
 
+        [MaxLength(RegistrationPlateMaxLength)]
         public string RegNumber { get; set; }
 
         [Required]
+        [MaxLength(YearMadeMaxLength)]
         public string YearManufactured { get; set; } = null!;
 
         public string FuelType { get; set; } = null!;
 
+        [MaxLength(MileageMaxLength)]
         public string Mileage { get; set; }
 
         [ForeignKey(nameof(Customer))]

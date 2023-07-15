@@ -16,21 +16,25 @@ namespace MyGarage.Data.Models
         public Guid Id { get; set; }
 
         [Required]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
+        [MaxLength(SurnameMaxLength)]
         public string Surname { get; set; } = null!;
 
-
+        [MaxLength(EgnMaxLength)]
         public string? Egn { get; set; }
 
-
+        [MaxLength(AddressMaxLength)]
         public string? Address { get; set; }
 
         [Required]
+        [MaxLength(EmailMaxLength)]
         public string Email { get; set; } = null!;
 
-        [Required] 
+        [Required]
+        [MaxLength(PhoneNumberMaxLength)]
         public string PhoneNumber { get; set; } = null!;
 
         public Guid? ApplicationUserId { get; set; }

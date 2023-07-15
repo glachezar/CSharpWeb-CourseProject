@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using MyGarage.Web.ViewModels.Home;
-
-namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
+    using ViewModels.Home;
+
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

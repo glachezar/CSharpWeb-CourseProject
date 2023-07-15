@@ -27,7 +27,7 @@
         [ForeignKey(nameof(Mechanic))]
         public Guid MechanicId { get; set; }
 
-        public Mechanic Mechanic { get; set; }
+        public Mechanic? Mechanic { get; set; }
 
         public virtual ICollection<Job>? Jobs { get; set; }
 

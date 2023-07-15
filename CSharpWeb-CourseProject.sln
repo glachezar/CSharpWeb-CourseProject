@@ -13,13 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Data", "MyGarage.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Data.Models", "MyGarage.Data.Models\MyGarage.Data.Models.csproj", "{92288DFC-01D2-4915-90C8-B0747BC34037}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Common", "MyGarage.Common\MyGarage.Common.csproj", "{5F6D376F-9343-4162-8DD8-7183B5E47361}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Common", "MyGarage.Common\MyGarage.Common.csproj", "{5F6D376F-9343-4162-8DD8-7183B5E47361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Web.ViewModels", "MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj", "{6173C107-6409-4C1A-ABE6-66B88444490D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Web.ViewModels", "MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj", "{6173C107-6409-4C1A-ABE6-66B88444490D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A9A9A241-AF0F-414A-9324-1A8445B0DD54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Services.Data", "MyGarage.Services.Data\MyGarage.Services.Data.csproj", "{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Services.Data", "MyGarage.Services.Data\MyGarage.Services.Data.csproj", "{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGarage.Data;
 
@@ -11,9 +12,10 @@ using MyGarage.Data;
 namespace MyGarage.Data.Migrations
 {
     [DbContext(typeof(MyGarageDbContext))]
-    partial class MyGarageDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230713174921_AddedPricePropertyToPartEntity")]
+    partial class AddedPricePropertyToPartEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,35 +232,29 @@ namespace MyGarage.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ApplicationUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Egn")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("VehicleId")
                         .HasColumnType("uniqueidentifier");
@@ -274,7 +270,7 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("371b5cdc-1779-4888-8f9a-c58542b48902"),
+                            Id = new Guid("1eba4f2a-400e-4dc4-a985-d6a5630e687f"),
                             Email = "Martinov@mcg.bg",
                             Name = "Martin",
                             PhoneNumber = "0888100100",
@@ -282,7 +278,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3c44ffef-bcd6-4d9e-9341-3df9aa75a4b5"),
+                            Id = new Guid("5217caa3-b513-434a-8e9f-80999d50f9e8"),
                             Email = "Peshov@mcg.bg",
                             Name = "Pesho",
                             PhoneNumber = "0888100200",
@@ -290,7 +286,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0337c1dd-08fa-4b3a-aac9-4b57b1f90c9a"),
+                            Id = new Guid("1a1fe45e-6b52-43f5-aa89-834bd8a5ab07"),
                             Email = "Ivanov@mcg.bg",
                             Name = "Ivan",
                             PhoneNumber = "0888100200",
@@ -309,8 +305,7 @@ namespace MyGarage.Data.Migrations
 
                     b.Property<string>("JobName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -324,13 +319,13 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0ad1f76c-478f-4efe-9705-6aa764c86b03"),
+                            Id = new Guid("740d1999-24af-4eff-a0d0-a7b564643898"),
                             JobName = "Oil change",
                             Price = 50.00m
                         },
                         new
                         {
-                            Id = new Guid("fcb640fe-67c0-482a-b599-a7acca967a35"),
+                            Id = new Guid("0919e083-7137-417a-9a35-8ee5fd11e5b7"),
                             JobName = "Tyre replacement",
                             Price = 20.00m
                         });
@@ -345,7 +340,7 @@ namespace MyGarage.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 15, 0, 13, 59, 713, DateTimeKind.Utc).AddTicks(6641));
+                        .HasDefaultValue(new DateTime(2023, 7, 13, 17, 49, 21, 49, DateTimeKind.Utc).AddTicks(8236));
 
                     b.Property<Guid>("MechanicId")
                         .HasColumnType("uniqueidentifier");
@@ -374,18 +369,15 @@ namespace MyGarage.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -394,14 +386,14 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("839d20b4-fe29-4c58-ac57-7fc0c5c0f6b9"),
+                            Id = new Guid("97df411f-c565-4523-bdf1-8e01fba64fdb"),
                             Name = "Ivan",
                             PhoneNumber = "0888123456",
                             Surname = "Ivanov"
                         },
                         new
                         {
-                            Id = new Guid("523d2f9f-3b0a-466a-8a40-7f28c73ca220"),
+                            Id = new Guid("029dff04-c0cd-42d1-acfd-64eb2599fe67"),
                             Name = "Petar",
                             PhoneNumber = "0888123457",
                             Surname = "Petrov"
@@ -419,13 +411,11 @@ namespace MyGarage.Data.Migrations
 
                     b.Property<string>("PartName")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PartNumber")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -439,14 +429,14 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("036f4771-e075-4d08-bf80-5afc5794f0b6"),
+                            Id = new Guid("2c566e7e-a017-48cc-8542-43cb348316f6"),
                             PartName = "Wishbone",
                             PartNumber = "G40.3613/C",
                             Price = 70.00m
                         },
                         new
                         {
-                            Id = new Guid("3acb2cf4-01b9-4ba8-a07b-d3f0c54611f9"),
+                            Id = new Guid("c537a6f7-646e-4544-8a66-d67a2ffc323d"),
                             PartName = "Handbrake cable",
                             PartNumber = "G40.36415/C",
                             Price = 65.00m
@@ -464,8 +454,7 @@ namespace MyGarage.Data.Migrations
 
                     b.Property<string>("EngineNumber")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FuelType")
                         .IsRequired()
@@ -473,33 +462,27 @@ namespace MyGarage.Data.Migrations
 
                     b.Property<string>("Make")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mileage")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegNumber")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Vin")
                         .IsRequired()
-                        .HasMaxLength(17)
-                        .HasColumnType("nvarchar(17)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("YearManufactured")
                         .IsRequired()
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -510,7 +493,7 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1b0b15fe-8fc4-4b3a-b216-c9a7818cdc23"),
+                            Id = new Guid("7ab8b5cd-781b-4358-9ff3-b9f25959e7d3"),
                             EngineNumber = "5GZCZ33D03S835560",
                             FuelType = "Gasoline",
                             Make = "Acura",
@@ -522,7 +505,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b8e55a4b-36e0-45e9-9906-41a095813738"),
+                            Id = new Guid("29971c57-ec5b-4d0c-b6e1-7d7366f5a90b"),
                             EngineNumber = "JN6MD06S2BW031939",
                             FuelType = "Gasoline",
                             Make = "Hyundai",
