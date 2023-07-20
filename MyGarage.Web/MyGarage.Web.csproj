@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.16" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +21,16 @@
     <ProjectReference Include="..\MyGarage.Data.Models\MyGarage.Data.Models.csproj" />
     <ProjectReference Include="..\MyGarage.Data\MyGarage.Data.csproj" />
     <ProjectReference Include="..\MyGarage.Services.Data\MyGarage.Services.Data.csproj" />
+    <ProjectReference Include="..\MyGarage.Web.Infrastructure\MyGarage.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Vehicle\ViewDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Vehicle\ViewDetails.cshtml" />
   </ItemGroup>
 
 </Project>

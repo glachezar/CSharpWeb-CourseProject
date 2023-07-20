@@ -1,5 +1,8 @@
 using System.Net.Mime;
 using MyGarage.Data.Models;
+using MyGarage.Services.Data;
+using MyGarage.Services.Data.Interfaces;
+using MyGarage.Web.Infrastructure.Extensions;
 
 namespace MyGarage.Web
 {
@@ -41,6 +44,10 @@ namespace MyGarage.Web
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
                 })
                 .AddEntityFrameworkStores<MyGarageDbContext>();
+
+            //builder.Services.AddScoped<ICustomerService, CustomerService>();
+
+            builder.Services.AddApplicationServices(typeof(ICustomerService));
 
             builder.Services.AddControllersWithViews();
 
