@@ -51,7 +51,7 @@ namespace MyGarage.Services.Data
                 Mileage = vehicleViewModel.Mileage ?? "No Record"
             };
 
-            _context.Vehicles.Add(newVehicle);
+            await _context.Vehicles.AddAsync(newVehicle);
             await _context.SaveChangesAsync();
         }
 

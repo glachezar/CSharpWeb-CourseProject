@@ -29,10 +29,27 @@ namespace MyGarage.Services.Data
                     FirstName = c.Name,
                     LastName = c.Surname,
                     PhoneNumber = c.PhoneNumber,
+                    Email = c.Email
                 })
                 .ToArrayAsync();
 
             return viewAllCustomers;
+        }
+
+        public async Task AddCustomerAsync(AddCustomerViewModel customer)
+        {
+            Customer newCustomer = new Customer()
+            {
+                Name = customer.Name,
+                Surname = customer.Surname,
+                PhoneNumber = customer.PhoneNumber,
+                Egn = customer.Egn,
+                Email = customer.Email,
+                Address = customer.Address,
+            };
+
+            await _dbContext.AddAsync(newCustomer);
+            await this._dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> CustomerHaveVehiclesByIdAsync(string id)

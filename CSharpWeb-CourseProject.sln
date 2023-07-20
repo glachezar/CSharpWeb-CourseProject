@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Services.Data", "MyGarage.Services.Data\MyGarage.Services.Data.csproj", "{2DC79F6A-BD83-4ACE-A717-2C1FEC8A8309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGarage.Web.Infrastructure", "MyGarage.Web.Infrastructure\MyGarage.Web.Infrastructure.csproj", "{69A156BB-180E-412E-922C-ED1581603F58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGarage.Web.Infrastructure", "MyGarage.Web.Infrastructure\MyGarage.Web.Infrastructure.csproj", "{69A156BB-180E-412E-922C-ED1581603F58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

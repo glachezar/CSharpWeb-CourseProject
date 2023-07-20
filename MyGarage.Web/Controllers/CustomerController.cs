@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ViewModels.Customer;
     using MyGarage.Services.Data.Interfaces;
+    using MyGarage.Services.Data;
 
 
     [Authorize]
@@ -28,6 +29,24 @@
         public Task<IActionResult> Details()
         {
             throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddCustomerViewModel addCustomer)
+        {
+            if (ModelState.IsValid)
+            {
+                await _customerService.AddCustomerAsync(addCustomer);
+                return RedirectToAction("All", "Customer");
+            }
+
+            return View(addCustomer);
         }
     }
 }
