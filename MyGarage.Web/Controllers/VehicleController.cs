@@ -1,7 +1,6 @@
-﻿using MyGarage.Services.Data.Interfaces;
-
-namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Controllers
 {
+    using MyGarage.Services.Data.Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ViewModels.Vehicle;

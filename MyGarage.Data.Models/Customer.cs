@@ -1,4 +1,5 @@
-﻿using static MyGarage.Common.EntityValidationConstants.Customer;
+﻿using System.Runtime.CompilerServices;
+using static MyGarage.Common.EntityValidationConstants.Customer;
 
 namespace MyGarage.Data.Models
 {

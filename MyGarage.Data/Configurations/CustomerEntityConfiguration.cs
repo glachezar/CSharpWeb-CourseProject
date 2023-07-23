@@ -19,6 +19,7 @@
             .WithOne(u => u.Customer)
             .HasForeignKey<Customer>(c => c.ApplicationUserId);
 
+            
         }
 
         private Customer[] GenerateCustomers()
@@ -32,7 +33,8 @@
                 Name = "Martin",
                 Surname = "Martinov",
                 PhoneNumber = "0888100100",
-                Email = "Martinov@mcg.bg"
+                Email = "Martinov@mcg.bg",
+                
             };
             customers.Add(customer);
 

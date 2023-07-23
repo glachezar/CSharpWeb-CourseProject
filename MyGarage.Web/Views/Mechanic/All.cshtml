@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MechanicViewModel>
+
+@{
+    ViewData["Title"] = "Our Mechanics!";
+    ViewBag.Currency = "$";
+    var mechanics = Model.ToList();
+    var count = 1;
+}
+
+<div class="text-centre mb-5" align="center">
+    <h2 class="display-4 text-centre">@ViewData["Title"]</h2>
+</div>
+<hr />
+<div align="center" class="mb-5">
+    <a type="button" class="btn btn-primary" asp-area="" asp-controller="Mechanic" asp-action="Add">Add New Mechanic</a>
+</div>
+
+<div class="">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var m in mechanics)
+        {
+
+            <tr>
+                <th scope="row">@count</th>
+                <td>@m.Name</td>
+                <td>@m.Surname</td>
+                <td>@m.PhoneNumber</td>
+
+                <td><a type="button" class="btn btn-primary" asp-area="" asp-controller="Mechanic" asp-action="Details" value="@m.Id">View Details</a></td>
+                <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="Mechanic" asp-action="Edit" value="@m.Id">Edit</a></td>
+                <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="Mechanic" asp-action="Delete" value="@m.Id">Delete</a></td>
+            </tr>
+            count++;
+        }
+        </tbody>
+    </table>
+</div>

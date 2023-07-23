@@ -3,8 +3,10 @@ using MyGarage.Web.ViewModels.Part;
 
 namespace MyGarage.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class PartController : Controller
     {
         private readonly IPartService _partService;
