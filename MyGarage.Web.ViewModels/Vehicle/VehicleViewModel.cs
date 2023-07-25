@@ -11,6 +11,8 @@
 
         public string Vin { get; set; } = null!;
 
+        public string? RegistrationNumber { get; set; } 
+
         public string YearManufactured { get; set; } = null!;
     }
 }

@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ViewModels.Vehicle;
+    using static Common.NotificationsMessagesConstants;
 
 
 
@@ -29,8 +30,14 @@
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            VehicleDetailsViewModel viewModel = 
+            VehicleDetailsViewModel? viewModel = 
                 await this._vehicleService.ViewVehicleDetailsByIdAsync(id);
+
+            if (viewModel == null)
+            {
+                this.TempData[ErrorMessage] = "No Vehicle details Available!";
+                return this.RedirectToAction("All", "Vehicle");
+            }
 
             return View(viewModel);
         }

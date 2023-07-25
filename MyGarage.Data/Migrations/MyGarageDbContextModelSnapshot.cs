@@ -269,7 +269,7 @@ namespace MyGarage.Data.Migrations
                         .IsUnique()
                         .HasFilter("[ApplicationUserId] IS NOT NULL");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
 
                     b.HasData(
                         new
@@ -319,7 +319,7 @@ namespace MyGarage.Data.Migrations
 
                     b.HasIndex("JobCardId");
 
-                    b.ToTable("Jobs");
+                    b.ToTable("Jobs", (string)null);
 
                     b.HasData(
                         new
@@ -363,7 +363,7 @@ namespace MyGarage.Data.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("JobCards");
+                    b.ToTable("JobCards", (string)null);
                 });
 
             modelBuilder.Entity("MyGarage.Data.Models.Mechanic", b =>
@@ -389,7 +389,7 @@ namespace MyGarage.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Mechanics");
+                    b.ToTable("Mechanics", (string)null);
 
                     b.HasData(
                         new
@@ -434,7 +434,7 @@ namespace MyGarage.Data.Migrations
 
                     b.HasIndex("JobCardId");
 
-                    b.ToTable("Parts");
+                    b.ToTable("Parts", (string)null);
 
                     b.HasData(
                         new
@@ -510,7 +510,7 @@ namespace MyGarage.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Vehicles", (string)null);
 
                     b.HasData(
                         new

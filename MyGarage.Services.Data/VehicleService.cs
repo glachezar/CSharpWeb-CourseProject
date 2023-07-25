@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MyGarage.Data;
 using MyGarage.Data.Models;
 using MyGarage.Services.Data.Interfaces;
+using MyGarage.Web.ViewModels.Customer;
 using MyGarage.Web.ViewModels.Vehicle;
 
 namespace MyGarage.Services.Data
@@ -28,8 +29,9 @@ namespace MyGarage.Services.Data
                     Id = v.Id.ToString(),
                     Make = v.Make,
                     Model = v.Model,
-                    YearManufactured = v.YearManufactured,
-                    Vin = v.Vin
+                    RegistrationNumber = v.RegNumber,
+                    Vin = v.Vin,
+                    YearManufactured = v.YearManufactured
                 })
                 .ToArrayAsync();
 
@@ -60,22 +62,35 @@ namespace MyGarage.Services.Data
         {
             Vehicle? vehicle = await _context
                 .Vehicles
+                .Include(c => c.Customer)
                 .FirstOrDefaultAsync(v => v.Id.ToString() == id);
 
-            VehicleDetailsViewModel model = new VehicleDetailsViewModel()
+            if (vehicle == null)
+            {
+                return null;
+            }
+
+            return new VehicleDetailsViewModel()
             {
                 Id = vehicle!.Id.ToString(),
                 Make = vehicle.Make,
                 Model = vehicle.Model,
                 Vin = vehicle.Vin,
-                EngineNumber = vehicle.EngineNumber ?? "Unknown Engine Number!",
-                RegNumber = vehicle.RegNumber ?? "No Registration Provided!",
+                EngineNumber = vehicle.EngineNumber ?? "No Engine Number Provided!",
+                RegistrationNumber = vehicle.RegNumber ?? "No Registration Provided!",
                 YearManufactured = vehicle.YearManufactured,
                 FuelType = vehicle.FuelType ?? "Unknown Fuel Type!",
-                Mileage = vehicle.Mileage ?? "Unknown Mileage!"
+                Mileage = vehicle.Mileage ?? "Unknown Mileage!",
+                VehicleOwner = new CustomerInfoOnVehicleViewModel
+                {
+                    Id = vehicle.Customer?.Id.ToString() ?? "No Owner Added!",
+                    Name = vehicle.Customer?.Name ?? "No Owner Added!",
+                    PhoneNumber = vehicle.Customer?.PhoneNumber ?? "No Owner Added!",
+                    Email = vehicle.Customer?.Email ?? "No Owner Added!"
+                }
             };
 
-            return model;
+            
         }
 
         public Task<bool> VehicleExistingByIdAsync(string id)

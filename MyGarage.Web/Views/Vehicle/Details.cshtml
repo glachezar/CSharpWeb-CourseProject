@@ -12,9 +12,108 @@
     <title>@ViewData["Title"]</title>
 </head>
 <body>
-<div>
-        <h3>@ViewData["Title"]</h3>
-    <p>Make - @Model.Make</p>
-</div>
+    <div class="container mt-4">
+        <h1>Vehicle Details</h1>
+        @if (@Model.VehicleOwner.Name == "No Owner Added!")
+        {
+            <a type="button" class="btn btn-primary" asp-area="" asp-controller="Vehicle" asp-action="AddOwner" asp-route-id="@Model.Id">Add Owner</a>
+        }
+        <a type="button" class="btn btn-warning" asp-area="" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a type="button" class="btn btn-danger" asp-area="" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <hr/>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Make:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Make</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Model:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Model</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>VIN:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Vin</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Engine Number:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.EngineNumber</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Registration Number:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.RegistrationNumber</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Year Manufactured:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.YearManufactured</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Fuel Type:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.FuelType</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Mileage:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Mileage</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Vehicle Owner:</h4>
+            </div>
+            @if (@Model.VehicleOwner.Name == "No Owner Added!")
+            {
+                <div class="col-md-8">
+                    <h4>This vehicle do not have an owner!</h4>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-8">
+                    <p>Name: @Model.VehicleOwner.Name</p>
+                    <p>Phone: @Model.VehicleOwner.PhoneNumber</p>
+                    <p>Email: @Model.VehicleOwner.Email</p>
+                </div>
+            }
+
+        </div>
+    </div>
 </body>
 </html>

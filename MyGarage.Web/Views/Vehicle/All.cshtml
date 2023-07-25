@@ -123,8 +123,12 @@
                 <th scope="col">#</th>
                 <th scope="col">Make</th>
                 <th scope="col">Model</th>
-                <th scope="col">Year</th>
+                <th scope="col">Registration Plate</th>
                 <th scope="col">VIN</th>
+                <th scope="col">Year</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -135,11 +139,12 @@
                     <th scope="row">@count</th>
                     <td>@vehicle.Make</td>
                     <td>@vehicle.Model</td>
-                    <td>@vehicle.YearManufactured</td>
+                    <td>@vehicle.RegistrationNumber</td>
                     <td>@vehicle.Vin</td>
-                    <td><a type="button" class="btn btn-primary" asp-area="" asp-controller="Vehicle" asp-action="Details" value="@vehicle.Id">View Details</a></td>
-                    <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="Vehicle" asp-action="Edit" value="@vehicle.Id">Edit</a></td>
-                    <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="Vehicle" asp-action="Delete" value="@vehicle.Id">Delete</a></td>
+                    <td>@vehicle.YearManufactured</td>
+                    <td><a type="button" class="btn btn-primary" asp-area="" asp-controller="Vehicle" asp-action="Details" asp-route-id="@vehicle.Id">View Details</a></td>
+                    <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id">Edit</a></td>
+                    <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id">Delete</a></td>
                 </tr>
                 
                 count++;
