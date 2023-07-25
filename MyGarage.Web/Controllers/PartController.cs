@@ -5,6 +5,8 @@ namespace MyGarage.Web.Controllers
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MyGarage.Services.Data;
+    using MyGarage.Web.ViewModels.Customer;
 
     [Authorize]
     public class PartController : Controller
@@ -23,6 +25,24 @@ namespace MyGarage.Web.Controllers
 
             return View(viewModel);
             
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AllPartsViewModel addPart)
+        {
+            if (ModelState.IsValid)
+            {
+                await _partService.AddPartAsync(addPart);
+                return RedirectToAction("All", "Part");
+            }
+
+            return View(addPart);
         }
     }
 }

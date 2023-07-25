@@ -1,0 +1,32 @@
+﻿@model AllPartsViewModel
+
+@{
+    ViewData["Title"] = "Add New Customer!";
+}
+<h2 align="center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group mb-3">
+                <label asp-for="PartName"></label>
+                <input asp-for="PartName" class="form-control" placeholder="Part Name...">
+                <span asp-validation-for="PartName" class="small text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="PartNumber"></label>
+                <input asp-for="PartNumber" class="form-control" placeholder="Part Number...">
+                <span asp-validation-for="PartNumber" class="small text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Price...">
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -56,7 +56,7 @@
             public const int NumberMaxLength = 20;
             public const int NumberMinLength = 1;
 
-            public const string PriceMaxValue = "10 000";
+            public const string PriceMaxValue = "10000";
             public const string PriceMinValue = "0.50";
         }
 

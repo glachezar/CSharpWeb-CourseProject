@@ -7,5 +7,7 @@ namespace MyGarage.Services.Data.Interfaces
     public interface IPartService
     {
         Task<IEnumerable<AllPartsViewModel>> AllPartsAsync();
+
+        Task AddPartAsync(AllPartsViewModel part);
     }
 }

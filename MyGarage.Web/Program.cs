@@ -3,6 +3,7 @@ using MyGarage.Data.Models;
 using MyGarage.Services.Data;
 using MyGarage.Services.Data.Interfaces;
 using MyGarage.Web.Infrastructure.Extensions;
+using MyGarage.Web.Infrastructure.ModelBinders;
 
 namespace MyGarage.Web
 {
@@ -49,7 +50,13 @@ namespace MyGarage.Web
 
             builder.Services.AddApplicationServices(typeof(ICustomerService));
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                });
+
+            
 
             var app = builder.Build();
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyGarage.Data;
+using MyGarage.Data.Models;
 
 namespace MyGarage.Services.Data
 {
@@ -32,6 +33,19 @@ namespace MyGarage.Services.Data
                 .ToArrayAsync();
 
             return viewAllParts;
+        }
+
+        public async Task AddPartAsync(AllPartsViewModel part)
+        {
+            Part newPart = new Part()
+            {
+                PartNumber = part.PartNumber,
+                PartName = part.PartName,
+                Price = part.Price,
+            };
+
+            await this.context.AddAsync(newPart);
+            await this.context.SaveChangesAsync();
         }
     }
 }
