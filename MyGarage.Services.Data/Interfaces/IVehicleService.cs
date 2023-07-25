@@ -12,6 +12,8 @@
 
         Task<VehicleDetailsViewModel> ViewVehicleDetailsByIdAsync(string id);
 
-        Task<bool> VehicleExistingByIdAsync(string id);
+        Task<bool> ExistingByIdAsync(string id);
+
+        Task<AddVehicleViewModel> GetVehicleForEditByIdAsync(string id);
     }
 }

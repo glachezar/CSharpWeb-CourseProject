@@ -66,17 +66,12 @@ namespace MyGarage.Services.Data
             return customer.Vehicles!.Any();
         }
 
-        public async Task<bool> CustomerExistByEmailAsync(string email)
+        public async Task<Customer> GetCustomerByEmailAsync(string email)
         {
-            var customer = await this._dbContext
-                .Customers
-                .FirstOrDefaultAsync(u => u.Email.ToUpper() == email.ToUpper());
-            if (customer == null)
-            {
-                return false;
-            }
-
-            return true;
+            string normalizedEmail = email.ToUpper();
+            return await _dbContext.Customers.FirstOrDefaultAsync(c => c.Email.ToUpper() == normalizedEmail);
         }
+
+
     }
 }

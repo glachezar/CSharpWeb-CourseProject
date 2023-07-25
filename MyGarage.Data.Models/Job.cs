@@ -9,6 +9,7 @@ namespace MyGarage.Data.Models
         public Job()
         {
             this.Id = Guid.NewGuid();
+            JobCards = new HashSet<JobCard>();
         }
 
         [Key]
@@ -21,10 +22,8 @@ namespace MyGarage.Data.Models
         [Required]
         public decimal Price { get; set; }
 
-        [ForeignKey(nameof(JobCard))]
-        public Guid? JobCardId { get; set; }
         
-        public JobCard? JobCard { get; set; }
+        public ICollection<JobCard> JobCards { get; set; }
 
     }
 }

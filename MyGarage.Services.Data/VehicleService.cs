@@ -83,19 +83,44 @@ namespace MyGarage.Services.Data
                 Mileage = vehicle.Mileage ?? "Unknown Mileage!",
                 VehicleOwner = new CustomerInfoOnVehicleViewModel
                 {
-                    Id = vehicle.Customer?.Id.ToString() ?? "No Owner Added!",
-                    Name = vehicle.Customer?.Name ?? "No Owner Added!",
-                    PhoneNumber = vehicle.Customer?.PhoneNumber ?? "No Owner Added!",
-                    Email = vehicle.Customer?.Email ?? "No Owner Added!"
+                    Id = vehicle.Customer?.Id.ToString(),
+                    Name = vehicle.Customer?.Name,
+                    PhoneNumber = vehicle.Customer?.PhoneNumber,
+                    Email = vehicle.Customer?.Email 
                 }
             };
 
             
         }
 
-        public Task<bool> VehicleExistingByIdAsync(string id)
+        public async Task<bool> ExistingByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            bool result = await _context
+                .Vehicles
+                .AnyAsync(v => v.Id.ToString() == id);
+
+            return result;
         }
+
+        public async Task<AddVehicleViewModel> GetVehicleForEditByIdAsync(string id)
+        {
+            Vehicle vehicle = await _context
+                .Vehicles
+                .Include(c => c.Customer)
+                .FirstAsync(v => v.Id.ToString() == id);
+
+            return new AddVehicleViewModel
+            {
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                Vin = vehicle.Vin,
+                EngineNumber = vehicle.EngineNumber,
+                RegNumber = vehicle.RegNumber,
+                YearManufactured = vehicle.YearManufactured,
+                FuelType = vehicle.FuelType,
+                Mileage = vehicle.Mileage
+            };
+        }
+
     }
 }

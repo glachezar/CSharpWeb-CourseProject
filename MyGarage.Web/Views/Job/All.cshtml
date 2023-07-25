@@ -1,0 +1,55 @@
+﻿@model IEnumerable<JobViewModel>
+
+@{
+    ViewData["Title"] = "All Jobs!";
+    var jobs = Model.ToList();
+    ViewBag.Currency = "$";
+    var count = 1;
+}
+
+<div class="text-centre mb-5" align="center">
+    <h2 class="display-4 text-centre">@ViewData["Title"]</h2>
+</div>
+<hr />
+<div align="center" class="mb-5">
+    <a type="button" class="btn btn-primary" asp-area="" asp-controller="Job" asp-action="Add">Add New Job</a>
+</div>
+
+<div class="">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Job Name</th>
+            <th scope="col">Labor Price</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (jobs.Count == 0)
+        {
+            <h4>No jobs added.</h4>
+        }
+        else
+        {
+            @foreach (var job in jobs)
+            {
+
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@job.JobName</td>
+                        <td>@job.Price @ViewBag.Currency</td>
+
+                        <td><a type="button" class="btn btn-primary" asp-area="" asp-controller="Job" asp-action="Details" asp-route-id="@job.Id">View Details</a></td>
+                        <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="Job" asp-action="Edit" asp-route-id="@job.Id">Edit</a></td>
+                        <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="Job" asp-action="Delete" asp-route-id="@job.Id">Delete</a></td>
+                </tr>
+                count++;
+            }
+        }
+
+        </tbody>
+    </table>
+</div>

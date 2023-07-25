@@ -1,5 +1,7 @@
 ﻿@using static MyGarage.Common.NotificationsMessagesConstants;
 
+<script>toastr.options.positionClass = 'toast-bottom-right';</script>
+
 @if (TempData.ContainsKey(ErrorMessage))
 {
     <script>toastr.error('@TempData[ErrorMessage]');</script>
@@ -18,5 +20,10 @@
 @if (TempData.ContainsKey(InformationMessage))
 {
     <script>toastr.info('@TempData[InformationMessage]');</script>
+}
+
+@section Scripts
+{
+    
 }
 

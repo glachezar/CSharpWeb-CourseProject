@@ -23,6 +23,9 @@
             <th scope="col">Last Name</th>
             <th scope="col">Phone Number</th>
             <th scope="col">Email address</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -35,9 +38,9 @@
                 <td>@customer.LastName</td>
                 <td>@customer.PhoneNumber</td>
                 <td>@customer.Email</td>
-                <td><a type="button" class="btn btn-primary" asp-area="" asp-controller="Customer" asp-action="Details" value="@customer.Id">View Details</a></td>
-                <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="Customer" asp-action="Edit" value="@customer.Id">Edit</a></td>
-                <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="Customer" asp-action="Delete" value="@customer.Id">Delete</a></td>
+                    <td><a type="button" class="btn btn-primary" asp-area="" asp-controller="Customer" asp-action="Details" asp-route-id="@customer.Id">View Details</a></td>
+                    <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.Id">Edit</a></td>
+                    <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.Id">Delete</a></td>
             </tr>
             count++;
         }

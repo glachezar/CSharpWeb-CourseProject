@@ -1,6 +1,8 @@
 ﻿namespace MyGarage.Services.Data.Interfaces
 {
-    using MyGarage.Web.ViewModels.Customer;
+    using Web.ViewModels.Customer;
+    using MyGarage.Data.Models;
+
 
     public interface ICustomerService
     {
@@ -10,6 +12,6 @@
 
         Task<bool> CustomerHaveVehiclesByIdAsync(string id);
 
-        Task<bool> CustomerExistByEmailAsync(string email);
+        Task<Customer> GetCustomerByEmailAsync(string email);
     }
 }

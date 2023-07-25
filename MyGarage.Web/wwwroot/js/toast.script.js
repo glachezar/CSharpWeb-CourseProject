@@ -126,7 +126,9 @@
 
 		if($element.fadeIn) {
             $element.fadeIn();
-        }else {
+        }
+        else
+        {
             $alert.css({display: 'block', opacity: 1});
         }
 

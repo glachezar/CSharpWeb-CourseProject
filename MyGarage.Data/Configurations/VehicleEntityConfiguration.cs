@@ -43,7 +43,7 @@ namespace MyGarage.Data.Configurations
                 FuelType = "Gasoline",
                 Mileage = "123654",
                 RegNumber = "BT2525BT",
-                CustomerId = Guid.Parse("6131ea8b-b390-4bd9-90b6-788529c37e91")
+                //CustomerId = Guid.Parse("1542b9ce-decd-4028-8b7d-c6e5ca5f64f7")
             };
             vehicles.Add(vehicle);
 

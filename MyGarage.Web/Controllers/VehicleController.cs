@@ -30,14 +30,18 @@
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
+            bool vehicleExist = await _vehicleService.ExistingByIdAsync(id);
+
+            if (!vehicleExist)
+            {
+                this.TempData[ErrorMessage] = "Vehicle with provided id does not exist!";
+                return this.RedirectToAction("All", "Vehicle");
+            }
+
             VehicleDetailsViewModel? viewModel = 
                 await this._vehicleService.ViewVehicleDetailsByIdAsync(id);
 
-            if (viewModel == null)
-            {
-                this.TempData[ErrorMessage] = "No Vehicle details Available!";
-                return this.RedirectToAction("All", "Vehicle");
-            }
+            
 
             return View(viewModel);
         }
@@ -58,6 +62,21 @@
             }
 
             return View(addVehicle);
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            bool vehicleExist = await _vehicleService.ExistingByIdAsync(id);
+
+            if (!vehicleExist)
+            {
+                this.TempData[ErrorMessage] = "Vehicle with provided id does not exist!";
+                return this.RedirectToAction("All", "Vehicle");
+            }
+
+            AddVehicleViewModel formModel = await this._vehicleService.GetVehicleForEditByIdAsync(id);
+
+            return this.View(formModel);
         }
     }
 }

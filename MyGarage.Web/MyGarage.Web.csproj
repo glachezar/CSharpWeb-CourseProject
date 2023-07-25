@@ -25,12 +25,4 @@
     <ProjectReference Include="..\MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Vehicle\ViewDetails.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Vehicle\ViewDetails.cshtml" />
-  </ItemGroup>
-
 </Project>
