@@ -132,6 +132,12 @@
             </tr>
         </thead>
         <tbody>
+        @if (vehicles.Count == 0)
+        {
+            <h3>There is no vehicles added!</h3>
+        }
+        else
+        {
             @foreach (var vehicle in vehicles)
             {
 
@@ -146,9 +152,10 @@
                     <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id">Edit</a></td>
                     <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id">Delete</a></td>
                 </tr>
-                
+
                 count++;
             }
+        }
         </tbody>
     </table>
 </div>

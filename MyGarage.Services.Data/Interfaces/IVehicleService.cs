@@ -15,5 +15,7 @@
         Task<bool> ExistingByIdAsync(string id);
 
         Task<AddVehicleViewModel> GetVehicleForEditByIdAsync(string id);
+
+        Task EditVehicleByIdAndFormModel(string vehicleId, AddVehicleViewModel vehicleViewModel);
     }
 }

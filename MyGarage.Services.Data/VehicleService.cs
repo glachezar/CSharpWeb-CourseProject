@@ -90,7 +90,6 @@ namespace MyGarage.Services.Data
                 }
             };
 
-            
         }
 
         public async Task<bool> ExistingByIdAsync(string id)
@@ -122,5 +121,22 @@ namespace MyGarage.Services.Data
             };
         }
 
+        public async Task EditVehicleByIdAndFormModel(string vehicleId, AddVehicleViewModel vehicleViewModel)
+        {
+            Vehicle vehicle = await _context
+                .Vehicles
+                .FirstAsync(v => v.Id.ToString() == vehicleId);
+
+            vehicle.Make = vehicleViewModel.Make;
+            vehicle.Model = vehicleViewModel.Model;
+            vehicle.Vin = vehicleViewModel.Vin;
+            vehicle.RegNumber = vehicleViewModel.RegNumber ?? "N/A";
+            vehicle.EngineNumber = vehicleViewModel.EngineNumber ?? "N/A";
+            vehicle.YearManufactured = vehicleViewModel.YearManufactured;
+            vehicle.FuelType = vehicleViewModel.FuelType;
+            vehicle.Mileage = vehicleViewModel.Mileage;
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -64,6 +64,32 @@
             return View(addVehicle);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, AddVehicleViewModel formModel)
+        {
+            bool vehicleExist = await _vehicleService.ExistingByIdAsync(id);
+
+            if (!vehicleExist)
+            {
+                this.TempData[ErrorMessage] = "Vehicle with provided id does not exist!";
+                return this.RedirectToAction("All", "Vehicle");
+            }
+
+            try
+            {
+                await this._vehicleService.EditVehicleByIdAndFormModel(id, formModel);
+                this.TempData[SuccessMessage] = "Vehicle edit successful!";
+            }
+            catch (Exception )
+            {
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occur while trying to update vehicle details, please try again later or contact support!");
+                return View(formModel);
+            }
+
+            return RedirectToAction("Details", "Vehicle", new{id});
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
             bool vehicleExist = await _vehicleService.ExistingByIdAsync(id);
