@@ -1,4 +1,6 @@
-﻿namespace MyGarage.Web.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace MyGarage.Web.Controllers
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -7,6 +9,7 @@
     using Data.Models;
     using ViewModels.Customer;
 
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

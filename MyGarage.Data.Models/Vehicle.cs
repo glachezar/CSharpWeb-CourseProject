@@ -10,6 +10,7 @@
         public Vehicle()
         {
             this.Id = Guid.NewGuid();
+            this.IsActive = true;
         }
 
         [Key]
@@ -41,6 +42,8 @@
 
         [MaxLength(MileageMaxLength)]
         public string Mileage { get; set; }
+
+        public bool IsActive { get; set; }
 
         [ForeignKey(nameof(Customer))]
         public Guid? CustomerId { get; set; }

@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace MyGarage.Web.ViewModels.Vehicle
+﻿namespace MyGarage.Web.ViewModels.Vehicle
 {
     using System.ComponentModel.DataAnnotations;
     using static Common.EntityValidationConstants.Vehicle;
@@ -35,5 +33,7 @@ namespace MyGarage.Web.ViewModels.Vehicle
 
         [StringLength(MileageMaxLength, MinimumLength = MileageMinLength)]
         public string? Mileage { get; set; }
+
+        public string? CustomerId { get; set; }
     }
 }

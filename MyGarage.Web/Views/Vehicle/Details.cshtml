@@ -1,8 +1,8 @@
 ﻿@model VehicleDetailsViewModel
 
+
 @{
     ViewData["Title"] = "Vehicle Details";
-
 }
 
 <!DOCTYPE html>
@@ -14,10 +14,6 @@
 <body>
     <div class="container mt-4">
         <h1>Vehicle Details</h1>
-        @if (@Model.VehicleOwner.Name == "No Owner Added!")
-        {
-            <a type="button" class="btn btn-primary" asp-area="" asp-controller="Vehicle" asp-action="AddOwner" asp-route-id="@Model.Id">Add Owner</a>
-        }
         <a type="button" class="btn btn-warning" asp-area="" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
         <a type="button" class="btn btn-danger" asp-area="" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
         <hr/>
@@ -98,10 +94,11 @@
             <div class="col-md-4">
                 <h4>Vehicle Owner:</h4>
             </div>
-            @if (@Model.VehicleOwner.Name == "No Owner Added!")
+            @if (@Model.VehicleOwner.Id == null)
             {
                 <div class="col-md-8">
                     <h4>This vehicle do not have an owner!</h4>
+                    <a type="button" class="btn btn-primary" asp-area="" asp-controller="Vehicle" asp-action="AddOwner" asp-route-id="@Model.Id">Add Owner</a>
                 </div>
             }
             else

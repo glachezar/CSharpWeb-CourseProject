@@ -13,9 +13,10 @@
     {
         private readonly IVehicleService _vehicleService;
 
-        public VehicleController(IVehicleService service)
+        public VehicleController(IVehicleService service, ICustomerService customerService)
         {
             _vehicleService = service;
+            
         }
 
         [HttpGet]

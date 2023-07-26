@@ -1,12 +1,12 @@
-﻿using MyGarage.Services.Data.Interfaces;
-using MyGarage.Web.ViewModels.Job;
-
-namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using MyGarage.Services.Data;
-    using MyGarage.Web.ViewModels.Vehicle;
+    using Microsoft.AspNetCore.Authorization;
 
+    using MyGarage.Services.Data.Interfaces;
+    using ViewModels.Job;
+
+    [Authorize]
     public class JobController : Controller
     {
         private readonly IJobService _jobService;
@@ -23,6 +23,7 @@ namespace MyGarage.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
