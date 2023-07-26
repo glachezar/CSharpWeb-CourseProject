@@ -23,6 +23,7 @@ namespace MyGarage.Services.Data
         {
             IEnumerable<VehicleViewModel> viewAllVehicles = await _context
                 .Vehicles
+                .Where(v => v.IsActive == true)
                 .AsNoTracking()
                 .Select(v => new VehicleViewModel()
                 {
@@ -41,20 +42,34 @@ namespace MyGarage.Services.Data
 
         public async Task AddVehicleAsync(AddVehicleViewModel vehicleViewModel)
         {
-            Vehicle newVehicle = new Vehicle()
-            {
-                Make = vehicleViewModel.Make,
-                Model = vehicleViewModel.Model,
-                Vin = vehicleViewModel.Vin,
-                EngineNumber = vehicleViewModel.EngineNumber ?? "N/A",
-                RegNumber = vehicleViewModel.RegNumber ?? "N/A",
-                YearManufactured = vehicleViewModel.YearManufactured,
-                FuelType = vehicleViewModel.FuelType,
-                Mileage = vehicleViewModel.Mileage ?? "No Record"
-            };
+            Vehicle? inactiveVehicleCheck = await _context
+                .Vehicles
+                .Where(v => v.IsActive == false)
+                .FirstOrDefaultAsync(v => v.Vin == vehicleViewModel.Vin);
 
-            await _context.Vehicles.AddAsync(newVehicle);
-            await _context.SaveChangesAsync();
+            if (inactiveVehicleCheck != null)
+            {
+                inactiveVehicleCheck.IsActive = true;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                Vehicle newVehicle = new Vehicle()
+                {
+                    Make = vehicleViewModel.Make,
+                    Model = vehicleViewModel.Model,
+                    Vin = vehicleViewModel.Vin,
+                    EngineNumber = vehicleViewModel.EngineNumber ?? "N/A",
+                    RegNumber = vehicleViewModel.RegNumber ?? "N/A",
+                    YearManufactured = vehicleViewModel.YearManufactured,
+                    FuelType = vehicleViewModel.FuelType,
+                    Mileage = vehicleViewModel.Mileage ?? "No Record"
+                };
+
+                await _context.Vehicles.AddAsync(newVehicle);
+                await _context.SaveChangesAsync();
+            }
+            
         }
 
 
@@ -62,6 +77,7 @@ namespace MyGarage.Services.Data
         {
             Vehicle? vehicle = await _context
                 .Vehicles
+                .Where(v => v.IsActive == true)
                 .Include(c => c.Customer)
                 .FirstOrDefaultAsync(v => v.Id.ToString() == id);
 
@@ -96,6 +112,7 @@ namespace MyGarage.Services.Data
         {
             bool result = await _context
                 .Vehicles
+                .Where(v => v.IsActive == true)
                 .AnyAsync(v => v.Id.ToString() == id);
 
             return result;
@@ -105,6 +122,7 @@ namespace MyGarage.Services.Data
         {
             Vehicle vehicle = await _context
                 .Vehicles
+                .Where(v => v.IsActive == true)
                 .Include(c => c.Customer)
                 .FirstAsync(v => v.Id.ToString() == id);
 
