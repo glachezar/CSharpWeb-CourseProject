@@ -72,6 +72,23 @@ namespace MyGarage.Services.Data
             
         }
 
+        public async Task<bool> IsVehicleSoftDeletedAsync(string vin)
+        {
+            Vehicle? isVehicleNotActive = await _context
+                .Vehicles
+                .Where(v => v.IsActive == false)
+                .FirstOrDefaultAsync(v => v.Vin == vin);
+
+            if (isVehicleNotActive == null)
+            {
+                return false;
+            }
+
+            isVehicleNotActive.IsActive = true;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
 
         public async Task<VehicleDetailsViewModel> ViewVehicleDetailsByIdAsync(string id)
         {
@@ -139,7 +156,7 @@ namespace MyGarage.Services.Data
             };
         }
 
-        public async Task EditVehicleByIdAndFormModel(string vehicleId, AddVehicleViewModel vehicleViewModel)
+        public async Task EditVehicleByIdAndFormModelAsync(string vehicleId, AddVehicleViewModel vehicleViewModel)
         {
             Vehicle vehicle = await _context
                 .Vehicles
@@ -155,6 +172,36 @@ namespace MyGarage.Services.Data
             vehicle.Mileage = vehicleViewModel.Mileage;
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> SoftDeleteVehicleAsync(Guid vehicleId)
+        {
+            
+            var vehicle = await _context.Vehicles.FindAsync(vehicleId);
+            if (vehicle == null)
+            {
+                return false;
+            }
+
+            vehicle.IsActive = false;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<VehicleDeleteViewModel> GetVehicleByIdAsync(string id)
+        {
+            Guid vId = Guid.Parse(id);
+            var vehicle = await _context.Vehicles.FindAsync(vId);
+
+            VehicleDeleteViewModel result = new VehicleDeleteViewModel
+            {
+                Id = vehicle.Id.ToString(),
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                Vin = vehicle.Vin
+            };
+
+            return result;
         }
     }
 }

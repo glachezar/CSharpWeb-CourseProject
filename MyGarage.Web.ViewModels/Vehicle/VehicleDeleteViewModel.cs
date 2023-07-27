@@ -1,12 +1,15 @@
 ﻿namespace MyGarage.Web.ViewModels.Vehicle
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    internal class VehicleDeleteViewModel
+
+    public class VehicleDeleteViewModel
     {
+        public string Id { get; set; } = null!;
+
+        public string Make { get; set; } = null!;
+
+        public string Model { get; set; } = null!;
+
+        public string Vin { get; set; } = null!;
     }
 }
