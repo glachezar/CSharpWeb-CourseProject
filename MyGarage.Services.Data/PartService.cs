@@ -5,25 +5,26 @@ using MyGarage.Data.Models;
 namespace MyGarage.Services.Data
 {
     using Interfaces;
+    using MyGarage.Web.ViewModels.Vehicle;
     using Web.ViewModels.Part;
 
 
 
     public class PartService : IPartService
     {
-        private readonly MyGarageDbContext context;
+        private readonly MyGarageDbContext _context;
 
         public PartService(MyGarageDbContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public async Task<IEnumerable<AllPartsViewModel>> AllPartsAsync()
+        public async Task<IEnumerable<PartsViewModel>> AllPartsAsync()
         {
-            IEnumerable<AllPartsViewModel> viewAllParts = await context
+            IEnumerable<PartsViewModel> viewAllParts = await _context
                 .Parts
                 .AsNoTracking()
-                .Select(p => new AllPartsViewModel()
+                .Select(p => new PartsViewModel()
                 {
                     Id = p.Id.ToString(),
                     PartName = p.PartName,
@@ -35,7 +36,7 @@ namespace MyGarage.Services.Data
             return viewAllParts;
         }
 
-        public async Task AddPartAsync(AllPartsViewModel part)
+        public async Task AddPartAsync(PartsViewModel part)
         {
             Part newPart = new Part()
             {
@@ -44,8 +45,90 @@ namespace MyGarage.Services.Data
                 Price = part.Price,
             };
 
-            await this.context.AddAsync(newPart);
-            await this.context.SaveChangesAsync();
+            await this._context.AddAsync(newPart);
+            await this._context.SaveChangesAsync();
         }
+
+
+        public async Task<PartsViewModel> ViewPartDetailsByIdAsync(string id)
+        {
+            Part? part = await _context
+                .Parts
+                .FirstOrDefaultAsync(v => v.Id.ToString() == id);
+
+            if (part == null)
+            {
+                return null;
+            }
+
+            return new PartsViewModel()
+            {
+                Id = part!.Id.ToString(),
+                PartName = part.PartName,
+                PartNumber = part.PartNumber,
+                Price = part.Price
+            };
+        }
+
+        public async Task<bool> ExistingByIdAsync(string id)
+        {
+            bool result = await _context
+                .Parts
+                //.Where(v => v.IsActive == true)
+                .AnyAsync(v => v.Id.ToString() == id);
+
+            return result;
+        }
+        public async Task<PartsViewModel> GetPartByIdAsync(string id)
+        {
+            Guid vId = Guid.Parse(id);
+            var part= await _context.Parts.FindAsync(vId);
+
+            PartsViewModel result = new PartsViewModel()
+            {
+                Id = part.Id.ToString(),
+                PartName = part.PartName,
+                PartNumber = part.PartNumber,
+                Price = part.Price
+            };
+
+            return result;
+        }
+
+        public async Task<PartsViewModel> GetPartForEditByIdAsync(string id)
+        {
+            Part part = await _context
+                .Parts
+                //.Where(v => v.IsActive == true)
+                .FirstAsync(v => v.Id.ToString() == id);
+
+            return new PartsViewModel
+            {
+                Id = part.Id.ToString(),
+                PartName = part.PartName,
+                PartNumber = part.PartNumber,
+                Price = part.Price
+            };
+        }
+
+        public async Task EditPartByIdAndFormModelAsync(string partId, PartsViewModel partModel) 
+        {
+            
+                Part part = await _context
+                    .Parts
+                    .FirstAsync(v => v.Id.ToString() == partId);
+
+                part.PartName = partModel.PartName;
+                part.PartNumber = partModel.PartNumber;
+                part.Price = partModel.Price;
+
+                await _context.SaveChangesAsync();
+        }
+
+        public Task<bool> SoftDeletePartAsync(string vehicleId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

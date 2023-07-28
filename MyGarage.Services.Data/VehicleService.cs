@@ -135,6 +135,22 @@ namespace MyGarage.Services.Data
             return result;
         }
 
+        public async Task<VehicleDeleteViewModel> GetVehicleByIdAsync(string id)
+        {
+            Guid vId = Guid.Parse(id);
+            var vehicle = await _context.Vehicles.FindAsync(vId);
+
+            VehicleDeleteViewModel result = new VehicleDeleteViewModel
+            {
+                Id = vehicle.Id.ToString(),
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                Vin = vehicle.Vin
+            };
+
+            return result;
+        }
+
         public async Task<AddVehicleViewModel> GetVehicleForEditByIdAsync(string id)
         {
             Vehicle vehicle = await _context
@@ -188,20 +204,5 @@ namespace MyGarage.Services.Data
             return true;
         }
 
-        public async Task<VehicleDeleteViewModel> GetVehicleByIdAsync(string id)
-        {
-            Guid vId = Guid.Parse(id);
-            var vehicle = await _context.Vehicles.FindAsync(vId);
-
-            VehicleDeleteViewModel result = new VehicleDeleteViewModel
-            {
-                Id = vehicle.Id.ToString(),
-                Make = vehicle.Make,
-                Model = vehicle.Model,
-                Vin = vehicle.Vin
-            };
-
-            return result;
-        }
     }
 }

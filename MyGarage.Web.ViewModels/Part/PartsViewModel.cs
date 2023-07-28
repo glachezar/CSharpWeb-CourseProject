@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using static Common.EntityValidationConstants.Part;
 
-    public class AllPartsViewModel
+    public class PartsViewModel
     {
 
         public string? Id { get; set; }

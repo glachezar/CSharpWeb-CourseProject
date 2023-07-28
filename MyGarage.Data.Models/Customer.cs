@@ -42,8 +42,6 @@ namespace MyGarage.Data.Models
 
         public ApplicationUser? ApplicationUser { get; set; }
 
-        public Guid? VehicleId { get; set; }
-
         public virtual ICollection<Vehicle>? Vehicles { get; set; }
     }
 }

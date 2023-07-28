@@ -9,6 +9,8 @@
         public Part()
         {
             this.Id = Guid.NewGuid();
+            this.IsActive = true;
+            this.JobCard = new HashSet<JobCard>();
         }
 
         [Key]
@@ -25,10 +27,9 @@
         [Required]
         public decimal Price { get; set; }
 
-        
-        public Guid? JobCardId { get; set; }
+        public bool IsActive { get; set; }
 
-        public JobCard? JobCard { get; set; }
+        public ICollection<JobCard>? JobCard { get; set; }
 
     }
 }

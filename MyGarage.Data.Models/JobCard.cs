@@ -31,9 +31,9 @@
 
         public Mechanic? Mechanic { get; set; }
 
-        public virtual ICollection<Job> Jobs { get; set; } 
+        public virtual ICollection<Job>? Jobs { get; set; } 
 
         
-        public virtual ICollection<Part> Parts { get; set; }
+        public virtual ICollection<Part>? Parts { get; set; }
     }
 }

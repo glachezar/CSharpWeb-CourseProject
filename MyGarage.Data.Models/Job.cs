@@ -9,7 +9,8 @@ namespace MyGarage.Data.Models
         public Job()
         {
             this.Id = Guid.NewGuid();
-            JobCards = new HashSet<JobCard>();
+            this.IsActive = true;
+            this.JobCards = new HashSet<JobCard>();
         }
 
         [Key]
@@ -22,7 +23,8 @@ namespace MyGarage.Data.Models
         [Required]
         public decimal Price { get; set; }
 
-        
+        public bool IsActive { get; set; }
+
         public ICollection<JobCard> JobCards { get; set; }
 
     }

@@ -8,6 +8,8 @@
         public Mechanic()
         {
             this.Id = Guid.NewGuid();
+            this.JobCards = new HashSet<JobCard>();
+            this.IsActive = true;
         }
 
         [Key]
@@ -24,6 +26,8 @@
         [Required]
         [MaxLength(PhoneNumberMaxLength)]
         public string PhoneNumber { get; set; } = null!;
+
+        public bool IsActive { get; set; }
 
         public ICollection<JobCard>? JobCards { get; set; }
 
