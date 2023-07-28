@@ -9,18 +9,18 @@ namespace MyGarage.Services.Data.Interfaces
     {
         Task<IEnumerable<MechanicViewModel>> AllMechanicsAsync();
 
-        Task AddPartAsync(MechanicViewModel part);
+        Task AddMechanicAsync(MechanicViewModel part);
 
-        Task<MechanicViewModel> ViewPartDetailsByIdAsync(string id);
+        Task<MechanicViewModel> ViewMechanicDetailsByIdAsync(string id);
 
         Task<bool> ExistingByIdAsync(string id);
 
-        Task<MechanicViewModel> GetPartByIdAsync(string id);
+        Task<MechanicViewModel> GetMechanicByIdAsync(string id);
 
-        Task<MechanicViewModel> GetPartForEditByIdAsync(string id);
+        Task<MechanicViewModel> GetMechanicForEditByIdAsync(string id);
 
-        Task EditPartByIdAndFormModelAsync(string vehicleId, MechanicViewModel vehicleViewModel);
+        Task EditMechanicByIdAndFormModelAsync(string vehicleId, MechanicViewModel vehicleViewModel);
 
-        Task<bool> SoftDeletePartAsync(Guid vehicleId);
+        Task<bool> SoftDeleteMechanicAsync(Guid vehicleId);
     }
 }
