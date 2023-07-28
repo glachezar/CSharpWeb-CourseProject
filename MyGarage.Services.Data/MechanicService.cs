@@ -33,5 +33,40 @@ namespace MyGarage.Services.Data
 
             return allMechanics;
         }
+
+        public async Task AddMechanicAsync(MechanicViewModel mechanic)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MechanicViewModel> ViewMechanicDetailsByIdAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ExistingByIdAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MechanicViewModel> GetMechanicByIdAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<MechanicViewModel> GetMechanicForEditByIdAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task EditMechanicByIdAndFormModelAsync(string vehicleId, MechanicViewModel mechanic)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> SoftDeleteMechanicAsync(Guid mechanicId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
