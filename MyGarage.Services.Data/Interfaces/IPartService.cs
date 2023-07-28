@@ -21,7 +21,7 @@ namespace MyGarage.Services.Data.Interfaces
 
         Task EditPartByIdAndFormModelAsync(string vehicleId, PartsViewModel vehicleViewModel);
 
-        Task<bool> SoftDeletePartAsync(string vehicleId);
+        Task<bool> SoftDeletePartAsync(Guid vehicleId);
 
     }
 }

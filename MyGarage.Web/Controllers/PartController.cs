@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MyGarage.Services.Data.Interfaces;
+    using MyGarage.Web.ViewModels.Vehicle;
     using ViewModels.Part;
     using static Common.NotificationsMessagesConstants;
 
@@ -38,6 +39,7 @@
             if (ModelState.IsValid)
             {
                 await _partService.AddPartAsync(addPart);
+                this.TempData[SuccessMessage] = "Successfully added new part!";
                 return RedirectToAction("All", "Part");
             }
 
@@ -51,7 +53,7 @@
             if (!vehicleExist)
             {
                 this.TempData[ErrorMessage] = "Part with provided id does not exist!";
-                return this.RedirectToAction("All", "Vehicle");
+                return this.RedirectToAction("All", "Part");
             }
 
             try
@@ -65,7 +67,7 @@
                 return View(formModel);
             }
 
-            return RedirectToAction("Details", "Part", new { id });
+            return RedirectToAction("All", "Part", new { id });
         }
 
         [HttpGet]
@@ -101,8 +103,8 @@
         [HttpPost]
         public async Task<IActionResult> Delete(string id, PartsViewModel partToDelete)
         {
-            
-            var isDeleted = await _partService.SoftDeletePartAsync(id);
+            Guid partId = Guid.Parse(id);   
+            var isDeleted = await _partService.SoftDeletePartAsync(partId);
             if (!isDeleted)
             {
                 this.TempData[ErrorMessage] = "Part with provided id does not exist!";
@@ -112,6 +114,23 @@
 
             this.TempData[SuccessMessage] = "Part successfully deleted!";
             return RedirectToAction("All", "Part");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            bool partExist = await _partService.ExistingByIdAsync(id);
+
+            if (!partExist)
+            {
+                this.TempData[ErrorMessage] = "Part with provided id does not exist!";
+                return this.RedirectToAction("All", "Part");
+            }
+
+            PartsViewModel? viewModel =
+                await this._partService.ViewPartDetailsByIdAsync(id);
+
+            return View(viewModel);
         }
     }
 }

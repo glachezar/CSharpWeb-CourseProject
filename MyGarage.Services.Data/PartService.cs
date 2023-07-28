@@ -1,13 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyGarage.Data;
-using MyGarage.Data.Models;
-
-namespace MyGarage.Services.Data
+﻿namespace MyGarage.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MyGarage.Data;
     using Interfaces;
-    using MyGarage.Web.ViewModels.Vehicle;
     using Web.ViewModels.Part;
-
+    using MyGarage.Data.Models;
 
 
     public class PartService : IPartService
@@ -23,6 +20,7 @@ namespace MyGarage.Services.Data
         {
             IEnumerable<PartsViewModel> viewAllParts = await _context
                 .Parts
+                .Where(p => p.IsActive == true)
                 .AsNoTracking()
                 .Select(p => new PartsViewModel()
                 {
@@ -49,11 +47,11 @@ namespace MyGarage.Services.Data
             await this._context.SaveChangesAsync();
         }
 
-
         public async Task<PartsViewModel> ViewPartDetailsByIdAsync(string id)
         {
             Part? part = await _context
                 .Parts
+                .Where(p => p.IsActive == true)
                 .FirstOrDefaultAsync(v => v.Id.ToString() == id);
 
             if (part == null)
@@ -74,11 +72,12 @@ namespace MyGarage.Services.Data
         {
             bool result = await _context
                 .Parts
-                //.Where(v => v.IsActive == true)
+                .Where(v => v.IsActive == true)
                 .AnyAsync(v => v.Id.ToString() == id);
 
             return result;
         }
+
         public async Task<PartsViewModel> GetPartByIdAsync(string id)
         {
             Guid vId = Guid.Parse(id);
@@ -99,7 +98,7 @@ namespace MyGarage.Services.Data
         {
             Part part = await _context
                 .Parts
-                //.Where(v => v.IsActive == true)
+                .Where(v => v.IsActive == true)
                 .FirstAsync(v => v.Id.ToString() == id);
 
             return new PartsViewModel
@@ -125,9 +124,18 @@ namespace MyGarage.Services.Data
                 await _context.SaveChangesAsync();
         }
 
-        public Task<bool> SoftDeletePartAsync(string vehicleId)
+        public async Task<bool> SoftDeletePartAsync(Guid partId)
         {
-            throw new NotImplementedException();
+            
+            var part = await _context.Parts.FindAsync(partId);
+            if (part == null)
+            {
+                return false;
+            }
+
+            part.IsActive = false;
+            await _context.SaveChangesAsync();
+            return true;
         }
 
     }
