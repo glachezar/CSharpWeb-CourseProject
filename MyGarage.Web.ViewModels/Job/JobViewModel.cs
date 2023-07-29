@@ -1,5 +1,4 @@
-﻿
-namespace MyGarage.Web.ViewModels.Job
+﻿namespace MyGarage.Web.ViewModels.Job
 {
 
     using System.ComponentModel.DataAnnotations;

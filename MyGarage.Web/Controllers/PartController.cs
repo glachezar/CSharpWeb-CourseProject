@@ -4,7 +4,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MyGarage.Services.Data.Interfaces;
-    using MyGarage.Web.ViewModels.Vehicle;
     using ViewModels.Part;
     using static Common.NotificationsMessagesConstants;
 

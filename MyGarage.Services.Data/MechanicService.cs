@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyGarage.Data;
-using MyGarage.Services.Data.Interfaces;
-using MyGarage.Web.ViewModels.Mechanic;
-
-namespace MyGarage.Services.Data
+﻿namespace MyGarage.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using MyGarage.Data;
+    using MyGarage.Data.Models;
+    using Interfaces;
+    using Web.ViewModels.Mechanic;
 
 
     public class MechanicService : IMechanicService
@@ -36,37 +36,105 @@ namespace MyGarage.Services.Data
 
         public async Task AddMechanicAsync(MechanicViewModel mechanic)
         {
-            throw new NotImplementedException();
+            Mechanic newMechanic = new Mechanic()
+            {
+                Name = mechanic.Name,
+                Surname = mechanic.Surname,
+                PhoneNumber = mechanic.PhoneNumber,
+            };
+
+            await this._context.AddAsync(newMechanic);
+            await this._context.SaveChangesAsync();
         }
 
-        public Task<MechanicViewModel> ViewMechanicDetailsByIdAsync(string id)
+        public async Task<MechanicViewModel> ViewMechanicDetailsByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            Mechanic? mechanic = await _context
+                .Mechanics
+                .Where(p => p.IsActive == true)
+                .FirstOrDefaultAsync(v => v.Id.ToString() == id);
+
+            if (mechanic == null)
+            {
+                return null;
+            }
+
+            return new MechanicViewModel
+            {
+                Id = mechanic.Id.ToString(),
+                Name = mechanic.Name,
+                Surname = mechanic.Surname,
+                PhoneNumber = mechanic.PhoneNumber
+            };
         }
 
-        public Task<bool> ExistingByIdAsync(string id)
+        public async Task<bool> ExistingByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            bool result = await _context
+                .Mechanics
+                .Where(v => v.IsActive == true)
+                .AnyAsync(v => v.Id.ToString() == id);
+
+            return result;
         }
 
-        public Task<MechanicViewModel> GetMechanicByIdAsync(string id)
+        public async Task<MechanicViewModel> GetMechanicByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            Guid mId = Guid.Parse(id);
+            var mechanic = await _context.Mechanics.FindAsync(mId);
+
+            MechanicViewModel result = new MechanicViewModel()
+            {
+                Id = mechanic.Id.ToString(),
+                Name = mechanic.Name,
+                Surname = mechanic.Surname,
+                PhoneNumber = mechanic.PhoneNumber
+            };
+
+            return result;
         }
 
-        public Task<MechanicViewModel> GetMechanicForEditByIdAsync(string id)
+        public async Task<MechanicViewModel> GetMechanicForEditByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            Mechanic mechanic = await _context
+                .Mechanics
+                .Where(v => v.IsActive == true)
+                .FirstAsync(v => v.Id.ToString() == id);
+
+            return new MechanicViewModel
+            {
+                Id = mechanic.Id.ToString(),
+                Name = mechanic.Name,
+                Surname = mechanic.Surname,
+                PhoneNumber = mechanic.PhoneNumber
+
+            };
         }
 
-        public Task EditMechanicByIdAndFormModelAsync(string vehicleId, MechanicViewModel mechanic)
+        public async Task EditMechanicByIdAndFormModelAsync(string mechanicId, MechanicViewModel mechanic)
         {
-            throw new NotImplementedException();
+            Mechanic mechanicToEdit = await _context
+                .Mechanics
+                .FirstAsync(v => v.Id.ToString() == mechanicId);
+
+            mechanicToEdit.Name = mechanic.Name;
+            mechanicToEdit.Surname = mechanic.Surname;
+            mechanicToEdit.PhoneNumber = mechanic.PhoneNumber;
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<bool> SoftDeleteMechanicAsync(Guid mechanicId)
+        public async Task<bool> SoftDeleteMechanicAsync(Guid mechanicId)
         {
-            throw new NotImplementedException();
+            var mechanic = await _context.Mechanics.FindAsync(mechanicId);
+            if (mechanic == null)
+            {
+                return false;
+            }
+
+            mechanic.IsActive = false;
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model MechanicViewModel
+
+@{
+    ViewData["Title"] = "Mechanic Details";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Vehicle Details</h1>
+        <a type="button" class="btn btn-warning" asp-area="" asp-controller="Mechanic" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a type="button" class="btn btn-danger" asp-area="" asp-controller="Mechanic" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Mechanic Name:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Name @Model.Surname</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Phone Number:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.PhoneNumber</p>
+            </div>
+        </div>
+
+        @*    <div class="row">
+        <div class="col-md-4">
+        <h4>Price:</h4>
+        </div>
+        <div class="col-md-8">
+        <p>@Model.Price @ViewBag.Currency</p>
+        </div>
+        </div>*@
+
+
+    </div>
+</body>
+</html>
