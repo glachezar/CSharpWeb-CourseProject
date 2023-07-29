@@ -63,7 +63,7 @@
         public static class Job
         {
             public const int NameMaxLength = 150;
-            public const int NameMinLength = 20;
+            public const int NameMinLength = 5;
 
             public const string PriceMaxValue = "500";
             public const string PriceMinValue = "10";

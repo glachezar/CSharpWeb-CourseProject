@@ -47,9 +47,9 @@
 
         public async Task<IActionResult> Edit(string id, PartsViewModel formModel)
         {
-            bool vehicleExist = await _partService.ExistingByIdAsync(id);
+            bool partExist = await _partService.ExistingByIdAsync(id);
 
-            if (!vehicleExist)
+            if (!partExist)
             {
                 this.TempData[ErrorMessage] = "Part with provided id does not exist!";
                 return this.RedirectToAction("All", "Part");

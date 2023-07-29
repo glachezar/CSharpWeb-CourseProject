@@ -3,8 +3,10 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
+    using static Common.NotificationsMessagesConstants;
     using MyGarage.Services.Data.Interfaces;
     using ViewModels.Job;
+    using ViewModels.Part;
 
     [Authorize]
     public class JobController : Controller
@@ -35,10 +37,97 @@
             if (ModelState.IsValid)
             {
                 await _jobService.AddJobAsync(addJob);
+                TempData[SuccessMessage] = "Successfully added new job!";
                 return RedirectToAction("All", "Job");
             }
 
             return View(addJob);
+        }
+
+        public async Task<IActionResult> Edit(string id, JobViewModel formModel)
+        {
+            bool job = await _jobService.ExistingByIdAsync(id);
+
+            if (!job)
+            {
+                this.TempData[ErrorMessage] = "Job with provided id does not exist!";
+                return this.RedirectToAction("All", "Job");
+            }
+
+            try
+            {
+                await this._jobService.EditJobByIdAndFormModelAsync(id, formModel);
+                this.TempData[SuccessMessage] = "Job edited successfully!";
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occur while trying to update job details, please try again later or contact support!");
+                return View(formModel);
+            }
+
+            return RedirectToAction("All", "Job", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            bool jobExist = await _jobService.ExistingByIdAsync(id);
+
+            if (!jobExist)
+            {
+                this.TempData[ErrorMessage] = "Job with provided id does not exist!";
+                return this.RedirectToAction("All", "Job");
+            }
+
+            JobViewModel formModel = await this._jobService.GetJobForEditByIdAsync(id);
+
+            return this.View(formModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var job = await _jobService.GetJobByIdAsync(id);
+            if (job == null)
+            {
+                this.TempData[ErrorMessage] = "Unable to take job id!";
+                return this.RedirectToAction("All", "Job");
+            }
+
+            return View(job);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, JobViewModel jobToDelete)
+        {
+            Guid jobId = Guid.Parse(id);
+            var isDeleted = await _jobService.SoftDeleteJobAsync(jobId);
+            if (!isDeleted)
+            {
+                this.TempData[ErrorMessage] = "Job with provided id does not exist!";
+                return this.RedirectToAction("All", "Job");
+            }
+
+
+            this.TempData[SuccessMessage] = "Job successfully deleted!";
+            return RedirectToAction("All", "Job");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            bool jobExist = await _jobService.ExistingByIdAsync(id);
+
+            if (!jobExist)
+            {
+                this.TempData[ErrorMessage] = "Job with provided id does not exist!";
+                return this.RedirectToAction("All", "Job");
+            }
+
+            JobViewModel? viewModel =
+                await this._jobService.ViewJobDetailsByIdAsync(id);
+
+            return View(viewModel);
         }
     }
 }

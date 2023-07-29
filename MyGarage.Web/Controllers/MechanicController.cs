@@ -64,11 +64,11 @@
             }
             catch (Exception)
             {
-                this.ModelState.AddModelError(string.Empty, "Unexpected error occur while trying to update part details, please try again later or contact support!");
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occur while trying to update mechanic details, please try again later or contact support!");
                 return View(formModel);
             }
 
-            return RedirectToAction("All", "Part", new { id });
+            return RedirectToAction("All", "Mechanic", new { id });
         }
 
         [HttpGet]
