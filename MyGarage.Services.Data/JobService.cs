@@ -91,14 +91,14 @@
             return result;
         }
 
-        public async Task<JobViewModel> GetJobForEditByIdAsync(string id)
+        public async Task<AddJobViewModel> GetJobForEditByIdAsync(string id)
         {
             Job job = await _context
                 .Jobs
                 .Where(v => v.IsActive == true)
                 .FirstAsync(v => v.Id.ToString() == id);
 
-            return new JobViewModel
+            return new AddJobViewModel
             {
                 Id = job.Id.ToString(),
                 JobName = job.JobName,
@@ -106,7 +106,7 @@
             };
         }
 
-        public async Task EditJobByIdAndFormModelAsync(string jobId, JobViewModel jobViewModel)
+        public async Task EditJobByIdAndFormModelAsync(string jobId, AddJobViewModel jobViewModel)
         {
             Job jobToEdit = await _context
             .Jobs

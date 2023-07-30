@@ -15,9 +15,9 @@ namespace MyGarage.Services.Data.Interfaces
 
         Task<JobViewModel> GetJobByIdAsync(string id);
 
-        Task<JobViewModel> GetJobForEditByIdAsync(string id);
+        Task<AddJobViewModel> GetJobForEditByIdAsync(string id);
 
-        Task EditJobByIdAndFormModelAsync(string jobId, JobViewModel jobViewModel);
+        Task EditJobByIdAndFormModelAsync(string jobId, AddJobViewModel jobViewModel);
 
         Task<bool> SoftDeleteJobAsync(Guid jobId);
     }

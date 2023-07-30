@@ -5,6 +5,7 @@
 
     public class AddJobViewModel
     {
+        public string Id { get; set; } = null!;
 
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]

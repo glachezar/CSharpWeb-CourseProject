@@ -44,7 +44,8 @@
             return View(addJob);
         }
 
-        public async Task<IActionResult> Edit(string id, JobViewModel formModel)
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, AddJobViewModel formModel)
         {
             bool job = await _jobService.ExistingByIdAsync(id);
 
@@ -79,7 +80,7 @@
                 return this.RedirectToAction("All", "Job");
             }
 
-            JobViewModel formModel = await this._jobService.GetJobForEditByIdAsync(id);
+            AddJobViewModel formModel = await this._jobService.GetJobForEditByIdAsync(id);
 
             return this.View(formModel);
         }
