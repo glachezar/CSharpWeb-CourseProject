@@ -13,8 +13,6 @@ namespace MyGarage.Services.Data.Interfaces
 
         Task AddVehicleAsync(AddVehicleViewModel vehicleViewModel);
 
-        Task<bool> IsVehicleSoftDeletedAsync(string vin);
-
         Task<VehicleDetailsViewModel> ViewVehicleDetailsByIdAsync(string id);
 
         Task<bool> ExistingByIdAsync(string id);
@@ -23,8 +21,10 @@ namespace MyGarage.Services.Data.Interfaces
 
         Task EditVehicleByIdAndFormModelAsync(string vehicleId, AddVehicleViewModel vehicleViewModel);
 
-        Task<bool> SoftDeleteVehicleAsync(Guid vehicleId);
-
         public Task<VehicleDeleteViewModel> GetVehicleByIdAsync(string id);
+
+        Task<bool> IsVehicleSoftDeletedAsync(string vin);
+
+        Task<bool> SoftDeleteVehicleAsync(Guid vehicleId);
     }
 }

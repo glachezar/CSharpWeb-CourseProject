@@ -19,8 +19,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
+            <th scope="col">Name</th>
             <th scope="col">Phone Number</th>
             <th scope="col">Email address</th>
             <th scope="col"></th>
@@ -34,8 +33,7 @@
             
             <tr>
                 <th scope="row">@count</th>
-                <td>@customer.FirstName</td>
-                <td>@customer.LastName</td>
+                <td>@customer.Name @customer.Surname</td>
                 <td>@customer.PhoneNumber</td>
                 <td>@customer.Email</td>
                     <td><a type="button" class="btn btn-primary" asp-area="" asp-controller="Customer" asp-action="Details" asp-route-id="@customer.Id">View Details</a></td>

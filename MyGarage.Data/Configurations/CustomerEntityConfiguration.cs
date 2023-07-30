@@ -10,14 +10,22 @@
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.HasData(this.GenerateCustomers());
+            builder
+                .HasData(this.GenerateCustomers());
 
-            builder.HasKey(c => c.Id);
+            builder
+                .HasKey(c => c.Id);
 
+            builder
+                .HasMany(c => c.Vehicles)
+                .WithOne(v => v.Customer)
+                .HasForeignKey(v => v.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull);
 
-            builder.HasOne(c => c.ApplicationUser)
-            .WithOne(u => u.Customer)
-            .HasForeignKey<Customer>(c => c.ApplicationUserId);
+            builder
+                .HasOne(c => c.ApplicationUser)
+                .WithOne(u => u.Customer)
+                .HasForeignKey<Customer>(c => c.ApplicationUserId);
 
             
         }

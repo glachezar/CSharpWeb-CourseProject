@@ -13,5 +13,17 @@
         Task<bool> CustomerHaveVehiclesByIdAsync(string id);
 
         Task<Customer> GetCustomerByEmailAsync(string email);
+
+        Task<CustomerViewModel> ViewCustomerDetailsByIdAsync(string id);
+
+        Task<bool> ExistingByIdAsync(string id);
+
+        Task<AddCustomerViewModel> GetCustomerForEditByIdAsync(string id);
+
+        Task EditCustomerByIdAndFormModelAsync(string customerId, AddCustomerViewModel customerViewModel);
+
+        Task<CustomerViewModel> GetCustomerByIdAsync(string id);
+
+        Task<bool> DeleteCustomerByIdAsync(string id);
     }
 }

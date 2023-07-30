@@ -1,0 +1,29 @@
+﻿@model CustomerViewModel
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<form method="post" asp-action="Delete">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,11 +1,13 @@
 ﻿namespace MyGarage.Web.ViewModels.Customer
 {
     using System.ComponentModel.DataAnnotations;
+
+
     using static Common.EntityValidationConstants.Customer;
 
     public class AddCustomerViewModel
     {
-
+        
 
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
@@ -29,6 +31,8 @@
         [Required]
         [StringLength(PhoneNumberMaxLength, MinimumLength = PhoneNumberMinLength)]
         public string PhoneNumber { get; set; } = null!;
+
+        
 
     }
 }

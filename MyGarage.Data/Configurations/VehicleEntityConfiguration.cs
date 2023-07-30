@@ -10,7 +10,14 @@ namespace MyGarage.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Vehicle> builder)
         {
-            builder.HasData(GenerateVehicle());
+            builder
+                .HasData(GenerateVehicle());
+
+            builder
+                .HasOne(v => v.Customer)
+                .WithMany(c => c.Vehicles)
+                .HasForeignKey(v => v.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         private Vehicle[] GenerateVehicle()
