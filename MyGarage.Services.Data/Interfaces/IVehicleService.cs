@@ -11,6 +11,8 @@ namespace MyGarage.Services.Data.Interfaces
     {
         Task<IEnumerable<VehicleViewModel>> AllVehiclesAsync();
 
+        Task<IEnumerable<JobCardVehicleSelectFormModel>> AllVehiclesForFormModelAsync();
+
         Task AddVehicleAsync(AddVehicleViewModel vehicleViewModel);
 
         Task<VehicleDetailsViewModel> ViewVehicleDetailsByIdAsync(string id);

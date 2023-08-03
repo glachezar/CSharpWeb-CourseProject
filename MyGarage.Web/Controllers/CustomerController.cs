@@ -5,7 +5,6 @@
     using ViewModels.Customer;
     using MyGarage.Services.Data.Interfaces;
     using static Common.NotificationsMessagesConstants;
-    using MyGarage.Services.Data;
 
 
     [Authorize]
@@ -59,8 +58,6 @@
 
             CustomerViewModel? viewModel =
                 await this._customerService.ViewCustomerDetailsByIdAsync(id);
-
-
 
             return View(viewModel);
         }

@@ -34,6 +34,23 @@
             return allMechanics;
         }
 
+        public async Task<IEnumerable<JobCardMechanicFormModel>> AllMechanicsForFormModelAsync()
+        {
+            IEnumerable<JobCardMechanicFormModel> viewAllMechanics = await _context
+                .Mechanics
+                .AsNoTracking()
+                .Select(m => new JobCardMechanicFormModel()
+                {
+                    Id = m.Id.ToString(),
+                    Name = m.Name,
+                    LastName = m.Surname
+
+                })
+                .ToArrayAsync();
+
+            return viewAllMechanics;
+        }
+
         public async Task AddMechanicAsync(MechanicViewModel mechanic)
         {
             Mechanic newMechanic = new Mechanic()

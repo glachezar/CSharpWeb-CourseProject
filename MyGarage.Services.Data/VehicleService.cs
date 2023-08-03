@@ -39,6 +39,25 @@ namespace MyGarage.Services.Data
             return viewAllVehicles;
         }
 
+        public async Task<IEnumerable<JobCardVehicleSelectFormModel>> AllVehiclesForFormModelAsync()
+        {
+            IEnumerable<JobCardVehicleSelectFormModel> viewAllVehicles = await _context
+                .Vehicles
+                .Where(v => v.IsActive == true)
+                .AsNoTracking()
+                .Select(v => new JobCardVehicleSelectFormModel()
+                {
+                    Id = v.Id.ToString(),
+                    Make = v.Make,
+                    Model = v.Model,
+                    Vin = v.Vin,
+                    
+                })
+                .ToArrayAsync();
+
+            return viewAllVehicles;
+        }
+
 
         public async Task AddVehicleAsync(AddVehicleViewModel vehicleViewModel)
         {

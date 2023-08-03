@@ -1,11 +1,14 @@
 ﻿
 namespace MyGarage.Services.Data.Interfaces
 {
+    using MyGarage.Web.ViewModels.Part;
     using Web.ViewModels.Job;
 
     public interface IJobService
     {
         Task<IEnumerable<JobViewModel>> AllJobsAsync();
+
+        Task<IEnumerable<JobCardJobSelectFormModel>> AllJobsForFormModelAsync();
 
         Task AddJobAsync(AddJobViewModel job);
 

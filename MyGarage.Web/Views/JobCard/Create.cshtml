@@ -1,0 +1,16 @@
+﻿@model CreateJobCardViewModel
+
+@{
+    ViewData["Title"] = "Create New Job Card";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+
+<partial name="_JobCardFormModel" model="@Model"/>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

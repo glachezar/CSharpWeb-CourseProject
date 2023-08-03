@@ -34,6 +34,23 @@
             return viewAllParts;
         }
 
+        public async Task<IEnumerable<JobCardPartSelectFormModel>> AllPartsForFormModelAsync()
+        {
+            IEnumerable<JobCardPartSelectFormModel> viewAllParts = await _context
+                .Parts
+                .Where(v => v.IsActive == true)
+                .AsNoTracking()
+                .Select(v => new JobCardPartSelectFormModel()
+                {
+                    Id = v.Id.ToString(),
+                    PartName = v.PartName,
+
+                })
+                .ToArrayAsync();
+
+            return viewAllParts;
+        }
+
         public async Task AddPartAsync(PartsViewModel part)
         {
             Part newPart = new Part()

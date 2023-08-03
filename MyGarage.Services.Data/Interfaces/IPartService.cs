@@ -1,13 +1,15 @@
-﻿using MyGarage.Web.ViewModels.Part;
+﻿
 
 namespace MyGarage.Services.Data.Interfaces
 {
+    using Web.ViewModels.Part;
 
-    using MyGarage.Web.ViewModels.Vehicle;
 
     public interface IPartService
     {
         Task<IEnumerable<PartsViewModel>> AllPartsAsync();
+
+        Task<IEnumerable<JobCardPartSelectFormModel>> AllPartsForFormModelAsync();
 
         Task AddPartAsync(PartsViewModel part);
 

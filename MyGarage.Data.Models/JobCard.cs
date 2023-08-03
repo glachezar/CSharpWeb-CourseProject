@@ -3,8 +3,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
 
-    using static MyGarage.Common.EntityValidationConstants.JobCard;
-
+   
     public class JobCard
     {
         public JobCard()
@@ -24,16 +23,20 @@
         [ForeignKey(nameof(Vehicle))]
         public Guid VehicleId { get; set; }
 
-        public Vehicle Vehicle { get; set; } = null!;
+        public Vehicle? Vehicle { get; set; }
 
         [ForeignKey(nameof(Mechanic))]
         public Guid MechanicId { get; set; }
 
         public Mechanic? Mechanic { get; set; }
 
-        public virtual ICollection<Job>? Jobs { get; set; } 
+        [ForeignKey(nameof(Jobs))]
+        public Guid JobId { get; set; }
+        public virtual IEnumerable<Job>? Jobs { get; set; }
 
+        [ForeignKey(nameof(Parts))]
+        public Guid PartId { get; set; }
         
-        public virtual ICollection<Part>? Parts { get; set; }
+        public virtual IEnumerable<Part>? Parts { get; set; }
     }
 }

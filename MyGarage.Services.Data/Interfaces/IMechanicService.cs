@@ -9,6 +9,8 @@ namespace MyGarage.Services.Data.Interfaces
     {
         Task<IEnumerable<MechanicViewModel>> AllMechanicsAsync();
 
+        Task<IEnumerable<JobCardMechanicFormModel>> AllMechanicsForFormModelAsync();
+
         Task AddMechanicAsync(MechanicViewModel part);
 
         Task<MechanicViewModel> ViewMechanicDetailsByIdAsync(string id);

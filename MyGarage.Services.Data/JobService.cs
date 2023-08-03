@@ -5,6 +5,7 @@
     using MyGarage.Data;
     using Interfaces;
     using Web.ViewModels.Job;
+    using MyGarage.Web.ViewModels.Part;
 
     public class JobService : IJobService
     {
@@ -28,6 +29,24 @@
                     Id = j.Id.ToString(),
                     JobName = j.JobName,
                     Price = j.Price
+                })
+                .ToArrayAsync();
+
+            return viewAllJobs;
+        }
+
+        public async Task<IEnumerable<JobCardJobSelectFormModel>> AllJobsForFormModelAsync()
+        {
+            IEnumerable<JobCardJobSelectFormModel> viewAllJobs = await _context
+                .Jobs
+                .Where(j => j.IsActive == true)
+                .AsNoTracking()
+                .Select(j => new JobCardJobSelectFormModel
+                {
+                    Id = j.Id.ToString(),
+                    JobName = j.JobName,
+
+
                 })
                 .ToArrayAsync();
 
