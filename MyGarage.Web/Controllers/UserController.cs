@@ -64,8 +64,8 @@ namespace MyGarage.Web.Controllers
             newUser.Customer = customer;
             newUser.CustomerId = customer.Id;
 
-            customer.ApplicationUserId = newUser.Id;
-            customer.ApplicationUser = newUser;
+            //customer.ApplicationUserId = newUser.Id;
+            //customer.ApplicationUser = newUser;
 
             //await _customerService.AddUserToCustomerByModelAsync(customer, newUser);
 

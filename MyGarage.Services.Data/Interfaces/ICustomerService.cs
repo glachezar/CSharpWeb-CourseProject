@@ -22,8 +22,6 @@
 
         Task EditCustomerByIdAndFormModelAsync(string customerId, AddCustomerViewModel customerViewModel);
 
-        Task AddUserToCustomerByModelAsync(Customer customer, ApplicationUser user);
-
         Task<CustomerViewModel> GetCustomerByIdAsync(string id);
 
         Task<bool> DeleteCustomerByIdAsync(string id);

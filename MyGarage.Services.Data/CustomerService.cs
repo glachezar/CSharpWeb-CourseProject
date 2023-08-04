@@ -149,14 +149,6 @@
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddUserToCustomerByModelAsync(Customer customer, ApplicationUser user)
-        {
-            customer.ApplicationUserId = user.Id;
-            customer.ApplicationUser = user;
-
-            await _context.SaveChangesAsync();
-        }
-
         public async Task<CustomerViewModel> GetCustomerByIdAsync(string id)
         {
             Guid cId = Guid.Parse(id);
