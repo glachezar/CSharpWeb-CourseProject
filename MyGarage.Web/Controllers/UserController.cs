@@ -64,10 +64,8 @@ namespace MyGarage.Web.Controllers
             newUser.Customer = customer;
             newUser.CustomerId = customer.Id;
 
-            //customer.ApplicationUserId = newUser.Id;
-            //customer.ApplicationUser = newUser;
-
-            //await _customerService.AddUserToCustomerByModelAsync(customer, newUser);
+            customer.ApplicationUserId = newUser.Id;
+            customer.ApplicationUser = newUser;
 
             await this._userManager.SetEmailAsync(newUser, user.Email);
             await this._userManager.SetUserNameAsync(newUser, user.Email);
