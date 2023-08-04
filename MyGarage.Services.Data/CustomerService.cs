@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MyGarage.Web.ViewModels.Vehicle;
-
-namespace MyGarage.Services.Data
+﻿namespace MyGarage.Services.Data
 {
 
     using Microsoft.EntityFrameworkCore;
@@ -10,7 +7,6 @@ namespace MyGarage.Services.Data
     using MyGarage.Data;
     using Web.ViewModels.Customer;
     using MyGarage.Data.Models;
-
 
 
 

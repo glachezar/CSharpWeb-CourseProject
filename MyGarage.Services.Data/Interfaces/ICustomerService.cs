@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace MyGarage.Services.Data.Interfaces
+﻿namespace MyGarage.Services.Data.Interfaces
 {
     using Web.ViewModels.Customer;
     using MyGarage.Data.Models;

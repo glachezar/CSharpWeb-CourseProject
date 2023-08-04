@@ -9,6 +9,7 @@ namespace MyGarage.Web.Controllers
     using static Common.NotificationsMessagesConstants;
     using ViewModels.User;
     using Data.Models;
+    using Microsoft.EntityFrameworkCore;
 
 
     public class UserController : Controller
@@ -17,14 +18,17 @@ namespace MyGarage.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly ICustomerService _customerService;
+        private readonly IUserService _userService;
 
         public UserController(SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore, ICustomerService customerService)
+            UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore,
+            ICustomerService customerService, IUserService userService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _userStore = userStore;
             _customerService = customerService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -41,6 +45,7 @@ namespace MyGarage.Web.Controllers
                 return View(user);
             }
 
+            Customer customer = await _customerService.GetCustomerByEmailAsync(user.Email);
 
             ApplicationUser newUser = new ApplicationUser()
             {
@@ -49,7 +54,6 @@ namespace MyGarage.Web.Controllers
                 LastName = user.LastName,
             };
 
-            Customer customer = await _customerService.GetCustomerByEmailAsync(user.Email);
 
             if (customer == null)
             {
@@ -60,7 +64,10 @@ namespace MyGarage.Web.Controllers
             newUser.Customer = customer;
             newUser.CustomerId = customer.Id;
 
-            await _customerService.AddUserToCustomerByModelAsync(customer, newUser);
+            customer.ApplicationUserId = newUser.Id;
+            customer.ApplicationUser = newUser;
+
+            //await _customerService.AddUserToCustomerByModelAsync(customer, newUser);
 
             await this._userManager.SetEmailAsync(newUser, user.Email);
             await this._userManager.SetUserNameAsync(newUser, user.Email);
