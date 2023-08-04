@@ -1,4 +1,6 @@
-﻿namespace MyGarage.Web.Controllers
+﻿using MyGarage.Services.Data.Interfaces;
+
+namespace MyGarage.Web.Controllers
 {
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
@@ -14,13 +16,15 @@
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly ICustomerService _customerService;
 
         public UserController(SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore)
+            UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore, ICustomerService customerService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _userStore = userStore;
+            _customerService = customerService;
         }
 
         [HttpGet]
@@ -37,12 +41,26 @@
                 return View(user);
             }
 
+
             ApplicationUser newUser = new ApplicationUser()
             {
                 Email = user.Email,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
             };
+
+            Customer customer = await _customerService.GetCustomerByEmailAsync(user.Email);
+
+            if (customer == null)
+            {
+                TempData[ErrorMessage] = "Your email is not in our database please ask our garage employee register you as customer first and try again!";
+                return this.View(user);
+            }
+
+            newUser.Customer = customer;
+            newUser.CustomerId = customer.Id;
+
+            await _customerService.AddUserToCustomerByModelAsync(customer, newUser);
 
             await this._userManager.SetEmailAsync(newUser, user.Email);
             await this._userManager.SetUserNameAsync(newUser, user.Email);

@@ -1,4 +1,5 @@
-﻿using MyGarage.Web.ViewModels.Vehicle;
+﻿using Microsoft.AspNetCore.Identity;
+using MyGarage.Web.ViewModels.Vehicle;
 
 namespace MyGarage.Services.Data
 {
@@ -149,6 +150,14 @@ namespace MyGarage.Services.Data
             customer.Email = customerViewModel.Email;
             customer.PhoneNumber = customerViewModel.PhoneNumber;
             
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddUserToCustomerByModelAsync(Customer customer, ApplicationUser user)
+        {
+            customer.ApplicationUserId = user.Id;
+            customer.ApplicationUser = user;
+
             await _context.SaveChangesAsync();
         }
 

@@ -1,4 +1,6 @@
-﻿namespace MyGarage.Services.Data.Interfaces
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace MyGarage.Services.Data.Interfaces
 {
     using Web.ViewModels.Customer;
     using MyGarage.Data.Models;
@@ -21,6 +23,8 @@
         Task<AddCustomerViewModel> GetCustomerForEditByIdAsync(string id);
 
         Task EditCustomerByIdAndFormModelAsync(string customerId, AddCustomerViewModel customerViewModel);
+
+        Task AddUserToCustomerByModelAsync(Customer customer, ApplicationUser user);
 
         Task<CustomerViewModel> GetCustomerByIdAsync(string id);
 
