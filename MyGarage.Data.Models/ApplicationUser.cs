@@ -1,4 +1,6 @@
-﻿namespace MyGarage.Data.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MyGarage.Data.Models
 {
     using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
@@ -15,7 +17,8 @@
 
         public string LastName { get; set; } = null!;
 
-
+        [ForeignKey(nameof(Customer))]
+        public Guid CustomerId { get; set; }
 
         public Customer Customer { get; set; }
 
