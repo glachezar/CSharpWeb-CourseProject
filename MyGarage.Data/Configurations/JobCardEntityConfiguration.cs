@@ -11,7 +11,8 @@
         {
             //builder.HasData(this.GenerateJobCards());
             builder.Property(jc => jc.CreatedOn)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("GETDATE()");
+
         }
 
 

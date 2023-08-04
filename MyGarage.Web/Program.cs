@@ -1,15 +1,12 @@
-using System.Net.Mime;
-using MyGarage.Data.Models;
-using MyGarage.Services.Data;
-using MyGarage.Services.Data.Interfaces;
-using MyGarage.Web.Infrastructure.Extensions;
-using MyGarage.Web.Infrastructure.ModelBinders;
-
 namespace MyGarage.Web
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
+    using MyGarage.Services.Data.Interfaces;
+    using Infrastructure.Extensions;
+    using Infrastructure.ModelBinders;
+
+    using Data.Models;
     using Data;
 
 

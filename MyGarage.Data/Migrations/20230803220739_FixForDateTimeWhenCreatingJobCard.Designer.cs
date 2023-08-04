@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGarage.Data;
 
@@ -11,9 +12,10 @@ using MyGarage.Data;
 namespace MyGarage.Data.Migrations
 {
     [DbContext(typeof(MyGarageDbContext))]
-    partial class MyGarageDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230803220739_FixForDateTimeWhenCreatingJobCard")]
+    partial class FixForDateTimeWhenCreatingJobCard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,14 +209,6 @@ namespace MyGarage.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -309,7 +303,7 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bf6136b0-f608-4b54-ada3-f806814336c4"),
+                            Id = new Guid("2bf3f0fd-5e63-495a-b588-e7549dd3359f"),
                             Email = "Martinov@mcg.bg",
                             Name = "Martin",
                             PhoneNumber = "0888100100",
@@ -317,7 +311,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("314bb288-753d-41d8-8b51-a019b418bb10"),
+                            Id = new Guid("1c0dbee2-8a68-4983-9b87-5d8de1fcfe47"),
                             Email = "Peshov@mcg.bg",
                             Name = "Pesho",
                             PhoneNumber = "0888100200",
@@ -325,7 +319,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e1f50d11-4cbd-4d33-b4c0-2181bd2730a6"),
+                            Id = new Guid("64b29285-8ad3-449a-ace7-78308e8ba857"),
                             Email = "Ivanov@mcg.bg",
                             Name = "Ivan",
                             PhoneNumber = "0888100200",
@@ -357,14 +351,14 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("018c307f-f810-44b2-88d7-20c2bf99ebab"),
+                            Id = new Guid("152519f7-4a6d-44d0-9cf0-d71b1c921557"),
                             IsActive = true,
                             JobName = "Oil change",
                             Price = 50.00m
                         },
                         new
                         {
-                            Id = new Guid("237a7a16-4230-42c1-a88b-68bdca61d3a3"),
+                            Id = new Guid("d430969c-c809-4c39-b3da-908ccca51b4d"),
                             IsActive = true,
                             JobName = "Tyre replacement",
                             Price = 20.00m
@@ -438,7 +432,7 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("27d2c681-c3b1-40e7-a7eb-ebc4e9b26dc3"),
+                            Id = new Guid("27d6e4c1-c8cb-43bf-a70e-d6307f67a0a9"),
                             IsActive = true,
                             Name = "Ivan",
                             PhoneNumber = "0888123456",
@@ -446,7 +440,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3f7fe907-1b59-4675-9516-b0d6da6783f3"),
+                            Id = new Guid("7e6ed7c2-957f-4832-8dee-14ee6c65a466"),
                             IsActive = true,
                             Name = "Petar",
                             PhoneNumber = "0888123457",
@@ -483,7 +477,7 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e083be9e-9269-4ae4-87c3-c272a775da68"),
+                            Id = new Guid("7c0cde43-4b28-4035-afb5-de5e4ffa30e5"),
                             IsActive = true,
                             PartName = "Wishbone",
                             PartNumber = "G40.3613/C",
@@ -491,7 +485,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("94863fbc-a1c7-4043-a700-b581bbc36b65"),
+                            Id = new Guid("e04cf186-1ea7-4daf-acd1-6d7c1a58eb14"),
                             IsActive = true,
                             PartName = "Handbrake cable",
                             PartNumber = "G40.36415/C",
@@ -564,7 +558,7 @@ namespace MyGarage.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("27fe0c8d-859a-4093-8b3f-f4197dee28ed"),
+                            Id = new Guid("edcdc088-a55f-475d-bc99-18c76124157d"),
                             EngineNumber = "12345678",
                             FuelType = "Gasoline",
                             IsActive = true,
@@ -577,7 +571,7 @@ namespace MyGarage.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a8f8bc9d-50ee-43dd-8e97-a9f9df0b9805"),
+                            Id = new Guid("c7f5a05b-8cac-4fa3-9427-f6f0a6ff91d8"),
                             EngineNumber = "12345679",
                             FuelType = "Gasoline",
                             IsActive = true,

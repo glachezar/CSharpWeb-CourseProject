@@ -11,11 +11,13 @@
     [Authorize]
     public class VehicleController : Controller
     {
+        private readonly ICustomerService _customerService;
         private readonly IVehicleService _vehicleService;
 
         public VehicleController(IVehicleService service, ICustomerService customerService)
         {
             _vehicleService = service;
+            _customerService = customerService;
             
         }
 
@@ -142,6 +144,29 @@
             
             this.TempData[SuccessMessage] = "Vehicle successfully deleted!";
             return RedirectToAction("All", "Vehicle");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddOwner()
+        {
+            var viewModel = await _customerService.AllCustomersAsync();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddOwner(string id, VehicleDetailsViewModel vehicleModel)
+        {
+            var vehicle = await _vehicleService.GetVehicleByIdAsync(id);
+
+            if (vehicle == null)
+            {
+                TempData[ErrorMessage] = "No Vehicle with Provided Id!";
+            }
+
+            await _vehicleService.AddOwnerToVehicleByIdAsync(vehicle.Id, id);
+
+            return RedirectToAction("Details", "Vehicle", new{vehicle.Id});
         }
     }
 }

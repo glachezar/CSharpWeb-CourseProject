@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CustomerViewModel>
+
+@{
+    ViewData["Title"] = "All Customers!";
+    var customers = Model.ToList();
+    var count = 1;
+}
+
+<div class="text-centre mb-5" align="center">
+    <h2 class="display-4 text-centre">@ViewData["Title"]</h2>
+</div>
+<hr/>
+<div align="center" class="mb-5">
+    <a type="button" class="btn btn-primary" asp-area="" asp-controller="Customer" asp-action="Add">Add New Customer</a>
+</div>
+
+<form method="post" asp-action="AddOwner">
+<div class="">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email address</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var customer in customers)
+        {
+            
+            <tr>
+                <th scope="row">@count</th>
+                <td>@customer.Name @customer.Surname</td>
+                <td>@customer.PhoneNumber</td>
+                <td>@customer.Email</td>
+                <td>
+
+                    <div class="text-center">
+                        <input class="btn btn-primary mt-3" type="submit" value="Save"/>
+                    </div>
+                </td>
+            </tr>
+            count++;
+        }
+        </tbody>
+    </table>
+</div>
+</form>

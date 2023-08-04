@@ -91,6 +91,18 @@ namespace MyGarage.Services.Data
             
         }
 
+        public async Task AddOwnerToVehicleByIdAsync(string id, string ownerId)
+        {
+            var vehicle = await _context
+                .Vehicles
+                .Where(v => v.IsActive == true)
+                .FirstOrDefaultAsync(v => v.Id.ToString() == id);
+
+            vehicle.CustomerId = Guid.Parse(ownerId);
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<bool> IsVehicleSoftDeletedAsync(string vin)
         {
             Vehicle? isVehicleNotActive = await _context

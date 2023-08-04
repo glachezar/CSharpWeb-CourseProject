@@ -23,7 +23,9 @@ namespace MyGarage.Services.Data.Interfaces
 
         Task EditVehicleByIdAndFormModelAsync(string vehicleId, AddVehicleViewModel vehicleViewModel);
 
-        public Task<VehicleDeleteViewModel> GetVehicleByIdAsync(string id);
+        Task<VehicleDeleteViewModel> GetVehicleByIdAsync(string id);
+
+        Task AddOwnerToVehicleByIdAsync(string id,  string ownerId);
 
         Task<bool> IsVehicleSoftDeletedAsync(string vin);
 
