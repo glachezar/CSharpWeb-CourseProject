@@ -28,4 +28,8 @@
     <ProjectReference Include="..\MyGarage.Web.ViewModels\MyGarage.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Account\" />
+  </ItemGroup>
+
 </Project>

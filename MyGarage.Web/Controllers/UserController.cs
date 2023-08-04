@@ -1,9 +1,11 @@
-﻿using MyGarage.Web.ViewModels.User;
-
-namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+
+    using static Common.NotificationsMessagesConstants;
+    using ViewModels.User;
     using Data.Models;
 
 
@@ -28,7 +30,7 @@ namespace MyGarage.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(UserFormModel user)
+        public async Task<IActionResult> Register(RegisterFormModel user)
         {
             if (!ModelState.IsValid)
             {
@@ -58,6 +60,40 @@ namespace MyGarage.Web.Controllers
 
             await this._signInManager.SignInAsync(newUser, false);
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login(string? returnUrl = null)
+        {
+            // Clear the existing external cookie to ensure a clean login process
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            LoginFormModel formModel = new LoginFormModel()
+            {
+                ReturnUrl = returnUrl
+            };
+            return this.View(formModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginFormModel formModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(formModel);
+            }
+
+            var result =
+                await this._signInManager.PasswordSignInAsync(formModel.Email, 
+                formModel.Password, formModel.RememberMe, false);
+
+            if (!result.Succeeded)
+            {
+                this.TempData[ErrorMessage] = "There was an error while logging you in, please try again later or contact support!";
+                return this.View(formModel);
+            }
+
+            return this.Redirect(formModel.ReturnUrl ?? "/Home/Index");
         }
     }
 }

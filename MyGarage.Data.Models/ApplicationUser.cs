@@ -15,6 +15,8 @@
 
         public string LastName { get; set; } = null!;
 
+
+
         public Customer Customer { get; set; }
 
         public virtual ICollection<Vehicle> Vehicles { get; set; }

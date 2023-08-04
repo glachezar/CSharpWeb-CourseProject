@@ -47,6 +47,11 @@ namespace MyGarage.Web
 
             builder.Services.AddApplicationServices(typeof(ICustomerService));
 
+            builder.Services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.LoginPath = "/User/Login";
+            });
+
             builder.Services.AddControllersWithViews()
                 .AddMvcOptions(options =>
                 {
