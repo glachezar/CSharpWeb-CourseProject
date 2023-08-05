@@ -24,35 +24,35 @@
 
         public async Task CreateJobCardViewModelAsync(string id, CreateJobCardViewModel model)
         {
-            var vehicle = await _context.Vehicles.FindAsync(Guid.Parse(id));
-            var mechanic = await _context.Mechanics.FindAsync(Guid.Parse(model.MechanicId));
-            var job = await _context.Jobs.FindAsync(Guid.Parse(model.JobId));
-            var part = await _context.Parts.FindAsync(Guid.Parse(model.PartId));
+            //var vehicle = await _context.Vehicles.FindAsync(Guid.Parse(id));
+            //var mechanic = await _context.Mechanics.FindAsync(Guid.Parse(model.MechanicId));
+            //var job = await _context.Jobs.FindAsync(Guid.Parse(model.JobId));
+            //var part = await _context.Parts.FindAsync(Guid.Parse(model.PartId));
 
-            JobCard newJob = new JobCard
-            {
+            //JobCard newJob = new JobCard
+            //{
 
-                Mileage = model.Mileage,
+            //    Mileage = model.Mileage,
 
-                VehicleId = Guid.Parse(id),
+            //    VehicleId = Guid.Parse(id),
 
-                MechanicId = mechanic.Id,
+            //    MechanicId = mechanic.Id,
 
-                JobId = job.Id,
+            //    JobId = job.Id,
 
-                PartId = part.Id,
+            //    PartId = part.Id,
 
-            };
+            //};
 
-            newJob.Vehicle = vehicle;
-            newJob.Mechanic = mechanic;
-            newJob.Jobs.Append(job);
-            newJob.Parts.Append(part);
+            //newJob.Vehicle = vehicle;
+            //newJob.Mechanic = mechanic;
+            //newJob.Jobs.Append(job);
+            //newJob.Parts.Append(part);
 
-            await _context.JobCards.AddAsync(newJob);
+            //await _context.JobCards.AddAsync(newJob);
 
-            await _context.SaveChangesAsync();
-
+            //await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }

@@ -39,6 +39,12 @@ namespace MyGarage.Data
 
             //builder.ApplyConfiguration(new CustomerEntityConfiguration());
 
+            builder.Entity<JobCardJob>()
+                .HasKey(jcj => new { jcj.JobId, jcj.JobCardId });
+
+            builder.Entity<JobCardPart>()
+                .HasKey(jcp => new { jcp.JobCardId, jcp.PartId });
+
             base.OnModelCreating(builder);
         }
 

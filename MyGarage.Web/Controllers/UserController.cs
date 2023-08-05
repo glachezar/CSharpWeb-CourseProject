@@ -48,7 +48,8 @@
 
             if (customerExist == null)
             {
-                TempData[ErrorMessage] = "Your email is not in our database please ask our garage employee register you as customer first and try again!";
+                TempData[ErrorMessage] = "Your email is not in our database," +
+                                         " please ask our garage employee register you as customer first and try again!";
                 return this.View(user);
             }
 

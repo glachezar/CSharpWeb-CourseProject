@@ -11,6 +11,7 @@
         {
             this.Id = Guid.NewGuid();
             this.IsActive = true;
+            JobCards = new HashSet<JobCard>();
         }
 
         [Key]
@@ -49,5 +50,7 @@
         public Guid? CustomerId { get; set; }
 
         public Customer? Customer { get; set; }
+
+        public ICollection<JobCard> JobCards { get; set; }
     }
 }

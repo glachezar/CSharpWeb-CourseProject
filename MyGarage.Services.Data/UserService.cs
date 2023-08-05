@@ -1,10 +1,11 @@
 ﻿namespace MyGarage.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+
     using MyGarage.Data.Models;
     using Web.ViewModels.User;
     using MyGarage.Data;
     using Interfaces;
-    using Microsoft.EntityFrameworkCore;
 
 
     public class UserService : IUserService
@@ -40,11 +41,10 @@
 
         public async Task<string> GetUserFullNameByEmailAsync(string email)
         {
-            string emailToUpper = email.ToUpper();
 
             ApplicationUser? user = await _dbContext
                 .Users
-                .FirstOrDefaultAsync(u => u.NormalizedEmail == emailToUpper);
+                .FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
             {

@@ -9,7 +9,7 @@
         {
             this.Id = Guid.NewGuid();
             this.IsActive = true;
-            this.JobCards = new HashSet<JobCard>();
+            this.JobCardJobs = new HashSet<JobCardJob>();
         }
 
         [Key]
@@ -24,7 +24,7 @@
 
         public bool IsActive { get; set; }
 
-        public ICollection<JobCard> JobCards { get; set; }
+        public ICollection<JobCardJob> JobCardJobs { get; set; }
 
     }
 }

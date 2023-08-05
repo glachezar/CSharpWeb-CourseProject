@@ -9,8 +9,8 @@
         public JobCard()
         {
             this.Id = Guid.NewGuid();
-            this.Jobs = new HashSet<Job>();
-            this.Parts = new HashSet<Part>();
+            this.JobCardJobs = new HashSet<JobCardJob>();
+            this.JobCardParts = new HashSet<JobCardPart>();
         }
 
         [Key]
@@ -30,13 +30,8 @@
 
         public Mechanic? Mechanic { get; set; }
 
-        [ForeignKey(nameof(Jobs))]
-        public Guid JobId { get; set; }
-        public virtual IEnumerable<Job>? Jobs { get; set; }
+        public virtual ICollection<JobCardJob>? JobCardJobs { get; set; }
 
-        [ForeignKey(nameof(Parts))]
-        public Guid PartId { get; set; }
-        
-        public virtual IEnumerable<Part>? Parts { get; set; }
+        public virtual ICollection<JobCardPart>? JobCardParts { get; set; }
     }
 }
