@@ -1,11 +1,8 @@
-﻿
-
-namespace MyGarage.Web.ViewModels.JobCard
+﻿namespace MyGarage.Web.ViewModels.JobCard
 {
     using System.ComponentModel.DataAnnotations;
-
+    using Data.Models;
     using Mechanic;
-    using Vehicle;
     using Part;
     using Job;
 
@@ -27,6 +24,8 @@ namespace MyGarage.Web.ViewModels.JobCard
 
         [Display(Name = "Mechanic Name")]
         public string MechanicId { get; set; } = null!;
+
+        public Vehicle Vehicle { get; set; }
 
         public IEnumerable<JobCardMechanicFormModel>? Mechanics { get; set; } = null!;
 

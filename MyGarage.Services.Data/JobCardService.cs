@@ -1,11 +1,8 @@
-﻿
-
-using MyGarage.Data.Models;
-
-namespace MyGarage.Services.Data
+﻿namespace MyGarage.Services.Data
 {
-    using MyGarage.Data;
+    using MyGarage.Data.Models;
     using Web.ViewModels.JobCard;
+    using MyGarage.Data;
     using Interfaces;
 
     public class JobCardService : IJobCardService

@@ -1,6 +1,7 @@
 ﻿namespace MyGarage.Web.ViewModels.Part
 {
     using System.ComponentModel.DataAnnotations;
+
     using static Common.EntityValidationConstants.Part;
 
     public class PartsViewModel

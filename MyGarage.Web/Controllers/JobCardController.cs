@@ -1,10 +1,10 @@
-﻿using MyGarage.Services.Data.Interfaces;
-using MyGarage.Web.ViewModels.JobCard;
-
-namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Controllers
 {
-    using static Common.NotificationsMessagesConstants;
     using Microsoft.AspNetCore.Mvc;
+
+    using MyGarage.Services.Data.Interfaces;
+    using ViewModels.JobCard;
+    using static Common.NotificationsMessagesConstants;
 
     public class JobCardController : Controller
     {

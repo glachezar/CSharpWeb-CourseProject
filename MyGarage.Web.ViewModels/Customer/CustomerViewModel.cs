@@ -1,8 +1,7 @@
-﻿
-
-namespace MyGarage.Web.ViewModels.Customer
+﻿namespace MyGarage.Web.ViewModels.Customer
 {
     using System.ComponentModel.DataAnnotations;
+
     using Data.Models;
     using static Common.EntityValidationConstants.Customer;
 

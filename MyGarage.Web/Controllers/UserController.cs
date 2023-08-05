@@ -46,27 +46,11 @@
                 return View(user);
             }
 
-            //Customer customer = await _customerService.GetCustomerByEmailAsync(user.Email);
-
-            //ApplicationUser newUser = new ApplicationUser()
-            //{
-            //    Email = user.Email,
-            //    FirstName = user.FirstName,
-            //    LastName = user.LastName,
-            //};
-
-
             if (customerExist == null)
             {
                 TempData[ErrorMessage] = "Your email is not in our database please ask our garage employee register you as customer first and try again!";
                 return this.View(user);
             }
-
-            //newUser.Customer = customer;
-            //newUser.CustomerId = customer.Id;
-
-            //customer.ApplicationUserId = newUser.Id;
-            //customer.ApplicationUser = newUser;
 
             ApplicationUser newUser = await _userService.CreateUserByFormModelAsync(user);
 

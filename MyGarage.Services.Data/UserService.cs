@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Server.IIS.Core;
-
-namespace MyGarage.Services.Data
+﻿namespace MyGarage.Services.Data
 {
     using MyGarage.Data.Models;
     using Web.ViewModels.User;

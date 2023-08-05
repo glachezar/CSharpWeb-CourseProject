@@ -1,7 +1,7 @@
 ﻿namespace MyGarage.Web.ViewModels.Job
 {
-
     using System.ComponentModel.DataAnnotations;
+
     using static Common.EntityValidationConstants.Job;
 
     public class JobViewModel

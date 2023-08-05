@@ -1,7 +1,7 @@
 ﻿namespace MyGarage.Web.ViewModels.User
 {
-
     using System.ComponentModel.DataAnnotations;
+
     using static Common.EntityValidationConstants.User;
 
     public class RegisterFormModel

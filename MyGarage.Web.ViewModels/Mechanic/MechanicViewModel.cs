@@ -1,7 +1,7 @@
 ﻿namespace MyGarage.Web.ViewModels.Mechanic
 {
-
     using System.ComponentModel.DataAnnotations;
+
     using static MyGarage.Common.EntityValidationConstants.Mechanic;
 
     public class MechanicViewModel

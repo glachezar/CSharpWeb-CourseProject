@@ -1,7 +1,6 @@
 ﻿
 namespace MyGarage.Services.Data.Interfaces
 {
-    using MyGarage.Web.ViewModels.Part;
     using Web.ViewModels.Job;
 
     public interface IJobService

@@ -1,6 +1,5 @@
 ﻿namespace MyGarage.Web.ViewModels.Vehicle
 {
-
     using Customer;
 
     public class VehicleDetailsViewModel : VehicleViewModel

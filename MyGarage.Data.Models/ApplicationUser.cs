@@ -1,9 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MyGarage.Data.Models
+﻿namespace MyGarage.Data.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
     using Microsoft.AspNetCore.Identity;
-    using System.ComponentModel.DataAnnotations;
 
     public class ApplicationUser : IdentityUser<Guid>
     {

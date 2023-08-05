@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
-using Microsoft.EntityFrameworkCore;
-using MyGarage.Data;
-using MyGarage.Data.Models;
-using MyGarage.Services.Data.Interfaces;
-using MyGarage.Web.ViewModels.Customer;
-using MyGarage.Web.ViewModels.Vehicle;
-
-namespace MyGarage.Services.Data
+﻿namespace MyGarage.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using Interfaces;
+    using MyGarage.Data;
+    using MyGarage.Data.Models;
+    using Web.ViewModels.Customer;
+    using Web.ViewModels.Vehicle;
+
 
 
     public class VehicleService : IVehicleService

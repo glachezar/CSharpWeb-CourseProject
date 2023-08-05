@@ -1,9 +1,8 @@
-﻿using System.Runtime.CompilerServices;
-using static MyGarage.Common.EntityValidationConstants.Customer;
-
-namespace MyGarage.Data.Models
+﻿namespace MyGarage.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+
+    using static MyGarage.Common.EntityValidationConstants.Customer;
 
     public class Customer
     {

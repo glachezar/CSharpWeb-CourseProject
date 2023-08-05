@@ -1,10 +1,6 @@
-﻿using MyGarage.Data.Models;
-
-namespace MyGarage.Services.Data.Interfaces
+﻿namespace MyGarage.Services.Data.Interfaces
 {
-    using Microsoft.EntityFrameworkCore;
-    using MyGarage.Data.Configurations;
-    using MyGarage.Web.ViewModels.Vehicle;
+    using Web.ViewModels.Vehicle;
 
 
     public interface IVehicleService

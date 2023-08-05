@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace MyGarage.Data.Configurations
+﻿namespace MyGarage.Data.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using MyGarage.Data.Models;
+
+    using Models;
 
     public class PartEntityConfiguration : IEntityTypeConfiguration<Part>
     {

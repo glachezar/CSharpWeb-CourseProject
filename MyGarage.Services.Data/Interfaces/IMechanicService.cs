@@ -1,8 +1,6 @@
-﻿using MyGarage.Web.ViewModels.Mechanic;
-using MyGarage.Web.ViewModels.Part;
-
-namespace MyGarage.Services.Data.Interfaces
+﻿namespace MyGarage.Services.Data.Interfaces
 {
+    using Web.ViewModels.Mechanic;
 
 
     public interface IMechanicService

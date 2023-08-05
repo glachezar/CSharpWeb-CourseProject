@@ -1,7 +1,6 @@
-﻿using System.Globalization;
-
-namespace MyGarage.Web.Infrastructure.ModelBinders
+﻿namespace MyGarage.Web.Infrastructure.ModelBinders
 {
+    using System.Globalization;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
     public class DecimalModelBinder : IModelBinder

@@ -1,9 +1,6 @@
-﻿
-
-namespace MyGarage.Services.Data.Interfaces
+﻿namespace MyGarage.Services.Data.Interfaces
 {
     using Web.ViewModels.Part;
-
 
     public interface IPartService
     {

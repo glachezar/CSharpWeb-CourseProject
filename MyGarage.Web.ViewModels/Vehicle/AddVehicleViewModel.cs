@@ -1,6 +1,7 @@
 ﻿namespace MyGarage.Web.ViewModels.Vehicle
 {
     using System.ComponentModel.DataAnnotations;
+
     using static Common.EntityValidationConstants.Vehicle;
 
     public class AddVehicleViewModel

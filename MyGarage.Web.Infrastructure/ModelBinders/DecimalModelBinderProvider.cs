@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-namespace MyGarage.Web.Infrastructure.ModelBinders
+﻿namespace MyGarage.Web.Infrastructure.ModelBinders
 {
-    
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
     public class DecimalModelBinderProvider : IModelBinderProvider
     {
