@@ -1,15 +1,14 @@
-﻿using MyGarage.Services.Data.Interfaces;
-
-namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Controllers
 {
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    using static Common.NotificationsMessagesConstants;
+    using MyGarage.Services.Data.Interfaces;
     using ViewModels.User;
     using Data.Models;
-    using Microsoft.EntityFrameworkCore;
+    using static Common.NotificationsMessagesConstants;
+
 
 
     public class UserController : Controller
@@ -40,32 +39,36 @@ namespace MyGarage.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterFormModel user)
         {
+            bool customerExist = await _customerService.CustomerExistByEmailAsync(user.Email);
+
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
 
-            Customer customer = await _customerService.GetCustomerByEmailAsync(user.Email);
+            //Customer customer = await _customerService.GetCustomerByEmailAsync(user.Email);
 
-            ApplicationUser newUser = new ApplicationUser()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-            };
+            //ApplicationUser newUser = new ApplicationUser()
+            //{
+            //    Email = user.Email,
+            //    FirstName = user.FirstName,
+            //    LastName = user.LastName,
+            //};
 
 
-            if (customer == null)
+            if (customerExist == null)
             {
                 TempData[ErrorMessage] = "Your email is not in our database please ask our garage employee register you as customer first and try again!";
                 return this.View(user);
             }
 
-            newUser.Customer = customer;
-            newUser.CustomerId = customer.Id;
+            //newUser.Customer = customer;
+            //newUser.CustomerId = customer.Id;
 
-            customer.ApplicationUserId = newUser.Id;
-            customer.ApplicationUser = newUser;
+            //customer.ApplicationUserId = newUser.Id;
+            //customer.ApplicationUser = newUser;
+
+            ApplicationUser newUser = await _userService.CreateUserByFormModelAsync(user);
 
             await this._userManager.SetEmailAsync(newUser, user.Email);
             await this._userManager.SetUserNameAsync(newUser, user.Email);

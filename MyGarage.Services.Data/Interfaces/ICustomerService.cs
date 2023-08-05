@@ -12,6 +12,8 @@
 
         Task<bool> CustomerHaveVehiclesByIdAsync(string id);
 
+        Task<bool> CustomerExistByEmailAsync(string email);
+
         Task<Customer> GetCustomerByEmailAsync(string email);
 
         Task<CustomerViewModel> ViewCustomerDetailsByIdAsync(string id);

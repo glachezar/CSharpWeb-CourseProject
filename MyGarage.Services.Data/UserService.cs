@@ -20,9 +20,24 @@ namespace MyGarage.Services.Data
             _customerService = customerService;
         }
 
+
         public async Task<ApplicationUser> CreateUserByFormModelAsync(RegisterFormModel form)
         {
-            throw new NotImplementedException();
+            Customer customer = await _customerService.GetCustomerByEmailAsync(form.Email);
+
+            ApplicationUser newUser = new ApplicationUser()
+            {
+                Email = customer.Email,
+                FirstName = customer.Name,
+                LastName = customer.Surname,
+                CustomerId = customer.Id,
+                Customer = customer
+            };
+
+            customer.ApplicationUserId = newUser.Id;
+            customer.ApplicationUser = newUser;
+
+            return newUser;
         }
     }
 }

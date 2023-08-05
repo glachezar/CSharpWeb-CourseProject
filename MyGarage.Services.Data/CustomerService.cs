@@ -68,6 +68,19 @@
             return customerHaveVehicles;
         }
 
+        public async Task<bool> CustomerExistByEmailAsync(string email)
+        {
+            string normalizedEmail = email.ToUpper();
+            Customer? customerByEmail = await _context.Customers.FirstOrDefaultAsync(c => c.Email.ToUpper() == normalizedEmail);
+
+            if (customerByEmail == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<Customer> GetCustomerByEmailAsync(string email)
         {
             string normalizedEmail = email.ToUpper();
