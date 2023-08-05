@@ -24,35 +24,52 @@
 
         public async Task CreateJobCardViewModelAsync(string id, CreateJobCardViewModel model)
         {
-            //var vehicle = await _context.Vehicles.FindAsync(Guid.Parse(id));
-            //var mechanic = await _context.Mechanics.FindAsync(Guid.Parse(model.MechanicId));
-            //var job = await _context.Jobs.FindAsync(Guid.Parse(model.JobId));
-            //var part = await _context.Parts.FindAsync(Guid.Parse(model.PartId));
+            var vehicle = await _context.Vehicles.FindAsync(Guid.Parse(id));
+            var mechanic = await _context.Mechanics.FindAsync(Guid.Parse(model.MechanicId));
+            var job = await _context.Jobs.FindAsync(Guid.Parse(model.JobId));
+            var part = await _context.Parts.FindAsync(Guid.Parse(model.PartId));
 
-            //JobCard newJob = new JobCard
-            //{
 
-            //    Mileage = model.Mileage,
 
-            //    VehicleId = Guid.Parse(id),
+            JobCard newJob = new JobCard()
+            {
 
-            //    MechanicId = mechanic.Id,
+                Mileage = model.Mileage,
 
-            //    JobId = job.Id,
+                VehicleId = Guid.Parse(id),
+                Vehicle = vehicle,
 
-            //    PartId = part.Id,
+                MechanicId = mechanic.Id,
+                Mechanic = mechanic
+            };
 
-            //};
+            JobCardJob jobCardJob = new JobCardJob()
+            {
+                JobId = job.Id,
+                Job = job,
 
-            //newJob.Vehicle = vehicle;
-            //newJob.Mechanic = mechanic;
-            //newJob.Jobs.Append(job);
-            //newJob.Parts.Append(part);
+                JobCardId = newJob.Id,
+                JobCard = newJob
+            };
 
-            //await _context.JobCards.AddAsync(newJob);
+            JobCardPart jobCardPart = new JobCardPart()
+            {
+                PartId = part.Id,
+                Part = part,
 
-            //await _context.SaveChangesAsync();
-            throw new NotImplementedException();
+                JobCardId = newJob.Id,
+                JobCard = newJob
+            };
+
+            newJob.JobCardJobs?.Add(jobCardJob);
+            newJob.JobCardParts?.Add(jobCardPart);
+
+            mechanic.JobCards?.Add(newJob);
+            vehicle.JobCards?.Add(newJob);
+
+            await _context.JobCards.AddAsync(newJob);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

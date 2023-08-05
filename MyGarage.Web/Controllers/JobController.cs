@@ -36,12 +36,14 @@
         {
             if (ModelState.IsValid)
             {
-                await _jobService.AddJobAsync(addJob);
-                TempData[SuccessMessage] = "Successfully added new job!";
-                return RedirectToAction("All", "Job");
+                TempData[ErrorMessage] = "Something went wrong while trying to add new job!";
+                return View(addJob);
             }
 
-            return View(addJob);
+            await _jobService.AddJobAsync(addJob);
+            TempData[SuccessMessage] = "Successfully added new job!";
+            return RedirectToAction("All", "Job");
+            
         }
 
         [HttpPost]

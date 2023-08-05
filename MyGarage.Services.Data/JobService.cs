@@ -5,7 +5,7 @@
     using MyGarage.Data;
     using Interfaces;
     using Web.ViewModels.Job;
-    using MyGarage.Web.ViewModels.Part;
+
 
     public class JobService : IJobService
     {
