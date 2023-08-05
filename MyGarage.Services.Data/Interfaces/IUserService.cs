@@ -9,5 +9,7 @@
     public interface IUserService
     {
         Task<ApplicationUser> CreateUserByFormModelAsync(RegisterFormModel form);
+
+        Task<string> GetUserFullNameByEmailAsync(string email);
     }
 }

@@ -4,7 +4,7 @@
     using Web.ViewModels.User;
     using MyGarage.Data;
     using Interfaces;
-
+    using Microsoft.EntityFrameworkCore;
 
 
     public class UserService : IUserService
@@ -36,6 +36,22 @@
             customer.ApplicationUser = newUser;
 
             return newUser;
+        }
+
+        public async Task<string> GetUserFullNameByEmailAsync(string email)
+        {
+            string emailToUpper = email.ToUpper();
+
+            ApplicationUser? user = await _dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.NormalizedEmail == emailToUpper);
+
+            if (user == null)
+            {
+                return string.Empty;
+            }
+
+            return $"{user.FirstName} {user.LastName}";
         }
     }
 }
