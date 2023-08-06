@@ -51,6 +51,8 @@ namespace MyGarage.Web
 
             builder.Services.AddApplicationServices(typeof(ICustomerService));
 
+            builder.Services.AddRecaptchaService();
+
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
                 cfg.LoginPath = "/User/Login";
@@ -87,8 +89,11 @@ namespace MyGarage.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.SeedAdministrator(DeveloperAdminEmail);
-
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator(DeveloperAdminEmail);
+            }
+            
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

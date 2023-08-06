@@ -7,6 +7,7 @@
     using MyGarage.Services.Data.Interfaces;
     using ViewModels.User;
     using Data.Models;
+    using Griesoft.AspNetCore.ReCaptcha;
     using static Common.NotificationsMessagesConstants;
 
 
@@ -37,6 +38,8 @@
         }
 
         [HttpPost]
+        [ValidateRecaptcha(Action = nameof(Register),
+        ValidationFailedAction = ValidationFailedAction.ContinueRequest)]
         public async Task<IActionResult> Register(RegisterFormModel user)
         {
             bool customerExist = await _customerService.CustomerExistByEmailAsync(user.Email);
