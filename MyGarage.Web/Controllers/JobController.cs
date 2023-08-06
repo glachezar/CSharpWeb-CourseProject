@@ -6,7 +6,6 @@
     using static Common.NotificationsMessagesConstants;
     using MyGarage.Services.Data.Interfaces;
     using ViewModels.Job;
-    using ViewModels.Part;
 
     [Authorize]
     public class JobController : Controller
@@ -34,7 +33,7 @@
         [HttpPost]
         public async Task<IActionResult> Add(AddJobViewModel addJob)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 TempData[ErrorMessage] = "Something went wrong while trying to add new job!";
                 return View(addJob);

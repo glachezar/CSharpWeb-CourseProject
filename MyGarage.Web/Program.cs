@@ -8,6 +8,9 @@ namespace MyGarage.Web
 
     using Data.Models;
     using Data;
+    using Microsoft.AspNetCore.Identity;
+
+    using static Common.GeneralApplicationConstants;
 
 
     public class Program
@@ -41,6 +44,7 @@ namespace MyGarage.Web
                     options.Password.RequiredLength = 
                         builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
                 })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<MyGarageDbContext>();
 
             //builder.Services.AddScoped<ICustomerService, CustomerService>();
@@ -82,6 +86,8 @@ namespace MyGarage.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdministrator(DeveloperAdminEmail);
 
             app.MapControllerRoute(
                 name: "default",
