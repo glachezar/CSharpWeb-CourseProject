@@ -1,0 +1,15 @@
+﻿@model AddCustomerViewModel
+
+@{
+    ViewData["Title"] = "Edit Customer!";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr/>
+
+<partial name="_CustomerFormPartial" model="@Model" />
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

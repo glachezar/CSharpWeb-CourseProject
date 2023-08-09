@@ -1,15 +1,16 @@
-﻿namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Areas.Admin.Controllers
 {
-    using MyGarage.Services.Data.Interfaces;
-    using Microsoft.AspNetCore.Authorization;
+
     using Microsoft.AspNetCore.Mvc;
+
+    using MyGarage.Services.Data.Interfaces;
     using ViewModels.Vehicle;
+
     using static Common.NotificationsMessagesConstants;
 
 
 
-    [Authorize]
-    public class VehicleController : Controller
+    public class VehicleController : BaseAdminController
     {
         private readonly ICustomerService _customerService;
         private readonly IVehicleService _vehicleService;
@@ -131,7 +132,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string id, VehicleDeleteViewModel vehicleDeleteView)
+        public async Task<IActionResult> Delete(string id, AddVehicleViewModel vehicleDeleteView)
         {
             Guid vehicleId = Guid.Parse(id);
             var isDeleted = await _vehicleService.SoftDeleteVehicleAsync(vehicleId);
@@ -147,15 +148,15 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddOwner()
+        public async Task<IActionResult> AddOwner(string id)
         {
-            var viewModel = await _customerService.AllCustomersAsync();
-
-            return View(viewModel);
+            AddVehicleViewModel formModel = await this._vehicleService.GetVehicleForEditByIdAsync(id);
+ 
+            return View(formModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddOwner(string id, AddVehicleViewModel vehicleModel)
+        public async Task<IActionResult> AddOwner(string id, AddVehicleViewModel vehicleViewModel)
         {
             var vehicle = await _vehicleService.GetVehicleByIdAsync(id);
 
@@ -164,9 +165,38 @@
                 TempData[ErrorMessage] = "No Vehicle with Provided Id!";
             }
 
-            await _vehicleService.AddOwnerToVehicleByIdAsync(vehicle.Id, vehicleModel);
-
+            await _vehicleService.AddOwnerToVehicleByIdAsync(vehicle!.Id, vehicleViewModel);
+            TempData[SuccessMessage] = "Successfully added owner to vehicle!";
             return RedirectToAction("Details", "Vehicle", new{vehicle.Id});
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveOwner(string id)
+        {
+
+            var vehicle = await _vehicleService.GetVehicleToRemoveOwnerByIdAsync(id);
+            if (vehicle == null)
+            {
+                TempData[ErrorMessage] = "Vehicle with provided Id do not exist!";
+                return RedirectToAction("All", "Vehicle");
+            }
+
+            return View(vehicle);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveOwner(RemoveOwnerFormModel vehicle, string id)
+        {
+            var isOwnerDeleted = await _vehicleService.RemoveOwnerFromVehicleByIdAsync(vehicle);
+
+            if (isOwnerDeleted)
+            {
+                TempData[SuccessMessage] = "Vehicle owner have been removed from vehicle!";
+                return this.RedirectToAction("Details", "Vehicle", new{vehicle.Id});
+            }
+
+            TempData[ErrorMessage] = "Something went wrong please try again later or contact support!";
+            return this.RedirectToAction("All", "Vehicle");
         }
     }
 }

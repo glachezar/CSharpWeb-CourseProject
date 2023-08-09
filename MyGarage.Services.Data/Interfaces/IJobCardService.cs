@@ -4,8 +4,8 @@
 
     public interface IJobCardService
     {
-        Task CreateJobCardViewModelAsync(string id, CreateJobCardViewModel model);
-
+        Task<IEnumerable<JobCardViewModel>> ViewAllJobCardsAsync();
         
+        Task CreateJobCardViewModelAsync(string id, CreateJobCardViewModel model);
     }
 }

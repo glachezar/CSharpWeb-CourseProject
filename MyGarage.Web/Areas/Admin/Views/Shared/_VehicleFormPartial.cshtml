@@ -1,13 +1,14 @@
 ﻿@model AddVehicleViewModel
 
 @{
-    ViewData["Title"] = "Add New Vehicle!";
+    //ViewData["Title"] = "Add New Vehicle!";
+    var customers = Model.Owner.ToList();
 }
 
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
+        <form asp-area="Admin" method="post">
             <div class="form-group mb-3">
                 <label asp-for="Make"></label>
                 <input asp-for="Make" class="form-control" placeholder="Make...">
@@ -16,13 +17,12 @@
             <div class="form-group mb-3">
                 <label asp-for="Model"></label>
                 <input asp-for="Model" class="form-control"
-
                        placeholder="Model...">
                 <span asp-validation-for="Model" class="small text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <label asp-for="Vin"></label>
-                <input asp-for="Vin" class="form-control" placeholder="VIN..."></input>
+                <input asp-for="Vin" class="form-control" placeholder="VIN...">
                 <span asp-validation-for="Vin" class="small textdanger"></span>
             </div>
             <div class="form-group mb-3">
@@ -49,6 +49,20 @@
                 <label asp-for="Mileage"></label>
                 <input asp-for="Mileage" class="form-control" placeholder="Mileage...">
                 <span asp-validation-for="Mileage" class="small textdanger"></span>
+            </div>
+            <div class="form-group">
+                @if (Model.CustomerId == null || Model.CustomerId == Guid.Empty.ToString() || string.IsNullOrEmpty(Model.CustomerId))
+                {
+                    <label asp-for="CustomerId"></label>
+                    <select asp-for="CustomerId" class="form-select">
+                        <option value="null" selected>Open to select owner!</option>
+                        @foreach (var customer in customers)
+                        {
+                            <option value="@customer.Id">@customer.Name, @customer.Email</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CustomerId" class="small text-danger"></span>
+                }
             </div>
             <div class="text-center">
                 <input class="btn btn-primary mt-3" type="submit" value="Save" />

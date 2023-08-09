@@ -1,0 +1,65 @@
+﻿@model IEnumerable<VehicleViewModel>
+
+@{
+    ViewData["Title"] = "All Vehicles!";
+    var vehicles = Model.ToList();
+    var count = 1;
+}
+
+<div class="text-centre mb-5" align="center">
+    <h2 class="display-4 text-centre">@ViewData["Title"]</h2>
+</div>
+<hr/>
+<div align="center" class="mb-5">
+    <a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="Vehicle" asp-action="Add">Add Vehicle</a>
+</div>
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Make</th>
+                <th scope="col">Model</th>
+                <th scope="col">Registration Plate</th>
+                <th scope="col">VIN</th>
+                <th scope="col">Year</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+        @if (vehicles.Count == 0)
+        {
+            <h3>There is no vehicles added!</h3>
+        }
+        else
+        {
+            @foreach (var vehicle in vehicles)
+            {
+
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@vehicle.Make</td>
+                    <td>@vehicle.Model</td>
+                    <td>@vehicle.RegistrationNumber</td>
+                    <td>@vehicle.Vin</td>
+                    <td>@vehicle.YearManufactured</td>
+                    <td><a type="button" class="btn btn-success" asp-area="Admin" asp-controller="JobCard" asp-action="Create" asp-route-id="@vehicle.Id">Create Job Card</a></td>
+                    <td><a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="Vehicle" asp-action="Details" asp-route-id="@vehicle.Id">View Details And ServiceHistory</a></td>
+                    <td><a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id">Edit</a></td>
+                    <td>@if (Model != null)
+                        {
+                            <a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id">Delete</a>
+                        }</td>
+                </tr>
+
+                count++;
+            }
+        }
+        </tbody>
+    </table>
+</div>

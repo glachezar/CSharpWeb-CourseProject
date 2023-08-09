@@ -1,7 +1,7 @@
 ﻿namespace MyGarage.Web.ViewModels.Vehicle
 {
     using System.ComponentModel.DataAnnotations;
-
+    using Customer;
     using static Common.EntityValidationConstants.Vehicle;
 
     public class AddVehicleViewModel
@@ -32,9 +32,12 @@
         [Required]
         public string FuelType { get; set; } = null!;
 
+        //[Required]
         [StringLength(MileageMaxLength, MinimumLength = MileageMinLength)]
         public string? Mileage { get; set; }
 
         public string? CustomerId { get; set; }
+
+        public IEnumerable<CustomerInfoOnVehicleViewModel> Owner { get; set; } = null!;
     }
 }

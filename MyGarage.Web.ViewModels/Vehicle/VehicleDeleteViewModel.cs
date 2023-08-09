@@ -11,5 +11,6 @@
         public string Model { get; set; } = null!;
 
         public string Vin { get; set; } = null!;
+
     }
 }

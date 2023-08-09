@@ -21,7 +21,11 @@
 
         Task<VehicleDeleteViewModel> GetVehicleByIdAsync(string id);
 
-        Task AddOwnerToVehicleByIdAsync(string id,  string ownerId);
+        Task AddOwnerToVehicleByIdAsync(string id, AddVehicleViewModel vehicleViewModel);
+
+        Task<RemoveOwnerFormModel> GetVehicleToRemoveOwnerByIdAsync(string id);
+
+        Task<bool> RemoveOwnerFromVehicleByIdAsync(RemoveOwnerFormModel model);
 
         Task<bool> IsVehicleSoftDeletedAsync(string vin);
 

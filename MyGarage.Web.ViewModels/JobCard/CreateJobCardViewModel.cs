@@ -19,13 +19,14 @@
 
         public string Mileage { get; set; } = null!;
 
+        [Required]
         [Display(Name = "Vehicle")]
         public string VehicleId { get; set; } = null!;
 
+        public Vehicle Vehicle { get; set; } = null!;
+
         [Display(Name = "Mechanic Name")]
         public string MechanicId { get; set; } = null!;
-
-        public Vehicle Vehicle { get; set; }
 
         public IEnumerable<JobCardMechanicFormModel>? Mechanics { get; set; } = null!;
 

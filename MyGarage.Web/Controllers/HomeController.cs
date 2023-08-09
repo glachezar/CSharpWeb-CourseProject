@@ -4,6 +4,7 @@
     using System.Diagnostics;
 
     using ViewModels.Home;
+    using static Common.GeneralApplicationConstants;
 
 
     public class HomeController : Controller
@@ -17,6 +18,11 @@
 
         public IActionResult Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+
             return View();
         }
 

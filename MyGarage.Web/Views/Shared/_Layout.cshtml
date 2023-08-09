@@ -1,5 +1,5 @@
 ﻿@using static MyGarage.Common.GeneralApplicationConstants
-@using MyGarage.Web.Infrastructure.Extensions
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,23 +28,26 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                @if (User.Identity.IsAuthenticated && this.User.IsAdmin())
+                @if (User.Identity.IsAuthenticated)
                 {
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="All">All Customers</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Customer" asp-action="All">All Customers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="All">All Vehicles</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Vehicle" asp-action="All">All Vehicles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Part" asp-action="All">All Parts</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Part" asp-action="All">All Parts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Mechanic" asp-action="All">Our Mechanics</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Mechanic" asp-action="All">Our Mechanics</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Job" asp-action="All">View Jobs</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Job" asp-action="All">View Jobs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="JobCard" asp-action="All">View Jobs Cards</a>
                         </li>
                     </ul>
                 }

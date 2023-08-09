@@ -1,0 +1,158 @@
+﻿@model VehicleDetailsViewModel
+
+
+@{
+    ViewData["Title"] = "Vehicle Details";
+    var jobCards = Model.JobCards!.ToList();
+}
+
+
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<form asp-area="Admin">
+    <div asp-area="" class="container mt-4">
+        <h1>Vehicle Details</h1>
+        <a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Make:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Make</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Model:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Model</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>VIN:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Vin</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Engine Number:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.EngineNumber</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Registration Number:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.RegistrationNumber</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Year Manufactured:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.YearManufactured</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Fuel Type:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.FuelType</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Mileage:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Mileage</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Vehicle Owner:</h4>
+            </div>
+            @if (Model.VehicleOwner?.Id == null
+            || Model.VehicleOwner.Id == Guid.Empty.ToString()
+            || string.IsNullOrEmpty(Model.VehicleOwner.Id))
+            {
+                <div class="col-md-8">
+                    <h4>This vehicle do not have an owner!</h4>
+                </div>
+
+                <a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="Vehicle" asp-action="AddOwner" asp-route-id="@Model.Id">Add Owner</a>
+            }
+            else
+            {
+                <div class="col-md-8">
+                    <p>Name: @Model.VehicleOwner.Name</p>
+                    <p>Phone: @Model.VehicleOwner.PhoneNumber</p>
+                    <p>Email: @Model.VehicleOwner.Email</p>
+                </div>
+                <a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Vehicle" asp-action="RemoveOwner" asp-route-id="@Model.Id">Remove owner!</a>
+            }
+
+        </div>
+        <hr />
+        <div class="row">
+
+            @if (@jobCards.Count == 0)
+            {
+                <h3 class="text-center mt-4">There is no jobs done on this vehicle yet!</h3>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Date Added</th>
+                            <th class="text-center" scope="col">Mileage</th>
+                            <th class="text-center" scope="col">Mechanic Name</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var jobCard in @jobCards)
+                        {
+
+                            <tr>
+                                <td class="text-center">@jobCard.CreatedOn</td>
+                                <td class="text-center">@jobCard.Mileage</td>
+                                <td class="text-center">@jobCard.Mechanic.Name @jobCard.Mechanic.LastName</td>
+
+                                <td class="text-end"><a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="JobCard" asp-action="Details" asp-route-id="@jobCard.Id">View Details</a></td>
+                                <td class="text-center"><a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="JobCard" asp-action="Edit" asp-route-id="@jobCard.Id">Edit card</a></td>
+                                <td><a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="JobCard" asp-action="Delete" asp-route-id="@jobCard.Id">Delete</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+        </div>
+    </div>
+
+</form>

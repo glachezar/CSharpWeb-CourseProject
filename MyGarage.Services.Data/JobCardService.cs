@@ -1,9 +1,13 @@
 ﻿namespace MyGarage.Services.Data
 {
+    using System.Collections;
     using MyGarage.Data.Models;
     using Web.ViewModels.JobCard;
     using MyGarage.Data;
     using Interfaces;
+    using Microsoft.EntityFrameworkCore;
+    using Web.ViewModels.Vehicle;
+    using System.Linq;
 
     public class JobCardService : IJobCardService
     {
@@ -20,6 +24,32 @@
             _partService = partService;
             _vehicleService = vehicleService;
             _mechanicService = mechanicService;
+        }
+
+
+        public async Task<IEnumerable<JobCardViewModel>> ViewAllJobCardsAsync()
+        {
+            IEnumerable<JobCardViewModel> allJobCards = await _context
+                .JobCards
+                .Where(jc => jc.Vehicle.IsActive == true)
+                .OrderByDescending(jc => jc.CreatedOn)
+                .AsNoTracking()
+                .Select(jc => new JobCardViewModel()
+                {
+                    Id = jc.Id.ToString(),
+                    CreatedOn = jc.CreatedOn.Date.ToString("d"),
+                    Vehicle = new JobCardVehicleSelectFormModel()
+                    {
+                        Id = jc.Vehicle.Id.ToString(),
+                        Make = jc.Vehicle.Make,
+                        Model = jc.Vehicle.Model,
+                        Vin = jc.Vehicle.Vin
+                    }
+
+                })
+                .ToArrayAsync();
+
+            return allJobCards;
         }
 
         public async Task CreateJobCardViewModelAsync(string id, CreateJobCardViewModel model)
@@ -71,5 +101,7 @@
 
             await _context.SaveChangesAsync();
         }
+
+
     }
 }

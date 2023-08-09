@@ -98,7 +98,7 @@
         public async Task<MechanicViewModel> GetMechanicByIdAsync(string id)
         {
             Guid mId = Guid.Parse(id);
-            var mechanic = await _context.Mechanics.FindAsync(mId);
+            Mechanic? mechanic = await _context.Mechanics.FindAsync(mId);
 
             MechanicViewModel result = new MechanicViewModel()
             {

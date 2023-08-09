@@ -30,10 +30,10 @@
         public string Vin { get; set; } = null!;
 
         [MaxLength(EngineNumberMaxLength)]
-        public string EngineNumber { get; set; }
+        public string? EngineNumber { get; set; }
 
         [MaxLength(RegistrationPlateMaxLength)]
-        public string RegNumber { get; set; }
+        public string? RegNumber { get; set; }
 
         [Required]
         [MaxLength(YearMadeMaxLength)]
@@ -42,7 +42,7 @@
         public string FuelType { get; set; } = null!;
 
         [MaxLength(MileageMaxLength)]
-        public string Mileage { get; set; }
+        public string? Mileage { get; set; }
 
         public bool IsActive { get; set; }
 

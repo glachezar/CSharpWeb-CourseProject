@@ -1,0 +1,114 @@
+﻿@model CustomerViewModel
+@{
+    ViewData["Title"] = "Customer Details";
+    ViewData["OwnedVehicles"] = "Owned vehicles!";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Vehicle Details</h1>
+        <a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Customer" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Customer" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Name:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Name @Model.Surname</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Email:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Email</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Phone:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.PhoneNumber</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Email:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Email</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Address:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Address</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="text-centre mb-3 mt-3" align="center">
+        <h4 class="display-4 text-centre">@ViewData["OwnedVehicles"]</h4>
+    </div>
+    <div class="row">
+
+        @if (@Model.Vehicles.Count == 0)
+        {
+            <h3 class="text-center mt-4">There is no vehicles added!</h3>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Make</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Registration Plate</th>
+                        <th scope="col">VIN</th>
+                        <th scope="col">Year</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vehicle in @Model.Vehicles)
+                    {
+
+
+                        <tr>
+                            <td>@vehicle.Make</td>
+                            <td>@vehicle.Model</td>
+                            <td>@vehicle.RegNumber</td>
+                            <td>@vehicle.Vin</td>
+                            <td>@vehicle.YearManufactured</td>
+                            <td><a type="button" class="btn btn-success" asp-area="Admin" asp-controller="JobCard" asp-action="Create" asp-route-id="@vehicle.Id">Create Job Card</a></td>
+                            <td><a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="Vehicle" asp-action="Details" asp-route-id="@vehicle.Id">View Details And ServiceHistory</a></td>
+                            <td><a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id">Edit</a></td>
+                            <td><a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</body>
+</html>

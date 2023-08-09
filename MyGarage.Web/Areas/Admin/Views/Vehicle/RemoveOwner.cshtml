@@ -1,0 +1,29 @@
+﻿@model RemoveOwnerFormModel
+@{
+    ViewData["Title"] = "Remove Owner from vehicle!";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<form method="post" asp-area="Admin" asp-action="RemoveOwner" asp-route-id="@Model.Id">
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            <div class="form-group">
+                <label asp-for="Make" class="control-label"></label>
+                <input asp-for="Make" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Vin" class="control-label">VIN</label>
+                <input asp-for="Vin" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Remove owner" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+</form>

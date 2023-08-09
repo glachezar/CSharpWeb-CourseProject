@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CustomerViewModel>
+
+@{
+    ViewData["Title"] = "All Customers!";
+    var customers = Model.ToList();
+    var count = 1;
+}
+
+<div class="text-centre mb-5" align="center">
+    <h2 class="display-4 text-centre">@ViewData["Title"]</h2>
+</div>
+<hr/>
+<div align="center" class="mb-5">
+    <a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="Customer" asp-action="Add">Add New Customer</a>
+</div>
+
+<div class="">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email address</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var customer in customers)
+        {
+            
+            <tr>
+                <th scope="row">@count</th>
+                <td>@customer.Name @customer.Surname</td>
+                <td>@customer.PhoneNumber</td>
+                <td>@customer.Email</td>
+                    <td><a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="Customer" asp-action="Details" asp-route-id="@customer.Id">View Details</a></td>
+                    <td><a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.Id">Edit</a></td>
+                    <td><a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.Id">Delete</a></td>
+            </tr>
+            count++;
+        }
+        </tbody>
+    </table>
+</div>
