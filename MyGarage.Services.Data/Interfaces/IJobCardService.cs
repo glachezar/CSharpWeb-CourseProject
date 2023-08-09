@@ -7,5 +7,7 @@
         Task<IEnumerable<JobCardViewModel>> ViewAllJobCardsAsync();
         
         Task CreateJobCardViewModelAsync(string id, CreateJobCardViewModel model);
+
+        Task<DetailsJobCardViewModel> GetJobCardForDetailsViewAsync(string id);
     }
 }

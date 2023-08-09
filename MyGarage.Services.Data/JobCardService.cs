@@ -8,6 +8,9 @@
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Vehicle;
     using System.Linq;
+    using Web.ViewModels.Job;
+    using Web.ViewModels.Mechanic;
+    using Web.ViewModels.Part;
 
     public class JobCardService : IJobCardService
     {
@@ -102,6 +105,120 @@
             await _context.SaveChangesAsync();
         }
 
+        //public async Task<DetailsJobCardViewModel> GetJobCardForDetailsViewAsync(string id)
+        //{
+        //    DetailsJobCardViewModel? card = await _context
+        //        .JobCards
+        //        .Include(m => m.Mechanic)!
+        //        .Include(jcp => jcp.JobCardParts)!
+        //        .ThenInclude(jcp => jcp.Part)!
+        //        .Include(jcj => jcj.JobCardJobs)!
+        //        .ThenInclude(jcj => jcj.Job)
+        //        .Include(v => v.Vehicle)
+        //        .AsNoTracking()
+        //        .Select(c =>new DetailsJobCardViewModel
+        //        {
+        //            Id = c.Id.ToString(),
+        //            CreatedOn = c.CreatedOn.ToString("d"),
+        //            Mileage = c.Mileage,
+        //            Vehicle = new JobCardVehicleSelectFormModel()
+        //            {
+        //                Make = c.Vehicle.Make,
+        //                Model = c.Vehicle.Model,
+        //                Vin = c.Vehicle.Vin
+        //            },
+        //            Mechanic = new JobCardMechanicFormModel()
+        //            {
+        //                Name = c.Mechanic!.Name,
+        //                LastName = c.Mechanic.Surname
+        //            },
+        //            Jobs =  c.JobCardJobs!
+        //                .Where(j => j.JobCard.Id.ToString() == id)
+        //                .Select(j => new JobViewModel
+        //                {
+        //                    Id = j.Job.Id.ToString(),
+        //                    JobName = j.Job.JobName,
+        //                    Price = j.Job.Price
+        //                })
+        //                .ToArray(),
+        //            TotalAmountForParts = 0,
+        //            Parts = c.JobCardParts!
+        //                .Where(j => j.JobCard.Id.ToString() == id)
+        //                .Select(p => new PartsViewModel
+        //                {
+        //                    Id = p.Part.Id.ToString(),
+        //                    PartName = p.Part.PartName,
+        //                    PartNumber = p.Part.PartNumber,
+        //                    Price = p.Part.Price
+        //                })
+        //                .ToArray(),
+
+        //            TotalAmountForLabor = 0,
+        //        })
+        //        .FirstOrDefaultAsync(jc => jc.Id.ToString() == id);
+
+
+        //    if (card == null)
+        //    {
+        //        return null;
+        //    }
+
+
+        //    return card;
+        //}
+
+        public async Task<DetailsJobCardViewModel> GetJobCardForDetailsViewAsync(string id)
+        {
+            var card = await _context.JobCards
+                .Include(m => m.Mechanic)
+                .Include(jcp => jcp.JobCardParts)
+                .ThenInclude(jcp => jcp.Part)
+                .Include(jcj => jcj.JobCardJobs)
+                .ThenInclude(jcj => jcj.Job)
+                .Include(v => v.Vehicle)
+                .AsNoTracking()
+                .Where(c => c.Id.ToString() == id)
+                .Select(c => new DetailsJobCardViewModel
+                {
+                    Id = c.Id.ToString(),
+                    CreatedOn = c.CreatedOn.ToString("d"),
+                    Mileage = c.Mileage,
+                    Vehicle = new JobCardVehicleSelectFormModel
+                    {
+                        Make = c.Vehicle.Make,
+                        Model = c.Vehicle.Model,
+                        Vin = c.Vehicle.Vin
+                    },
+                    Mechanic = new JobCardMechanicFormModel
+                    {
+                        Name = c.Mechanic.Name,
+                        LastName = c.Mechanic.Surname
+                    },
+                    Jobs = c.JobCardJobs
+                        .Select(j => new JobViewModel
+                        {
+                            Id = j.Job.Id.ToString(),
+                            JobName = j.Job.JobName,
+                            Price = j.Job.Price
+                        })
+                        .ToArray(),
+                    TotalAmountForParts = c.JobCardParts
+                        .Sum(p => p.Part.Price), // Calculate total price for parts
+                    Parts = c.JobCardParts
+                        .Select(p => new PartsViewModel
+                        {
+                            Id = p.Part.Id.ToString(),
+                            PartName = p.Part.PartName,
+                            PartNumber = p.Part.PartNumber,
+                            Price = p.Part.Price
+                        })
+                        .ToArray(),
+                    TotalAmountForLabor = c.JobCardJobs.Sum(j => j.Job.Price), // Calculate total price for labor
+                })
+                .FirstOrDefaultAsync();
+
+            return card;
+        }
 
     }
 }

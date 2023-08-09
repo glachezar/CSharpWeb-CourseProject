@@ -80,5 +80,22 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var model = await _jobCardService.GetJobCardForDetailsViewAsync(id);
+
+            if (model == null)
+            {
+                TempData[ErrorMessage] =
+                    "No Job Card with provided Id have been found! Please try again later or contact support.";
+                return RedirectToAction("All", "JobCard");
+            }
+
+            return View(model);
+        }
+
+        
     }
 }

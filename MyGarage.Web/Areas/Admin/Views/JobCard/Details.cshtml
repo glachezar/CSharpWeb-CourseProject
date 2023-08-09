@@ -1,0 +1,148 @@
+﻿@model DetailsJobCardViewModel
+@{
+    ViewData["Title"] = "Job Card Details";
+    var jobCardParts = Model.Parts!.ToList();
+    var jobCardJobs = Model.Jobs!.ToList();
+    decimal totalAmount = 0m;
+}
+
+
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<form asp-area="Admin">
+    <div asp-area="" class="container mt-4">
+        <h1>Job Card Details</h1>
+        <a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Created On:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.CreatedOn</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Make:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Vehicle.Make</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Model:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Vehicle.Model</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h4>VIN:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Vehicle.Vin</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Vehicle Mileage:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Mileage</p>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Mechanic:</h4>
+            </div>
+            <div class="col-md-8">
+                <p>@Model.Mechanic.Name @Model.Mechanic.LastName</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="table-responsive col-md-6">
+
+                @if (@jobCardParts.Count == 0)
+                {
+                    <h3 class="text-center mt-4">There in no parts that have been changed within this job card!</h3>
+                }
+                else
+                {
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-start" scope="col">Part</th>
+                            <th class="text-end" scope="col">Price</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var part in @jobCardParts)
+                        {
+
+                            <tr>
+                                <td class="text-start">@part.PartName</td>
+                                <td class="text-end">@part.Price</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td class="text-start">Total amount:</td>
+                            <td class="text-end">@Model.TotalAmountForParts</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+
+            </div>
+
+            <div class="table-responsive col-md-6">
+
+                @if (@jobCardJobs.Count == 0)
+                {
+                    <h3 class="text-center mt-4">There in no labor within this job card!</h3>
+                }
+                else
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-start" scope="col">Labor</th>
+                                <th class="text-end" scope="col">Price</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            @foreach (var part in @jobCardJobs)
+                            {
+
+
+                                <td class="text-start">@part.JobName</td>
+                                <td class="text-end">@part.Price</td>
+
+                            }
+                        </tr>
+                        <tr>
+                            <td class="text-start">Total amount:</td>
+                            <td class="text-end">@Model.TotalAmountForLabor</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+
+            </div>
+        </div>
+    </div>
+</form>
