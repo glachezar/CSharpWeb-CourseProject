@@ -203,7 +203,7 @@
                         })
                         .ToArray(),
                     TotalAmountForParts = c.JobCardParts
-                        .Sum(p => p.Part.Price), // Calculate total price for parts
+                        .Sum(p => p.Part.Price), 
                     Parts = c.JobCardParts
                         .Select(p => new PartsViewModel
                         {
@@ -213,12 +213,30 @@
                             Price = p.Part.Price
                         })
                         .ToArray(),
-                    TotalAmountForLabor = c.JobCardJobs.Sum(j => j.Job.Price), // Calculate total price for labor
+                    TotalAmountForLabor = c.JobCardJobs.Sum(j => j.Job.Price),
                 })
                 .FirstOrDefaultAsync();
 
             return card;
         }
 
+        public Task<DetailsJobCardViewModel> GetJobCardFofDeleteAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> DeleteJobCardByIdAsync(string id)
+        {
+            JobCard? card = await _context.JobCards.FirstOrDefaultAsync(jc => jc.Id.ToString() == id);
+
+            if (card == null)
+            {
+                return false;
+            }
+
+            _context.JobCards.Remove(card);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

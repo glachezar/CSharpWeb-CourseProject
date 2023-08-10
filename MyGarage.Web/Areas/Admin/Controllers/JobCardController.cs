@@ -96,6 +96,33 @@
             return View(model);
         }
 
-        
+        [HttpGet]
+        public async Task<IActionResult> Delete(DetailsJobCardViewModel model)
+        {
+            var viewModel = await _jobCardService.GetJobCardForDetailsViewAsync(model.Id);
+            if (viewModel == null)
+            {
+                TempData[ErrorMessage] = "Job card with provided id do not exist!";
+                return RedirectToAction("All", "JobCard");
+            }
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, DetailsJobCardViewModel model)
+        {
+            bool isDeleted = await _jobCardService.DeleteJobCardByIdAsync(id);
+
+            if (isDeleted == false)
+            {
+                TempData[ErrorMessage] =
+                    "Something went wrong while trying to delete Job card, please try again later or contact support.";
+                return RedirectToAction("All", "JobCard");
+            }
+
+            TempData[SuccessMessage] = "Successfully deleted!";
+            return RedirectToAction("All", "JobCard");
+        }
+
     }
 }

@@ -38,8 +38,8 @@
                     <td>@jobCard.Vehicle.Vin</td>
 
                <td><a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="JobCard" asp-action="Details" asp-route-id="@jobCard.Id">View Details</a></td>
-                <td><a type="button" class="btn btn-warning" asp-area="" asp-controller="JobCard" asp-action="Edit" asp-route-id="@jobCard.Id">Edit</a></td>
-                <td><a type="button" class="btn btn-danger" asp-area="" asp-controller="JobCard" asp-action="Delete" asp-route-id="@jobCard.Id">Delete</a></td>
+                <td><a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="JobCard" asp-action="Edit" asp-route-id="@jobCard.Id">Edit</a></td>
+                <td><a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="JobCard" asp-action="Delete" asp-route-id="@jobCard.Id">Delete</a></td>
             </tr>
             count++;
         }

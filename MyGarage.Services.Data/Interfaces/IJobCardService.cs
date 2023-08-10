@@ -9,5 +9,9 @@
         Task CreateJobCardViewModelAsync(string id, CreateJobCardViewModel model);
 
         Task<DetailsJobCardViewModel> GetJobCardForDetailsViewAsync(string id);
+
+        Task<DetailsJobCardViewModel> GetJobCardFofDeleteAsync(string id);
+
+        Task<bool> DeleteJobCardByIdAsync(string id);
     }
 }

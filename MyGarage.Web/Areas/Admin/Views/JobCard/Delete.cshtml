@@ -1,6 +1,6 @@
 ﻿@model DetailsJobCardViewModel
 @{
-    ViewData["Title"] = "Job Card Details";
+    ViewData["Title"] = "Delete Job Card";
     ViewBag.Currency = "$";
     var jobCardParts = Model.Parts!.ToList();
     var jobCardJobs = Model.Jobs!.ToList();
@@ -11,12 +11,13 @@
 <head>
     <title>@ViewData["Title"]</title>
 </head>
-<form asp-area="Admin">
+<form method="post" asp-area="Admin" asp-action="Delete">
     <div asp-area="" class="container mt-4">
-        <h1>Job Card Details</h1>
+        <h1>@ViewData["Title"]</h1>
 
-        <a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="JobCard" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-        <a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="JobCard" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <div class="form-group mt-2">
+            <input type="submit" value="Confirm!" class="btn btn-danger" />
+        </div>
         <hr />
 
         <div class="row">
@@ -80,12 +81,11 @@
                 <p>@totalAmount @ViewBag.Currency</p>
             </div>
         </div>
-        <hr/>
+        <hr />
 
         <div class="row">
             <div class="table-responsive col-md-6">
-                
-                <a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="JobCard" asp-action="AddPart" asp-route-id="@Model.Id">Add part</a>
+
 
                 @if (@jobCardParts.Count == 0)
                 {
@@ -95,25 +95,25 @@
                 {
                     <table class="table table-striped">
                         <thead>
-                        <tr>
-                            <th class="text-start" scope="col">Part</th>
-                            <th class="text-end" scope="col">Price</th>
+                            <tr>
+                                <th class="text-start" scope="col">Part</th>
+                                <th class="text-end" scope="col">Price</th>
 
-                        </tr>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach (var part in @jobCardParts)
-                        {
+                            @foreach (var part in @jobCardParts)
+                            {
 
+                                <tr>
+                                    <td class="text-start">@part.PartName</td>
+                                    <td class="text-end">@part.Price @ViewBag.Currency</td>
+                                </tr>
+                            }
                             <tr>
-                                <td class="text-start">@part.PartName</td>
-                                <td class="text-end">@part.Price @ViewBag.Currency</td>
-                            </tr>
-                        }
-                        <tr>
-                            <td class="text-start">Total bill for parts:</td>
+                                <td class="text-start">Total bill for parts:</td>
                                 <td class="text-end">@Model.TotalAmountForParts @ViewBag.Currency</td>
-                        </tr>
+                            </tr>
                         </tbody>
                     </table>
                 }
@@ -121,8 +121,7 @@
             </div>
 
             <div class="table-responsive col-md-6">
-                
-                <a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="JobCard" asp-action="AddLabor" asp-route-id="@Model.Id">Add labor</a>
+
 
                 @if (@jobCardJobs.Count == 0)
                 {
@@ -132,27 +131,27 @@
                 {
                     <table class="table table-striped">
                         <thead>
-                        <tr>
-                            <th class="text-start" scope="col">Labor</th>
-                            <th class="text-end" scope="col">Price</th>
+                            <tr>
+                                <th class="text-start" scope="col">Labor</th>
+                                <th class="text-end" scope="col">Price</th>
 
-                        </tr>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            @foreach (var part in @jobCardJobs)
-                            {
+                            <tr>
+                                @foreach (var part in @jobCardJobs)
+                                {
 
 
-                                <td class="text-start">@part.JobName</td>
-                                <td class="text-end">@part.Price @ViewBag.Currency</td>
+                                    <td class="text-start">@part.JobName</td>
+                                    <td class="text-end">@part.Price @ViewBag.Currency</td>
 
-                            }
-                        </tr>
-                        <tr>
-                            <td class="text-start">Total bill for labor:</td>
-                            <td class="text-end">@Model.TotalAmountForLabor @ViewBag.Currency</td>
-                        </tr>
+                                }
+                            </tr>
+                            <tr>
+                                <td class="text-start">Total bill for labor:</td>
+                                <td class="text-end">@Model.TotalAmountForLabor @ViewBag.Currency</td>
+                            </tr>
                         </tbody>
                     </table>
                 }
