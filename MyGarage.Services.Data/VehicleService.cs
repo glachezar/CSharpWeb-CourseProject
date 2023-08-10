@@ -43,6 +43,27 @@
             return viewAllVehicles;
         }
 
+        public async Task<IEnumerable<VehicleViewModel>> AllVehiclesByUserIdAsync(string id)
+        {
+            IEnumerable<VehicleViewModel> allCustomerVehicles = await _context
+                .Vehicles
+                .Include(v => v.Customer)
+                .Where(c => c.Customer.ApplicationUserId.ToString() == id)
+                .AsNoTracking()
+                .Select(v => new VehicleViewModel
+                {
+                    Id = v.Id.ToString(),
+                    Make = v.Make,
+                    Model = v.Model,
+                    Vin = v.Vin,
+                    RegistrationNumber = v.RegNumber,
+                    YearManufactured = v.YearManufactured
+                })
+                .ToArrayAsync();
+
+            return allCustomerVehicles;
+        }
+
         public async Task<IEnumerable<JobCardVehicleSelectFormModel>> AllVehiclesForFormModelAsync()
         {
             IEnumerable<JobCardVehicleSelectFormModel> viewAllVehicles = await _context
@@ -61,9 +82,6 @@
 
             return viewAllVehicles;
         }
-
-        
-
 
         public async Task AddVehicleAsync(AddVehicleViewModel vehicleViewModel)
         {
@@ -178,7 +196,6 @@
             await _context.SaveChangesAsync();
             return true;
         }
-
 
         public async Task<VehicleDetailsViewModel> ViewVehicleDetailsByIdAsync(string id)
         {

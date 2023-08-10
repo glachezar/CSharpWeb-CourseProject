@@ -1,5 +1,6 @@
 ﻿namespace MyGarage.Web.Controllers
 {
+    using Infrastructure.Extensions;
     using MyGarage.Services.Data.Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@
         public async Task<IActionResult> All()
         {
             IEnumerable<VehicleViewModel> viewModel =
-                await this._vehicleService.AllVehiclesAsync();
+                await this._vehicleService.AllVehiclesByUserIdAsync(this.User.GetUserId()!);
 
             return View(viewModel);
         }

@@ -28,7 +28,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                @if (User.Identity.IsAuthenticated)
+                @if (User.Identity.IsAuthenticated && User.IsInRole(AdminRoleName))
                 {
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -58,7 +58,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="MyDetails">My Details</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="MyVehicles">My Vehicles</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vehicle" asp-action="All">My Vehicles</a>
                             </li>
                         </ul>
                 }

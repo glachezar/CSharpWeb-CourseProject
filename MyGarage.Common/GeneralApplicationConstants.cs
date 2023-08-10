@@ -7,5 +7,6 @@
         public const string AdminAreaName = "Admin";
         public const string AdminRoleName = "Administrator";
         public const string DeveloperAdminEmail = "Martinov@mcg.bg";
+
     }
 }

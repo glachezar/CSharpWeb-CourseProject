@@ -7,6 +7,8 @@
     {
         Task<IEnumerable<VehicleViewModel>> AllVehiclesAsync();
 
+        Task<IEnumerable<VehicleViewModel>> AllVehiclesByUserIdAsync(string id);
+
         Task<IEnumerable<JobCardVehicleSelectFormModel>> AllVehiclesForFormModelAsync();
 
         Task AddVehicleAsync(AddVehicleViewModel vehicleViewModel);
