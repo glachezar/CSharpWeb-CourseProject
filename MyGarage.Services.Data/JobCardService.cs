@@ -202,6 +202,35 @@
             return model;
         }
 
+        public async Task<AddJobToJobCardViewModel> GetJobCardToAddJobAsync(string id)
+        {
+            var jobCard = await _context.JobCards
+                .Include(jc => jc.Vehicle)
+                .FirstOrDefaultAsync(jc => jc.Id.ToString() == id);
+
+            if (jobCard == null)
+            {
+                return null;
+            }
+
+            AddJobToJobCardViewModel model = new AddJobToJobCardViewModel
+            {
+                Id = jobCard.Id.ToString(),
+                CreatedOn = jobCard.CreatedOn.ToString("d"),
+                Vehicle = new JobCardVehicleSelectFormModel
+                {
+                    Id = jobCard.VehicleId.ToString(),
+                    Make = jobCard.Vehicle.Make,
+                    Model = jobCard.Vehicle.Model,
+                    Vin = jobCard.Vehicle.Vin
+                },
+            };
+
+            model.Jobs = await _jobService.AllJobsForFormModelAsync();
+
+            return model;
+        }
+
         public async Task<bool> AddPartToJobCardAsync(string id, AddPartToJobCardViewModel model)
         {
             Part? partToAdd = await _context.Parts.FindAsync(Guid.Parse(id));
@@ -234,6 +263,44 @@
             
 
             jobCard.JobCardParts.Add(newPart);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> AddJobToJobCardAsync(string id, AddJobToJobCardViewModel model)
+        {
+            Job? jobToAdd = await _context.Jobs.FindAsync(Guid.Parse(id));
+
+            JobCard? jobCard = await _context
+                .JobCards
+                .Include(jc => jc.Vehicle)
+                .FirstOrDefaultAsync(jc => jc.Id.ToString() == model.Id);
+
+
+            bool isAdded = await _context.JobCardJobs
+                .AnyAsync(jcj => jcj.JobId == jobToAdd.Id && jcj.JobCardId == jobCard.Id);
+
+
+            if (jobCard == null || jobToAdd == null || isAdded == true)
+            {
+                return false;
+            }
+
+
+            JobCardJob newJob = new JobCardJob
+            {
+                JobId = jobToAdd.Id,
+                Job = jobToAdd,
+
+                JobCardId = jobCard.Id,
+                JobCard = jobCard
+            };
+
+
+
+            jobCard.JobCardJobs.Add(newJob);
 
             await _context.SaveChangesAsync();
 

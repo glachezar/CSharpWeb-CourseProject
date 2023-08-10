@@ -1,0 +1,66 @@
+﻿@model AddJobToJobCardViewModel
+
+@{
+    ViewData["Title"] = "Add labor to Job card!";
+    List<JobCardJobSelectFormModel> jobs = Model.Jobs.ToList();
+}
+
+<div asp-area="" class="container mt-4">
+    <h1>Job Card Details</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Created On:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.CreatedOn</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Make:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Vehicle.Make</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Model:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Vehicle.Model</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4>VIN:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Vehicle.Vin</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-area="Admin" asp-action="AddJob" method="post">
+
+            <div class="form-group">
+                @* <label asp-for="SelectedJobId">Choose labor</label> *@
+                <select asp-for="SelectedJobId" class="form-select">
+                    <option value="" selected>Open to select labor!</option>
+                    @foreach (var job in jobs)
+                    {
+                        <option value="@job.Id">@job.JobName</option>
+                    }
+                </select>
+                <span asp-validation-for="Id" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

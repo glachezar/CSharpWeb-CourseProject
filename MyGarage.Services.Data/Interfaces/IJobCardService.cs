@@ -14,6 +14,10 @@
 
         Task<AddPartToJobCardViewModel> GetJobCardToAddPartAsync(string id);
 
+        Task<AddJobToJobCardViewModel> GetJobCardToAddJobAsync(string id);
+
         Task<bool> AddPartToJobCardAsync(string id, AddPartToJobCardViewModel model);
+
+        Task<bool> AddJobToJobCardAsync(string id, AddJobToJobCardViewModel model);
     }
 }

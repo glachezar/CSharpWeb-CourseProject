@@ -15,7 +15,6 @@
     <div asp-area="" class="container mt-4">
         <h1>Job Card Details</h1>
 
-        <a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="JobCard" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
         <a type="button" class="btn btn-danger" asp-area="Admin" asp-controller="JobCard" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
         <hr />
 
@@ -122,7 +121,7 @@
 
             <div class="table-responsive col-md-6">
                 
-                <a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="JobCard" asp-action="AddLabor" asp-route-id="@Model.Id">Add labor</a>
+                <a type="button" class="btn btn-primary" asp-area="Admin" asp-controller="JobCard" asp-action="AddJob" asp-route-id="@Model.Id">Add labor</a>
 
                 @if (@jobCardJobs.Count == 0)
                 {
@@ -139,16 +138,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        
                             @foreach (var part in @jobCardJobs)
                             {
-
+                                <tr>
 
                                 <td class="text-start">@part.JobName</td>
                                 <td class="text-end">@part.Price @ViewBag.Currency</td>
-
+                                </tr>
                             }
-                        </tr>
+                        
                         <tr>
                             <td class="text-start">Total bill for labor:</td>
                             <td class="text-end">@Model.TotalAmountForLabor @ViewBag.Currency</td>

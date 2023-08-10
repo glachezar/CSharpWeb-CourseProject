@@ -161,5 +161,42 @@
             return RedirectToAction("Details", "JobCard", new { id });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddJob(string id)
+        {
+            var model = await _jobCardService.GetJobCardToAddJobAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddJob(string id, AddJobToJobCardViewModel model)
+        {
+            var jobCard = await _jobCardService.GetJobCardToAddJobAsync(id);
+
+            if (jobCard == null)
+            {
+                TempData[ErrorMessage] = "Job card not found.";
+                return RedirectToAction("All", "JobCard");
+            }
+
+            if (model.SelectedJobId == Guid.Empty)
+            {
+                TempData[ErrorMessage] = "Please select a labor type.";
+                return RedirectToAction("AddJob", new { id });
+            }
+
+            bool isAdded = await _jobCardService.AddJobToJobCardAsync(model.SelectedJobId.ToString(), jobCard);
+
+            if (!isAdded)
+            {
+                TempData[ErrorMessage] = "Something went wrong while trying to add labor to job card.";
+                return RedirectToAction("Details", "JobCard", new { id });
+            }
+
+            TempData[SuccessMessage] = "Successfully added labor to JobCard!";
+            return RedirectToAction("Details", "JobCard", new { id });
+        }
+
     }
 }
