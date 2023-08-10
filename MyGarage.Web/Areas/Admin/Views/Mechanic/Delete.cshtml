@@ -6,8 +6,8 @@
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 
-<form method="post" asp-action="Delete">
-    <div class="row">
+<div class="row">
+    <form method="post" asp-area="Admin" asp-controller="Mechanic" asp-action="Delete">
         <div class="col-md-8">
             <div class="form-group mb-4">
                 <label asp-for="Name" class="control-label mb-1"></label>
@@ -25,5 +25,5 @@
                 <input type="submit" value="Delete" class="btn btn-danger" />
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

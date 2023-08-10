@@ -4,10 +4,12 @@
     ViewData["Title"] = "Add Mechanic";
 }
 
+<form asp-area="Admin" asp-controller="Mechanic" asp-action="Add">
 
-<partial name="_MechanicPartial" model="@Model" />
+    <partial name="_MechanicPartial" model="@Model" />
 
+</form>
 @section Scripts
-{
+    {
     <partial name="_ValidationScriptsPartial" />
 }

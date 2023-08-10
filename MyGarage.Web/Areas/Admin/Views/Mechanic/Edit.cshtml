@@ -6,8 +6,9 @@
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
-
+<form asp-area="Admin" asp-controller="Mechanic" asp-action="Edit">
 <partial name="_MechanicPartial" model="@Model" />
+</form>
 
 @section Scripts
     {

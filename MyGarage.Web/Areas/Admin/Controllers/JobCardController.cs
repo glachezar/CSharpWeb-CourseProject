@@ -4,7 +4,7 @@
 
     using MyGarage.Services.Data.Interfaces;
     using ViewModels.JobCard;
-
+    using ViewModels.Part;
     using static Common.NotificationsMessagesConstants;
 
     public class JobCardController : BaseAdminController
@@ -122,6 +122,43 @@
 
             TempData[SuccessMessage] = "Successfully deleted!";
             return RedirectToAction("All", "JobCard");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddPart(string id)
+        {
+            var model = await _jobCardService.GetJobCardToAddPartAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPart(string id, AddPartToJobCardViewModel model)
+        {
+            var jobCard = await _jobCardService.GetJobCardToAddPartAsync(id);
+
+            if (jobCard == null)
+            {
+                TempData[ErrorMessage] = "Job card not found.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (model.SelectedPartId == Guid.Empty)
+            {
+                TempData[ErrorMessage] = "Please select a part.";
+                return RedirectToAction("AddPart", new { id });
+            }
+
+            bool isAdded = await _jobCardService.AddPartToJobCardAsync(model.SelectedPartId.ToString(), jobCard);
+
+            if (!isAdded)
+            {
+                TempData[ErrorMessage] = "Something went wrong while trying to add part to job card.";
+                return RedirectToAction("Details", "JobCard", new { id });
+            }
+
+            TempData[SuccessMessage] = "Successfully added part to JobCard!";
+            return RedirectToAction("Details", "JobCard", new { id });
         }
 
     }

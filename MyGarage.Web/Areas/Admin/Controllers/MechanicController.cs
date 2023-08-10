@@ -1,6 +1,5 @@
-﻿namespace MyGarage.Web.Controllers
+﻿namespace MyGarage.Web.Areas.Admin.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using MyGarage.Services.Data.Interfaces;
@@ -9,8 +8,7 @@
 
 
 
-    [Authorize]
-    public class MechanicController : Controller
+    public class MechanicController : BaseAdminController
     {
         private readonly IMechanicService _mechanicService;
 
@@ -36,7 +34,7 @@
         [HttpPost]
         public async Task<IActionResult> Add(MechanicViewModel addMechanic)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await _mechanicService.AddMechanicAsync(addMechanic);
                 this.TempData[SuccessMessage] = "Successfully added new mechanic!";
@@ -91,6 +89,7 @@
         public async Task<IActionResult> Delete(string id)
         {
             var mechanic = await _mechanicService.GetMechanicByIdAsync(id);
+
             if (mechanic == null)
             {
                 this.TempData[ErrorMessage] = "Mechanic with provided id does not exist!";
@@ -104,7 +103,9 @@
         public async Task<IActionResult> Delete(string id, MechanicViewModel mechanicToDelete)
         {
             Guid mechanicId = Guid.Parse(id);
+
             var isDeleted = await _mechanicService.SoftDeleteMechanicAsync(mechanicId);
+
             if (!isDeleted)
             {
                 this.TempData[ErrorMessage] = "Mechanic with provided id does not exist!";

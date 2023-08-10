@@ -28,6 +28,9 @@ namespace MyGarage.Data
 
         public DbSet<JobCard> JobCards { get; set; }
 
+        public DbSet<JobCardJob> JobCardJobs { get; set; }
+        public DbSet<JobCardPart> JobCardParts { get; set; }
+
         public DbSet<Mechanic> Mechanics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

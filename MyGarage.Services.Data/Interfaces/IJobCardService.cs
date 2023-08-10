@@ -10,8 +10,10 @@
 
         Task<DetailsJobCardViewModel> GetJobCardForDetailsViewAsync(string id);
 
-        Task<DetailsJobCardViewModel> GetJobCardFofDeleteAsync(string id);
-
         Task<bool> DeleteJobCardByIdAsync(string id);
+
+        Task<AddPartToJobCardViewModel> GetJobCardToAddPartAsync(string id);
+
+        Task<bool> AddPartToJobCardAsync(string id, AddPartToJobCardViewModel model);
     }
 }

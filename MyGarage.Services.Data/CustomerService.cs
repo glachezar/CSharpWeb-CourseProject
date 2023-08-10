@@ -36,6 +36,22 @@
             return viewAllCustomers;
         }
 
+        public async Task<IEnumerable<CustomerInfoOnVehicleViewModel>> AllCustomersForSelectFormModelAsync()
+        {
+            IEnumerable<CustomerInfoOnVehicleViewModel> allCustomers = await _context
+                .Customers
+                .AsNoTracking()
+                .Select(c => new CustomerInfoOnVehicleViewModel
+                {
+                    Id = c.Id.ToString(),
+                    Name = $"{c.Name} {c.Surname}",
+                    Email = c.Email
+                })
+                .ToArrayAsync();
+
+            return allCustomers;
+        }
+
         public async Task AddCustomerAsync(AddCustomerViewModel customer)
         {
             Customer newCustomer = new Customer()

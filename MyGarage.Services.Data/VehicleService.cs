@@ -62,6 +62,8 @@
             return viewAllVehicles;
         }
 
+        
+
 
         public async Task AddVehicleAsync(AddVehicleViewModel vehicleViewModel)
         {
@@ -69,6 +71,9 @@
                 .Vehicles
                 .Where(v => v.IsActive == false)
                 .FirstOrDefaultAsync(v => v.Vin == vehicleViewModel.Vin);
+            Customer? owner = await _context
+                .Customers
+                .FirstOrDefaultAsync(c => c.Id.ToString() == vehicleViewModel.CustomerId);
 
             if (inactiveVehicleCheck != null)
             {
@@ -89,6 +94,11 @@
                     Mileage = vehicleViewModel.Mileage ?? "No Record"
                 };
 
+                if (vehicleViewModel.CustomerId != null && owner != null)
+                {
+                    newVehicle.CustomerId = Guid.Parse(vehicleViewModel.CustomerId);
+                    newVehicle.Customer = owner;
+                }
                 await _context.Vehicles.AddAsync(newVehicle);
                 await _context.SaveChangesAsync();
             }

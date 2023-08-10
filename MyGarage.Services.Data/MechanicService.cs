@@ -20,6 +20,7 @@
         {
             IEnumerable<MechanicViewModel> allMechanics = await this._context
                 .Mechanics
+                .Where(m => m.IsActive == true)
                 .AsNoTracking()
                 .Select(m => new MechanicViewModel()
                 {
@@ -38,6 +39,7 @@
         {
             IEnumerable<JobCardMechanicFormModel> viewAllMechanics = await _context
                 .Mechanics
+                .Where(m => m.IsActive == true)
                 .AsNoTracking()
                 .Select(m => new JobCardMechanicFormModel()
                 {

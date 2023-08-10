@@ -4,13 +4,12 @@
     ViewData["Title"] = "Mechanic Details";
 }
 
-<!DOCTYPE html>
 
-<html>
 <head>
     <title>@ViewData["Title"]</title>
 </head>
 <body>
+<form asp-area="Admin" asp-controller="Mechanic" asp-action="Details">
     <div class="container mt-4">
         <h1>Vehicle Details</h1>
         <a type="button" class="btn btn-warning" asp-area="" asp-controller="Mechanic" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
@@ -34,17 +33,6 @@
                 <p>@Model.PhoneNumber</p>
             </div>
         </div>
-
-        @*    <div class="row">
-        <div class="col-md-4">
-        <h4>Price:</h4>
-        </div>
-        <div class="col-md-8">
-        <p>@Model.Price @ViewBag.Currency</p>
-        </div>
-        </div>*@
-
-
     </div>
+</form>
 </body>
-</html>

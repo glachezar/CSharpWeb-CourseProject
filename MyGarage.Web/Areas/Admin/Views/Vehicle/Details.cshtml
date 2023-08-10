@@ -10,7 +10,7 @@
 <head>
     <title>@ViewData["Title"]</title>
 </head>
-<form asp-area="Admin">
+<form asp-area="Admin" asp-action="Details">
     <div asp-area="" class="container mt-4">
         <h1>Vehicle Details</h1>
         <a type="button" class="btn btn-warning" asp-area="Admin" asp-controller="Vehicle" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>

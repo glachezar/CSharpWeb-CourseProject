@@ -1,0 +1,66 @@
+﻿@model AddPartToJobCardViewModel
+
+@{
+    ViewData["Title"] = "Add Part Job card!";
+    List<JobCardPartSelectFormModel> parts = Model.Parts.ToList();
+}
+
+<div asp-area="" class="container mt-4">
+    <h1>Job Card Details</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Created On:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.CreatedOn</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Make:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Vehicle.Make</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Model:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Vehicle.Model</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4>VIN:</h4>
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Vehicle.Vin</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-area="Admin" asp-action="AddPart" method="post">
+
+            <div class="form-group">
+                @* <label asp-for="Id">Choose part to add to job card.</label> *@
+                <select asp-for="SelectedPartId" class="form-select">
+                    <option value="null" selected>Open to select part!</option>
+                    @foreach (var part in parts)
+                    {
+                        <option value="@part.Id">@part.PartName</option>
+                    }
+                </select>
+                <span asp-validation-for="Id" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

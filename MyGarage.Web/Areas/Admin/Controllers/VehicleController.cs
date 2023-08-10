@@ -51,26 +51,34 @@
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            return View();
+            AddVehicleViewModel formModel = new AddVehicleViewModel();
+            formModel.Owner = await _customerService.AllCustomersForSelectFormModelAsync();
+
+            return View(formModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(AddVehicleViewModel addVehicle)
         {
             bool notActive = await _vehicleService.IsVehicleSoftDeletedAsync(addVehicle.Vin);
+
             if (notActive)
             {
                 this.TempData[SuccessMessage] = "Vehicle was added successfully!";
                 return RedirectToAction("All", "Vehicle");
             }
-            if (notActive == false && ModelState.IsValid)
+            if (notActive == false && !ModelState.IsValid)
             {
-
+                
                 await _vehicleService.AddVehicleAsync(addVehicle);
                 this.TempData[SuccessMessage] = "Vehicle was added successfully!";
                 return RedirectToAction("All", "Vehicle");
+            }
+            else
+            {
+                addVehicle.Owner = await _customerService.AllCustomersForSelectFormModelAsync();
             }
 
             return View(addVehicle);

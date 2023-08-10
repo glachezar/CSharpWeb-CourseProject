@@ -55,7 +55,7 @@
                 {
                     <label asp-for="CustomerId"></label>
                     <select asp-for="CustomerId" class="form-select">
-                        <option value="null" selected>Open to select owner!</option>
+                        <option value="" selected>Open to select owner!</option>
                         @foreach (var customer in customers)
                         {
                             <option value="@customer.Id">@customer.Name, @customer.Email</option>
