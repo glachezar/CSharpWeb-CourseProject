@@ -143,6 +143,8 @@
         public async Task<IActionResult> Delete(string id, AddVehicleViewModel vehicleDeleteView)
         {
             Guid vehicleId = Guid.Parse(id);
+            var vehicleToRemoveOwner = await _vehicleService.GetVehicleToRemoveOwnerByIdAsync(id);
+            bool isOwnerRemoved = await _vehicleService.RemoveOwnerFromVehicleByIdAsync(vehicleToRemoveOwner);
             var isDeleted = await _vehicleService.SoftDeleteVehicleAsync(vehicleId);
             if (!isDeleted)
             {
@@ -150,6 +152,11 @@
                 return this.RedirectToAction("All", "Vehicle");
             }
 
+            if (isOwnerRemoved == false)
+            {
+                this.TempData[ErrorMessage] = "Something went wrong while trying to remove owner from vehicle!";
+                return this.RedirectToAction("All", "Vehicle");
+            }
             
             this.TempData[SuccessMessage] = "Vehicle successfully deleted!";
             return RedirectToAction("All", "Vehicle");

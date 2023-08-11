@@ -7,7 +7,7 @@
     using MyGarage.Data;
     using Web.ViewModels.Customer;
     using MyGarage.Data.Models;
-
+    using Web.ViewModels.Vehicle;
 
 
     public class CustomerService : ICustomerService
@@ -144,6 +144,15 @@
             return result;
         }
 
+        public async Task<bool> ExistingByUserIdAsync(string userId)
+        {
+            bool result = await _context
+                .Customers
+                .AnyAsync(c => c.ApplicationUserId.ToString() == userId);
+
+            return result;
+        }
+
         public async Task<AddCustomerViewModel> GetCustomerForEditByIdAsync(string id)
         {
             Guid vId = Guid.Parse(id);
@@ -212,6 +221,46 @@
             }
 
             return false;
+        }
+
+        public async Task<CustomerDetailsViewModel> GetCustomerDetailsByUserIdAsync(string id)
+        {
+            Customer? customer = await _context
+                .Customers
+                .FirstOrDefaultAsync(c => c.ApplicationUserId.ToString() == id);
+
+            IEnumerable<VehicleViewModel> vehicles = await _context
+                .Vehicles
+                .Where(v => v.CustomerId.ToString() == customer.Id.ToString())
+                .Select(v => new VehicleViewModel
+                {
+                    Id = v.Id.ToString(),
+                    Make = v.Make,
+                    Model = v.Model,
+                    Vin = v.Vin,
+                    RegistrationNumber = v.RegNumber ?? "NoNumber",
+                    YearManufactured = v.YearManufactured
+                })
+                .ToArrayAsync();
+
+            if (customer == null)
+            {
+                return null;
+            }
+
+            CustomerDetailsViewModel result = new CustomerDetailsViewModel
+            {
+                Id = customer.Id.ToString(),
+                Name = customer.Name,
+                Surname = customer.Surname,
+                Egn = customer.Egn ?? "Not Provided!",
+                Address = customer.Address ?? "Not Provided!",
+                Email = customer.Email,
+                PhoneNumber = customer.PhoneNumber,
+                Vehicles = vehicles
+            };
+
+            return result;
         }
     }
 }

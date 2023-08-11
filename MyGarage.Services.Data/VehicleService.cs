@@ -15,12 +15,12 @@
     public class VehicleService : IVehicleService
     {
         private readonly MyGarageDbContext _context;
-        private readonly ICustomerService _customerService;
 
-        public VehicleService(MyGarageDbContext dbContext, ICustomerService customerService)
+
+        public VehicleService(MyGarageDbContext dbContext)
         {
             _context = dbContext;
-            _customerService = customerService;
+            
         }
 
         public async Task<IEnumerable<VehicleViewModel>> AllVehiclesAsync()
@@ -48,7 +48,7 @@
             IEnumerable<VehicleViewModel> allCustomerVehicles = await _context
                 .Vehicles
                 .Include(v => v.Customer)
-                .Where(c => c.Customer.ApplicationUserId.ToString() == id)
+                .Where(c => c.Customer.ApplicationUserId.ToString() == id && c.IsActive == true)
                 .AsNoTracking()
                 .Select(v => new VehicleViewModel
                 {
@@ -178,23 +178,6 @@
             }
 
             return false;
-        }
-
-        public async Task<bool> IsVehicleSoftDeletedAsync(string vin)
-        {
-            Vehicle? isVehicleNotActive = await _context
-                .Vehicles
-                .Where(v => v.IsActive == false)
-                .FirstOrDefaultAsync(v => v.Vin == vin);
-
-            if (isVehicleNotActive == null)
-            {
-                return false;
-            }
-
-            isVehicleNotActive.IsActive = true;
-            await _context.SaveChangesAsync();
-            return true;
         }
 
         public async Task<VehicleDetailsViewModel> ViewVehicleDetailsByIdAsync(string id)
@@ -342,6 +325,23 @@
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> IsVehicleSoftDeletedAsync(string vin)
+        {
+            Vehicle? isVehicleNotActive = await _context
+                .Vehicles
+                .Where(v => v.IsActive == false)
+                .FirstOrDefaultAsync(v => v.Vin == vin);
+
+            if (isVehicleNotActive == null)
+            {
+                return false;
+            }
+
+            isVehicleNotActive.IsActive = true;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> SoftDeleteVehicleAsync(Guid vehicleId)
         {
             
@@ -352,6 +352,7 @@
             }
 
             vehicle.IsActive = false;
+
             await _context.SaveChangesAsync();
             return true;
         }

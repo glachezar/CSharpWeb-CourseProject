@@ -23,6 +23,8 @@
 
         Task<bool> ExistingByIdAsync(string id);
 
+        Task<bool> ExistingByUserIdAsync(string userId);
+
         Task<AddCustomerViewModel> GetCustomerForEditByIdAsync(string id);
 
         Task EditCustomerByIdAndFormModelAsync(string customerId, AddCustomerViewModel customerViewModel);
@@ -30,5 +32,7 @@
         Task<CustomerViewModel> GetCustomerByIdAsync(string id);
 
         Task<bool> DeleteCustomerByIdAsync(string id);
+
+        Task<CustomerDetailsViewModel> GetCustomerDetailsByUserIdAsync(string id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace MyGarage.Web.Controllers
 {
+    using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -19,46 +20,18 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> Details()
         {
-            IEnumerable<CustomerViewModel> viewModel =
-                await this._customerService.AllCustomersAsync();
-
-            return View(viewModel);
-        }
-
-        [HttpGet]
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Add(AddCustomerViewModel addCustomer)
-        {
-            if (ModelState.IsValid)
-            {
-                await _customerService.AddCustomerAsync(addCustomer);
-                TempData[SuccessMessage] = "Successfully added new customer!";
-                return RedirectToAction("All", "Customer");
-            }
-
-            return View(addCustomer);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Details(string id)
-        {
-            bool customerExist = await _customerService.ExistingByIdAsync(id);
+            bool customerExist = await _customerService.ExistingByUserIdAsync(this.User.GetUserId()!);
 
             if (customerExist == false)
             {
-                this.TempData[ErrorMessage] = "Customer with provided id does not exist!";
-                return this.RedirectToAction("All", "Customer");
+                this.TempData[ErrorMessage] = "Something went wrong please try again later or contact our garage employee for assistance!";
+                return this.RedirectToAction("Index", "Home");
             }
 
-            CustomerViewModel? viewModel =
-                await this._customerService.ViewCustomerDetailsByIdAsync(id);
+            CustomerDetailsViewModel? viewModel =
+                await this._customerService.GetCustomerDetailsByUserIdAsync(this.User.GetUserId()!);
 
             return View(viewModel);
         }
@@ -70,17 +43,17 @@
             if (!customerExist)
             {
                 this.TempData[ErrorMessage] = "Customer with provided id does not exist!";
-                return this.RedirectToAction("All", "Customer");
+                return this.RedirectToAction("Index", "Home");
             }
 
             try
             {
                 await this._customerService.EditCustomerByIdAndFormModelAsync(id, formModel);
-                this.TempData[SuccessMessage] = "Customer details edited successfully!";
+                this.TempData[SuccessMessage] = "Successfully edited your details!";
             }
             catch (Exception)
             {
-                this.ModelState.AddModelError(string.Empty, "Unexpected error occur while trying to update customer details, please try again later or contact support!");
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occur while trying to update your details, please try again later or contact administrator!");
                 return View(formModel);
             }
 
@@ -94,8 +67,8 @@
 
             if (!customerExist)
             {
-                this.TempData[ErrorMessage] = "Customer with provided id does not exist!";
-                return this.RedirectToAction("All", "Customer");
+                this.TempData[ErrorMessage] = "Something went wrong, please try again later or contact administrator!";
+                return this.RedirectToAction("Index", "Home");
             }
 
             AddCustomerViewModel formModel = await this._customerService.GetCustomerForEditByIdAsync(id);
@@ -107,6 +80,7 @@
         public async Task<IActionResult> Delete(string id)
         {
             var customer = await _customerService.GetCustomerByIdAsync(id);
+
             if (customer == null)
             {
                 this.TempData[ErrorMessage] = "Customer with provided id does not exist!";
