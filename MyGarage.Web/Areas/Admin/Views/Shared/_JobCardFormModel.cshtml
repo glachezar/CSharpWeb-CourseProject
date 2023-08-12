@@ -1,9 +1,9 @@
 ﻿@model CreateJobCardViewModel
 
 @{
-    var parts = Model.Parts.ToList();
-    var jobs = Model.Jobs.ToList();
-    var mechanics = Model.Mechanics.ToList();
+    var parts = Model.Parts?.ToList();
+    var jobs = Model.Jobs?.ToList();
+    var mechanics = Model.Mechanics?.ToList();
 }
 
 <div class="row">

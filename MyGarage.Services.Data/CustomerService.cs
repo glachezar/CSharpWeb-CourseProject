@@ -212,7 +212,7 @@
         public async Task<bool> DeleteCustomerByIdAsync(string id)
         {
             Guid customerId = Guid.Parse(id);
-            Customer customerToDelete = await _context.Customers.FindAsync(customerId);
+            Customer? customerToDelete = await _context.Customers.FindAsync(customerId);
             if (customerToDelete != null)
             {
                 _context.Customers.Remove(customerToDelete);

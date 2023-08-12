@@ -34,7 +34,7 @@
                 <h4>Make:</h4>
             </div>
             <div class="col-md-8">
-                <p>@Model.Vehicle.Make</p>
+                <p>@Model.Vehicle?.Make</p>
             </div>
         </div>
         <div class="row">
@@ -42,7 +42,7 @@
                 <h4>Model:</h4>
             </div>
             <div class="col-md-8">
-                <p>@Model.Vehicle.Model</p>
+                <p>@Model.Vehicle?.Model</p>
             </div>
         </div>
 
@@ -51,7 +51,7 @@
                 <h4>VIN:</h4>
             </div>
             <div class="col-md-8">
-                <p>@Model.Vehicle.Vin</p>
+                <p>@Model.Vehicle?.Vin</p>
             </div>
         </div>
         <div class="row">
@@ -68,7 +68,7 @@
                 <h4>Mechanic:</h4>
             </div>
             <div class="col-md-8">
-                <p>@Model.Mechanic.Name @Model.Mechanic.LastName</p>
+                <p>@Model.Mechanic?.Name @Model.Mechanic?.LastName</p>
             </div>
         </div>
 
