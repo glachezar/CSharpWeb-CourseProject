@@ -1,14 +1,9 @@
-﻿namespace MyGarage.Common
+﻿namespace MyGarage.Common;
+
+public static class NotificationsMessagesConstants
 {
-
-    public static class NotificationsMessagesConstants
-    {
-        public const string ErrorMessage = "ErrorMessage";
-
-        public const string WarningMessage = "WarningMessage";
-
-        public const string InformationMessage = "InfoMessage";
-
-        public const string SuccessMessage = "SuccessMessage";
-    }
+    public const string ErrorMessage = "ErrorMessage";
+    public const string WarningMessage = "WarningMessage";
+    public const string InformationMessage = "InfoMessage";
+    public const string SuccessMessage = "SuccessMessage";
 }

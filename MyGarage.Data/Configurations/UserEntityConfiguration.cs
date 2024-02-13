@@ -26,6 +26,15 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
         };
         users.Add(newUser);
 
+        newUser = new ApplicationUser
+        {
+            UserName = "admin",
+            Email = "admin@mcg.bg",
+            FirstName = "Admin",
+            LastName = "Adminov",
+        };
+        users.Add(newUser);
+
         return users.ToArray();
     }
 }

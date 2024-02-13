@@ -8,6 +8,7 @@ using Data.Models;
 using Griesoft.AspNetCore.ReCaptcha;
 using Microsoft.Extensions.Caching.Memory;
 using static Common.NotificationsMessagesConstants;
+using static Common.GeneralApplicationConstants;
 
 public class UserController : Controller
 {
@@ -74,7 +75,7 @@ public class UserController : Controller
         }
 
         await this._signInManager.SignInAsync(newUser, false);
-        //this._memoryCache.Remove(UsersCacheKey);
+        this._memoryCache.Remove(UsersCacheKey);
         return RedirectToAction("Index", "Home");
     }
 
