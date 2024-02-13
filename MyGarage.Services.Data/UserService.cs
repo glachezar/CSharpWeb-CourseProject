@@ -33,9 +33,6 @@
                 Customer = customer
             };
 
-            customer.ApplicationUserId = newUser.Id;
-            customer.ApplicationUser = newUser;
-
             return newUser;
         }
 
