@@ -2,9 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 using Models;
-
 
 public class VehicleEntityConfiguration : IEntityTypeConfiguration<Vehicle>
 {
@@ -34,7 +32,6 @@ public class VehicleEntityConfiguration : IEntityTypeConfiguration<Vehicle>
             FuelType = "Gasoline",
             Mileage = "354123",
             RegNumber = "CA2525CB"
-
         };
         vehicles.Add(vehicle);
 

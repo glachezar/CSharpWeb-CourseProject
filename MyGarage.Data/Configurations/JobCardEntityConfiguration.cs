@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
 
-
 public class JobCardEntityConfiguration : IEntityTypeConfiguration<JobCard>
 {
     public void Configure(EntityTypeBuilder<JobCard> builder)
@@ -12,7 +11,5 @@ public class JobCardEntityConfiguration : IEntityTypeConfiguration<JobCard>
         //builder.HasData(this.GenerateJobCards());
         builder.Property(jc => jc.CreatedOn)
             .HasDefaultValueSql("GETDATE()");
-
     }
-
 }
