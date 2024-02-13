@@ -42,19 +42,19 @@ public class UserController : Controller
     ValidationFailedAction = ValidationFailedAction.ContinueRequest)]
     public async Task<IActionResult> Register(RegisterFormModel user)
     {
-        bool customerExist = await _customerService.CustomerExistByEmailAsync(user.Email);
+        //bool customerExist = await _customerService.CustomerExistByEmailAsync(user.Email);
 
         if (!ModelState.IsValid)
         {
             return View(user);
         }
 
-        if (customerExist == false)
-        {
-            TempData[ErrorMessage] = "Your email is not in our database," +
-                                     " please ask our garage employee register you as customer first and try again!";
-            return this.View(user);
-        }
+        //if (customerExist == false)
+        //{
+        //    TempData[ErrorMessage] = "Your email is not in our database," +
+        //                             " please ask our garage employee register you as customer first and try again!";
+        //    return this.View(user);
+        //}
 
         ApplicationUser newUser = await _userService.CreateUserByFormModelAsync(user);
 

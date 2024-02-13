@@ -1,54 +1,47 @@
-﻿namespace MyGarage.Services.Data
+﻿namespace MyGarage.Services.Data;
+
+using Microsoft.EntityFrameworkCore;
+
+using MyGarage.Data.Models;
+using Web.ViewModels.User;
+using MyGarage.Data;
+using Interfaces;
+
+public class UserService : IUserService
 {
-    using Microsoft.EntityFrameworkCore;
+    private readonly MyGarageDbContext _dbContext;
+    private readonly ICustomerService _customerService;
 
-    using MyGarage.Data.Models;
-    using Web.ViewModels.User;
-    using MyGarage.Data;
-    using Interfaces;
-
-
-    public class UserService : IUserService
+    public UserService(MyGarageDbContext dbContext, ICustomerService customerService)
     {
-        private readonly MyGarageDbContext _dbContext;
-        private readonly ICustomerService _customerService;
+        _dbContext = dbContext;
+        _customerService = customerService;
+    }
 
-        public UserService(MyGarageDbContext dbContext, ICustomerService customerService)
+    public async Task<ApplicationUser> CreateUserByFormModelAsync(RegisterFormModel form)
+    {
+        //Customer customer = await _customerService.GetCustomerByEmailAsync(form.Email);
+
+        ApplicationUser newUser = new ApplicationUser()
         {
-            _dbContext = dbContext;
-            _customerService = customerService;
-        }
+            Email = form.Email,
+            FirstName = form.FirstName,
+            LastName = form.LastName,
+            //CustomerId = customer.Id,
+            //Customer = customer
+        };
 
+        return newUser;
+    }
 
-        public async Task<ApplicationUser> CreateUserByFormModelAsync(RegisterFormModel form)
-        {
-            Customer customer = await _customerService.GetCustomerByEmailAsync(form.Email);
+    public async Task<string> GetUserFullNameByEmailAsync(string email)
+    {
+        ApplicationUser? user = await _dbContext
+            .Users
+            .FirstOrDefaultAsync(u => u.Email == email);
 
-            ApplicationUser newUser = new ApplicationUser()
-            {
-                Email = customer.Email,
-                FirstName = customer.Name,
-                LastName = customer.Surname,
-                CustomerId = customer.Id,
-                Customer = customer
-            };
+        if (user == null) return string.Empty;
 
-            return newUser;
-        }
-
-        public async Task<string> GetUserFullNameByEmailAsync(string email)
-        {
-
-            ApplicationUser? user = await _dbContext
-                .Users
-                .FirstOrDefaultAsync(u => u.Email == email);
-
-            if (user == null)
-            {
-                return string.Empty;
-            }
-
-            return $"{user.FirstName} {user.LastName}";
-        }
+        return $"{user.FirstName} {user.LastName}";
     }
 }

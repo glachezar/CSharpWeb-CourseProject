@@ -88,7 +88,7 @@ public class Program
 
         if (app.Environment.IsDevelopment())
         {
-            //app.SeedAdministrator(DeveloperAdminEmail);
+            app.SeedAdministrator(DeveloperAdminEmail);
         }
 
         app.UseEndpoints(config =>
@@ -102,7 +102,6 @@ public class Program
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
         });
-
 
         app.MapRazorPages();
 

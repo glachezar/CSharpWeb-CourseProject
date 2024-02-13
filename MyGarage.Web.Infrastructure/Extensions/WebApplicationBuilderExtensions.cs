@@ -2,10 +2,10 @@
 
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-
 using Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Middlewares;
 using static Common.GeneralApplicationConstants;
 
 public static class WebApplicationBuilderExtensions
@@ -43,9 +43,7 @@ public static class WebApplicationBuilderExtensions
 
             services.AddScoped(interfaceType, implementationType);
         }
-
     }
-
 
     /// <summary>
     /// This method seeds admin role if such do not exist.
@@ -93,4 +91,3 @@ public static class WebApplicationBuilderExtensions
         return app.UseMiddleware<OnlineUsersMiddleware>();
     }
 }
-
