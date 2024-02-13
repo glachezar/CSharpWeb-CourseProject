@@ -1,47 +1,42 @@
-﻿namespace MyGarage.Data.Configurations
+﻿namespace MyGarage.Data.Configurations;
+
+using System.Collections.Generic;
+using System.Linq;
+
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+
+using Models;
+
+
+public class MechanicEntityConfiguration : IEntityTypeConfiguration<Mechanic>
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Microsoft.EntityFrameworkCore;
-
-    using Models;
-
-
-    public class MechanicEntityConfiguration : IEntityTypeConfiguration<Mechanic>
+    public void Configure(EntityTypeBuilder<Mechanic> builder)
     {
-        public void Configure(EntityTypeBuilder<Mechanic> builder)
+        builder.HasData(GenerateMechanic());
+    }
+
+    private Mechanic[] GenerateMechanic()
+    {
+        ICollection<Mechanic> mechanics = new HashSet<Mechanic>();
+
+        var mechanic = new Mechanic()
         {
-            builder.HasData(GenerateMechanic());
-        }
+            Name = "Ivan",
+            Surname = "Ivanov",
+            PhoneNumber = "0888123456"
+        };
+        mechanics.Add(mechanic);
 
-        private Mechanic[] GenerateMechanic()
+        mechanic = new Mechanic()
         {
-            ICollection<Mechanic> mechanics = new HashSet<Mechanic>();
+            Name = "Petar",
+            Surname = "Petrov",
+            PhoneNumber = "0888123457"
+        };
+        mechanics.Add(mechanic);
 
-            Mechanic mechanic;
-
-            mechanic = new Mechanic()
-            {
-                Name = "Ivan",
-                Surname = "Ivanov",
-                PhoneNumber = "0888123456"
-            };
-            mechanics.Add(mechanic);
-
-            mechanic = new Mechanic()
-            {
-                Name = "Petar",
-                Surname = "Petrov",
-                PhoneNumber = "0888123457"
-            };
-            mechanics.Add(mechanic);
-
-
-
-
-            return mechanics.ToArray();
-        }
+        return mechanics.ToArray();
     }
 }
+
